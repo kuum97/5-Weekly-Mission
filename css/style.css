@@ -9,6 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: var(--black);
 }
 
 header {
@@ -17,7 +18,6 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 1px rgba(1, 1, 1, 0.1);
 }
 
 footer {
@@ -59,6 +59,9 @@ a {
   padding: 10px 30px;
 }
 
+/* 메인 홈페이지 스타일 */
+/*-----------------------------------------------*/
+
 .login__button {
   background: var(--primary-gradient);
   border-radius: 8px;
@@ -67,7 +70,6 @@ a {
   align-items: center;
   font-size: 22px;
   font-weight: 600;
-  margin-right: 30px;
 }
 
 .login__button,
@@ -87,7 +89,6 @@ a {
 .header__content h1 {
   font-size: 65px;
   text-align: center;
-  color: var(--black);
 }
 
 .header__content span {
@@ -130,7 +131,6 @@ a {
 
 .main__card--text h2 {
   font-size: 50px;
-  color: var(--black);
 }
 
 .main__card--text p {
@@ -180,4 +180,105 @@ a {
 
 .social-media a {
   padding: 10px;
+}
+
+/* 로그인 페이지 스타일 */
+/*-----------------------------------------------*/
+
+.signin__container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--gray-lighter);
+}
+
+.signin__container .logo {
+  width: 220px;
+}
+
+.signin__container--header {
+  margin-bottom: 30px;
+}
+
+.goto__signup {
+  margin-left: 30px;
+  color: var(--primary);
+  padding: 0;
+  font-weight: 600;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
+  width: 400px;
+  height: 60px;
+  border-radius: 8px;
+  border: 1px solid var(--gray);
+  padding-left: 10px;
+}
+
+#email :focus,
+#password :focus {
+  border-color: var(--primary);
+}
+
+#submit {
+  color: var(--white);
+}
+
+.social-login__container {
+  width: 400px;
+  height: 60px;
+  background-color: var(--gray-light);
+  border: 1px solid var(--gray);
+  border-radius: 8px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-login {
+  display: flex;
+}
+
+.social-login__button {
+  padding: 5px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.google {
+  background-color: var(--white);
+}
+
+.kakao {
+  background-color: #f5e14b;
+}
+
+.password__box {
+  position: relative;
+}
+
+.password_eye {
+  position: absolute;
+  right: 20px;
+  top: 23px;
 }
