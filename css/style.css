@@ -62,7 +62,7 @@ a {
 /* 메인 홈페이지 스타일 */
 /*-----------------------------------------------*/
 
-.login__button {
+.sign__button {
   background: var(--primary-gradient);
   border-radius: 8px;
   display: flex;
@@ -72,7 +72,7 @@ a {
   font-weight: 600;
 }
 
-.login__button,
+.sign__button,
 .home__button :hover {
   cursor: pointer;
 }
@@ -182,10 +182,10 @@ a {
   padding: 10px;
 }
 
-/* 로그인 페이지 스타일 */
+/* 로그인/회원가입 페이지 스타일 */
 /*-----------------------------------------------*/
 
-.signin__container {
+.sign__container {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -195,15 +195,15 @@ a {
   background-color: var(--gray-lighter);
 }
 
-.signin__container .logo {
+.sign__container .logo {
   width: 220px;
 }
 
-.signin__container--header {
+.sign__container--header {
   margin-bottom: 30px;
 }
 
-.goto__signup {
+.goto__sign {
   margin-left: 30px;
   color: var(--primary);
   padding: 0;
@@ -262,7 +262,8 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 5px;
+  box-shadow: 1px 2px 2px var(--gray);
 }
 
 .google {

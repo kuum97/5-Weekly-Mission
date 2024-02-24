@@ -3,7 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/_variables.css" />
     <title>Sign Up</title>
   </head>
-  <body></body>
+  <body>
+    <div class="sign__container">
+      <header class="sign__container--header">
+        <a href="../../index.html"
+          ><img class="logo" src="../../image/logo.svg"
+        /></a>
+        <div>
+          <span>이미 회원이신가요?</span>
+          <a class="goto__sign" href="../signin/index.html">로그인 하기</a>
+        </div>
+      </header>
+      <main class="form__container">
+        <form>
+          <label for="email">이메일</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            placeholder="이메일을 입력해주세요."
+            required
+          />
+          <label for="password">비밀번호</label>
+          <div class="password__box">
+            <input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="비밀번호를 입력해주세요."
+              required
+            />
+            <img class="password_eye" src="../../image/password_eye.svg" />
+          </div>
+          <label for="password-validation">비밀번호 확인</label>
+          <div class="password__box">
+            <input
+              id="password-validation"
+              type="password"
+              name="password-validation"
+              placeholder="비밀번호를 한번 더 입력해주세요."
+              required
+            />
+            <img class="password_eye" src="../../image/password_eye.svg" />
+          </div>
+          <input
+            class="sign__button"
+            id="submit"
+            type="submit"
+            value="회원가입"
+          />
+        </form>
+        <div class="social-login__container">
+          <!--현재는 디자인만 존재 추후에 기능 추가 예정-->
+          <span>다른 방식으로 가입하기</span>
+          <div class="social-login">
+            <a
+              class="social-login__button google"
+              href="https://www.google.com/"
+              ><img src="../../image/google_logo.svg"
+            /></a>
+            <a
+              class="social-login__button kakao"
+              href="https://www.kakaocorp.com/page/"
+              ><img src="../../image/kakao_logo.svg"
+            /></a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>
