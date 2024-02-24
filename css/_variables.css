@@ -1,0 +1,12 @@
+:root {
+  --primary: #6d5afe;
+  --red: #ff5b56;
+  --black: #111322;
+  --white: #ffffff;
+  --primary-gradient: linear-gradient(to right, var(--primary), #6ae3fe);
+  --gray-darker: #3e3e43;
+  --gray-dark: #9fa6b2;
+  --gray: #ccd5e3;
+  --gray-light: #e7effb;
+  --gray-lighter: #f0f6ff;
+}
