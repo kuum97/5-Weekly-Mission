@@ -8,30 +8,30 @@
     <title>Sign In</title>
   </head>
   <body>
-    <div class="sign__container">
-      <header class="sign__container--header">
+    <div class="sign-container">
+      <header class="sign-container__header">
         <a href="../../index.html"
           ><img class="logo" src="../../image/logo.svg"
         /></a>
-        <div>
+        <div class="sign-container__content">
           <span>회원이 아니신가요?</span>
           <a class="goto__sign" href="../signup/index.html">회원 가입하기</a>
         </div>
       </header>
-      <main class="form__container">
-        <form>
-          <label for="email">이메일</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="이메일을 입력해주세요."
-            required
-          />
-          <label for="password">비밀번호</label>
-          <div class="password__box">
+      <main>
+        <form class="form-container">
+          <div class="input-box">
+            <label for="email">이메일</label>
             <input
-              id="password"
+              type="email"
+              name="email"
+              placeholder="이메일을 입력해주세요."
+              required
+            />
+          </div>
+          <div class="input-box">
+            <label for="password">비밀번호</label>
+            <input
               type="password"
               name="password"
               placeholder="비밀번호를 입력해주세요."
@@ -39,12 +39,7 @@
             />
             <img class="password_eye" src="../../image/password_eye.svg" />
           </div>
-          <input
-            class="sign__button"
-            id="submit"
-            type="submit"
-            value="로그인"
-          />
+          <button class="submit-btn">로그인</button>
         </form>
         <div class="social-login__container">
           <!--현재는 디자인만 존재 추후에 기능 추가 예정-->

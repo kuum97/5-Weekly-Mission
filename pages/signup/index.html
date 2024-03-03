@@ -8,30 +8,30 @@
     <title>Sign Up</title>
   </head>
   <body>
-    <div class="sign__container">
-      <header class="sign__container--header">
+    <div class="sign-container">
+      <header class="sign-container__header">
         <a href="../../index.html"
           ><img class="logo" src="../../image/logo.svg"
         /></a>
-        <div>
+        <div class="sign-container__content">
           <span>이미 회원이신가요?</span>
           <a class="goto__sign" href="../signin/index.html">로그인 하기</a>
         </div>
       </header>
-      <main class="form__container">
-        <form>
-          <label for="email">이메일</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="이메일을 입력해주세요."
-            required
-          />
-          <label for="password">비밀번호</label>
-          <div class="password__box">
+      <main>
+        <form class="form-container">
+          <div class="input-box">
+            <label for="email">이메일</label>
             <input
-              id="password"
+              type="email"
+              name="email"
+              placeholder="이메일을 입력해주세요."
+              required
+            />
+          </div>
+          <div class="input-box">
+            <label for="password">비밀번호</label>
+            <input
               type="password"
               name="password"
               placeholder="비밀번호를 입력해주세요."
@@ -39,10 +39,9 @@
             />
             <img class="password_eye" src="../../image/password_eye.svg" />
           </div>
-          <label for="password-validation">비밀번호 확인</label>
-          <div class="password__box">
+          <div class="input-box">
+            <label for="password-validation">비밀번호 확인</label>
             <input
-              id="password-validation"
               type="password"
               name="password-validation"
               placeholder="비밀번호를 한번 더 입력해주세요."
@@ -50,12 +49,7 @@
             />
             <img class="password_eye" src="../../image/password_eye.svg" />
           </div>
-          <input
-            class="sign__button"
-            id="submit"
-            type="submit"
-            value="회원가입"
-          />
+          <button class="submit-btn">회원가입</button>
         </form>
         <div class="social-login__container">
           <!--현재는 디자인만 존재 추후에 기능 추가 예정-->
