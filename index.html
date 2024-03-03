@@ -13,87 +13,131 @@
     <title>Linkbrary</title>
   </head>
   <body>
-    <nav>
-      <a class="home__button" href="./index.html"
-        ><img src="./image/logo.svg"
+    <header class="nav-container">
+      <a class="home-button" href="./index.html"
+        ><img class="home-button__img" src="./image/logo.svg"
       /></a>
-      <a class="sign__button" href="./pages/signin/index.html">로그인</a>
-    </nav>
-
-    <header>
-      <div class="header__content">
-        <h1>
-          <span>세상의 모든 정보</span>를<br />쉽게 저장하고 관리해 보세요
-        </h1>
-        <a href="./pages/signup/index.html">링크 추가하기</a>
-        <img src="./image/main_img.svg" />
-      </div>
+      <a class="login-button" href="./pages/signin/index.html">로그인</a>
     </header>
 
-    <main>
-      <div class="main__card">
-        <div class="main__card--text">
-          <h2>
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-content__title">
+          <span class="hero-content__highlight">세상의 모든 정보</span
+          >를<br />쉽게 저장하고 관리해 보세요
+        </h1>
+        <a class="hero-content__cta-btn" href="./pages/signup/index.html"
+          >링크 추가하기</a
+        >
+        <img
+          viewBox="0 0 100 100"
+          class="hero-content__img"
+          src="./image/main_img.svg"
+        />
+      </div>
+    </div>
+
+    <main class="main-container">
+      <div class="main-card">
+        <div class="main-card__text-box">
+          <h2 class="main-card__title">
             <span id="special-text-first">원하는 링크</span>를<br />저장하세요
           </h2>
-          <p>
+          <p class="main-card__text">
             나중에 읽고 싶은 글, 다시 보고 싶은 영상, 사고 싶은 옷, 기억하고
             싶은 모든 것을 한 공간에 저장하세요.
           </p>
         </div>
-        <div><img src="./image/img1.svg" /></div>
+        <div>
+          <img
+            viewBox="0 0 100 100"
+            class="main-card__img"
+            src="./image/img1.svg"
+          />
+        </div>
       </div>
-      <div class="main__card">
-        <div class="main__card--text">
-          <h2>
+      <div class="main-card">
+        <div class="main-card__text-box">
+          <h2 class="main-card__title">
             링크를 폴더로<br /><span id="special-text-second">관리</span>하세요
           </h2>
-          <p>나만의 폴더를 무제한으로 만들고 다양하게 활용할 수 있습니다.</p>
+          <p class="main-card__text">
+            나만의 폴더를 무제한으로 만들고 다양하게 활용할 수 있습니다.
+          </p>
         </div>
-        <div><img src="./image/img2.svg" /></div>
+        <div>
+          <img
+            viewBox="0 0 100 100"
+            class="main-card__img"
+            src="./image/img2.svg"
+          />
+        </div>
       </div>
-      <div class="main__card">
-        <div class="main__card--text">
-          <h2>
+      <div class="main-card">
+        <div class="main-card__text-box">
+          <h2 class="main-card__title">
             저장한 링크를<br /><span id="special-text-third">공유</span>해
             보세요
           </h2>
-          <p>
+          <p class="main-card__text">
             여러 링크를 폴더에 담고 공유할 수 있습니다. 가족, 친구, 동료들에게
             쉽고 빠르게 링크를 공유해 보세요.
           </p>
         </div>
-        <div><img src="./image/img3.svg" /></div>
+        <div>
+          <img
+            viewBox="0 0 100 100"
+            class="main-card__img"
+            src="./image/img3.svg"
+          />
+        </div>
       </div>
-      <div class="main__card">
-        <div class="main__card--text">
-          <h2>
+      <div class="main-card">
+        <div class="main-card__text-box">
+          <h2 class="main-card__title">
             저장한 링크를<br /><span id="special-text-fourth">검색</span>해
             보세요
           </h2>
-          <p>중요한 정보들을 검색으로 쉽게 찾아보세요.</p>
+          <p class="main-card__text">
+            중요한 정보들을 검색으로 쉽게 찾아보세요.
+          </p>
         </div>
-        <div><img src="./image/img4.svg" /></div>
+        <div>
+          <img
+            viewBox="0 0 100 100"
+            class="main-card__img"
+            src="./image/img4.svg"
+          />
+        </div>
       </div>
     </main>
 
-    <footer>
+    <footer class="footer-container">
       <span class="company-name">©codeit-2023</span>
       <div class="for-customer">
-        <a href="./pages/privacy/index.html">Privacy Policy</a>
-        <a href="./pages/faq/index.html">FAQ</a>
+        <a class="for-customer__btn" href="./pages/privacy/index.html"
+          >Privacy Policy</a
+        >
+        <a class="for-customer__btn" href="./pages/faq/index.html">FAQ</a>
       </div>
       <div class="social-media">
-        <a href="https://www.facebook.com/" target="_blank"
+        <a
+          class="social-media__btn"
+          href="https://www.facebook.com/"
+          target="_blank"
           ><i class="fa-brands fa-facebook"></i
         ></a>
-        <a href="https://twitter.com/" target="_blank"
+        <a class="social-media__btn" href="https://twitter.com/" target="_blank"
           ><i class="fa-brands fa-x-twitter"></i
         ></a>
-        <a href="https://www.youtube.com/" target="_blank"
+        <a
+          class="social-media__btn"
+          href="https://www.youtube.com/"
+          target="_blank"
           ><i class="fa-brands fa-youtube"></i
         ></a>
         <a
+          class="social-media__btn"
           href="https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2F"
           target="_blank"
           ><i class="fa-brands fa-instagram"></i
