@@ -297,7 +297,7 @@ a {
 /*-----------------------------------------------*/
 
 .sign-container {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -325,8 +325,16 @@ a {
   font-weight: 600;
 }
 
+.sign-container main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .form-container {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -340,7 +348,11 @@ a {
   position: relative;
 }
 
-input {
+.input-box label {
+  margin-bottom: 15px;
+}
+
+.input-box input {
   height: 60px;
   border-radius: 8px;
   border: 1px solid var(--gray-500);
@@ -368,7 +380,8 @@ input[type="password"]:focus {
 }
 
 .social-login__container {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 60px;
   background-color: var(--gray-400);
   border: 1px solid var(--gray-500);
@@ -404,12 +417,16 @@ input[type="password"]:focus {
 .password_eye {
   position: absolute;
   right: 20px;
-  top: 43px;
+  top: 57px;
 }
 
-@media (max-width: 390px) {
+@media (min-width: 375px) and (max-width: 767px) {
+  .sign-container {
+    padding: 0 32px;
+  }
+
   .form-container,
   .social-login__container {
-    width: 330px;
+    max-width: 400px;
   }
 }
