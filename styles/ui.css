@@ -48,3 +48,7 @@ a {
   align-items: center;
   padding: 10px 30px;
 }
+
+.home-btn__img {
+  width: 100%;
+}
