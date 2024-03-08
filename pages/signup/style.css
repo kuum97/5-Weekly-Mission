@@ -1,0 +1,134 @@
+.sign-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--gray-300);
+}
+
+.sign-container .logo {
+  width: 220px;
+}
+
+.sign-container__header {
+  margin-bottom: 30px;
+}
+
+.sign-container__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.goto__sign {
+  color: var(--primary);
+  padding: 0;
+  font-weight: 600;
+}
+
+.sign-container main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.input-box label {
+  margin-bottom: 15px;
+}
+
+.input-box input {
+  height: 60px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-500);
+  padding-left: 10px;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: var(--primary);
+}
+
+.submit-btn {
+  font-size: 20px;
+  width: 100%;
+  height: 60px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary-gradient);
+  color: var(--white);
+  margin-bottom: 30px;
+}
+
+.submit-btn:hover {
+  cursor: pointer;
+}
+
+.social-login__container {
+  width: 100%;
+  max-width: 400px;
+  height: 60px;
+  background-color: var(--gray-400);
+  border: 1px solid var(--gray-500);
+  border-radius: 8px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-login {
+  display: flex;
+}
+
+.social-login__button {
+  padding: 5px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+  box-shadow: 1px 2px 2px var(--gray-500);
+}
+
+.google {
+  background-color: var(--white);
+}
+
+.kakao {
+  background-color: #f5e14b;
+}
+
+.password_eye {
+  position: absolute;
+  right: 20px;
+  top: 57px;
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .sign-container {
+    padding: 0 32px;
+  }
+
+  .form-container,
+  .social-login__container {
+    max-width: 400px;
+  }
+}
