@@ -5,23 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../styles/common.css" />
     <link rel="stylesheet" href="../../styles/ui.css" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Sign In</title>
+    <link rel="stylesheet" href="../../styles/auth-common.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Log In</title>
   </head>
   <body>
-    <div class="sign-container">
-      <header class="sign-container__header">
-        <a href="../../index.html"
-          ><img class="logo" src="../../assets/images/logo.svg"
+    <div class="login-container">
+      <header class="header">
+        <a class="home-link" href="../../index.html"
+          ><img class="home-btn__img" src="../../assets/images/logo.svg"
         /></a>
-        <div class="sign-container__content">
+        <div class="header__second-line">
           <span>회원이 아니신가요?</span>
-          <a class="goto__sign" href="../signup/index.html">회원 가입하기</a>
+          <a class="to-signup-link" href="../signup/index.html"
+            >회원 가입하기</a
+          >
         </div>
       </header>
-      <main>
+      <main class="main">
         <form class="form-container">
-          <div class="input-box">
+          <div class="form-group">
             <label for="email">이메일</label>
             <input
               id="email"
@@ -31,7 +34,7 @@
               required
             />
           </div>
-          <div class="input-box">
+          <div class="form-group">
             <label for="password">비밀번호</label>
             <input
               id="password"
@@ -40,24 +43,24 @@
               placeholder="비밀번호를 입력해주세요."
               required
             />
-            <img
-              class="password_eye"
-              src="../../assets/images/password_eye.svg"
-            />
+            <button
+              class="show-hide-password"
+              aria-label="비밀번호 보기"
+            ></button>
           </div>
-          <button class="submit-btn">로그인</button>
+          <button class="submit-btn gradient-btn">로그인</button>
         </form>
-        <div class="social-login__container">
+        <div class="social-login-container">
           <!--현재는 디자인만 존재 추후에 기능 추가 예정-->
           <span>소셜 로그인</span>
-          <div class="social-login">
+          <div class="social-login__btns">
             <a
-              class="social-login__button google"
+              class="social-login__btn social-login__google"
               href="https://www.google.com/"
               ><img src="../../assets/images/google_logo.svg"
             /></a>
             <a
-              class="social-login__button kakao"
+              class="social-login__btn social-login__kakao"
               href="https://www.kakaocorp.com/page/"
               ><img src="../../assets/images/kakao_logo.svg"
             /></a>
