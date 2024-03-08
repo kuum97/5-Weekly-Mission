@@ -27,109 +27,124 @@
     <title>Linkbrary</title>
   </head>
   <body>
-    <header class="nav-container">
-      <a class="home-button" href="./index.html"
-        ><img class="home-button__img" src="assets/images/logo.svg"
-      /></a>
-      <a class="login-button" href="./pages/signin/index.html">로그인</a>
+    <header>
+      <nav class="nav-container">
+        <a class="nav__home-btn" href="./index.html"
+          ><img class="home-btn__img" src="assets/images/logo.svg"
+        /></a>
+        <a class="nav__login-btn gradient-btn" href="./pages/signin/index.html"
+          >로그인</a
+        >
+      </nav>
     </header>
 
-    <div class="hero-container">
-      <div class="hero-content">
-        <h1 class="hero-content__title">
-          <span class="hero-content__highlight">세상의 모든 정보</span
-          >를<br />쉽게 저장하고 관리해 보세요
-        </h1>
-        <a class="hero-content__cta-btn" href="./pages/signup/index.html"
-          >링크 추가하기</a
-        >
-        <img class="hero-content__img" src="assets/images/main_img.svg" />
-      </div>
-    </div>
-
     <main class="main-container">
-      <div class="main-card">
-        <div class="main-card__text-box">
-          <h2 class="main-card__title">
-            <span id="special-text-first">원하는 링크</span>를 저장하세요
+      <section class="hero-section">
+        <div class="hero-section__content">
+          <h1 class="hero-section__title">
+            <span class="gradient gradient-primary-to-pink"
+              >세상의 모든 정보</span
+            >를<br />쉽게 저장하고 관리해 보세요
+          </h1>
+          <a
+            class="hero-section__cta-btn gradient-btn"
+            href="./pages/signup/index.html"
+            >링크 추가하기</a
+          >
+          <img class="hero-section__img" src="assets/images/main_img.svg" />
+        </div>
+      </section>
+      <section class="main-section">
+        <div class="main-section__text-box">
+          <h2 class="main-section__title">
+            <span class="gradient gradient-pink-to-skyblue">원하는 링크</span>를
+            저장하세요
           </h2>
-          <p class="main-card__text">
+          <p class="main-section__description">
             나중에 읽고 싶은 글, 다시 보고 싶은 영상, 사고 싶은 옷, 기억하고
             싶은 모든 것을 한 공간에 저장하세요.
           </p>
         </div>
-        <div class="main-card__img-box">
-          <img class="main-card__img" src="assets/images/img1.svg" />
+        <div class="main-section__img-box">
+          <img class="main-section__img" src="assets/images/img1.svg" />
         </div>
-      </div>
-      <div class="main-card">
-        <div class="main-card__text-box">
-          <h2 class="main-card__title">
-            링크를 폴더로 <span id="special-text-second">관리</span>하세요
+      </section>
+      <section class="main-section">
+        <div class="main-section__text-box">
+          <h2 class="main-section__title">
+            링크를 폴더로
+            <span class="gradient gradient-skyblue-to-yellow">관리</span>하세요
           </h2>
-          <p class="main-card__text">
+          <p class="main-section__description">
             나만의 폴더를 무제한으로 만들고 다양하게 활용할 수 있습니다.
           </p>
         </div>
-        <div class="main-card__img-box">
-          <img class="main-card__img" src="assets/images/img2.svg" />
+        <div class="main-section__img-box">
+          <img class="main-section__img" src="assets/images/img2.svg" />
         </div>
-      </div>
-      <div class="main-card">
-        <div class="main-card__text-box">
-          <h2 class="main-card__title">
-            저장한 링크를 <span id="special-text-third">공유</span>해 보세요
+      </section>
+      <section class="main-section">
+        <div class="main-section__text-box">
+          <h2 class="main-section__title">
+            저장한 링크를
+            <span class="gradient gradient-navy-to-green">공유</span>해 보세요
           </h2>
-          <p class="main-card__text">
+          <p class="main-section__description">
             여러 링크를 폴더에 담고 공유할 수 있습니다. 가족, 친구, 동료들에게
             쉽고 빠르게 링크를 공유해 보세요.
           </p>
         </div>
-        <div class="main-card__img-box">
-          <img class="main-card__img" src="assets/images/img3.svg" />
+        <div class="main-section__img-box">
+          <img class="main-section__img" src="assets/images/img3.svg" />
         </div>
-      </div>
-      <div class="main-card">
-        <div class="main-card__text-box">
-          <h2 class="main-card__title">
-            저장한 링크를 <span id="special-text-fourth">검색</span>해 보세요
+      </section>
+      <section class="main-section">
+        <div class="main-section__text-box">
+          <h2 class="main-section__title">
+            저장한 링크를
+            <span class="gradient gradient-skyblue-to-pink">검색</span>해 보세요
           </h2>
-          <p class="main-card__text">
+          <p class="main-section__description">
             중요한 정보들을 검색으로 쉽게 찾아보세요.
           </p>
         </div>
-        <div class="main-card__img-box">
-          <img class="main-card__img" src="assets/images/img4.svg" />
+        <div class="main-section__img-box">
+          <img class="main-section__img" src="assets/images/img4.svg" />
         </div>
-      </div>
+      </section>
     </main>
 
     <footer class="footer-container">
-      <span class="company-name">©codeit-2023</span>
-      <div class="for-customer">
-        <a class="for-customer__btn" href="./pages/privacy/index.html"
+      <div class="footer__company-info">
+        <span class="footer__campany-name">©codeit-2023</span>
+      </div>
+      <div class="footer__links">
+        <a class="footer__link" href="./pages/privacy/index.html"
           >Privacy Policy</a
         >
-        <a class="for-customer__btn" href="./pages/faq/index.html">FAQ</a>
+        <a class="footer__link" href="./pages/faq/index.html">FAQ</a>
       </div>
-      <div class="social-media">
+      <div class="footer__social-media">
         <a
-          class="social-media__btn"
+          class="footer__social-link"
           href="https://www.facebook.com/"
           target="_blank"
           ><i class="fa-brands fa-facebook"></i
         ></a>
-        <a class="social-media__btn" href="https://twitter.com/" target="_blank"
+        <a
+          class="footer__social-link"
+          href="https://twitter.com/"
+          target="_blank"
           ><i class="fa-brands fa-x-twitter"></i
         ></a>
         <a
-          class="social-media__btn"
+          class="footer__social-link"
           href="https://www.youtube.com/"
           target="_blank"
           ><i class="fa-brands fa-youtube"></i
         ></a>
         <a
-          class="social-media__btn"
+          class="footer__social-link"
           href="https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2F"
           target="_blank"
           ><i class="fa-brands fa-instagram"></i

@@ -8,3 +8,43 @@ body {
   position: relative;
   color: var(--black);
 }
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.gradient-primary-to-pink {
+  background: linear-gradient(to right, var(--primary), #ff9f9f);
+}
+
+.gradient-pink-to-skyblue {
+  background: linear-gradient(to right, #fe8a8a, #a4ceff);
+}
+
+.gradient-skyblue-to-yellow {
+  background: linear-gradient(to right, #6fbaff, #ffd88b);
+}
+
+.gradient-navy-to-green {
+  background: linear-gradient(to right, #6d7ccd, #528885);
+}
+
+.gradient-skyblue-to-pink {
+  background: linear-gradient(to right, #a4ceff, #fe8a8a);
+}
+
+.gradient {
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-btn {
+  background: var(--primary-gradient);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 30px;
+}
