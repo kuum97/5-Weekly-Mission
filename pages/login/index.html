@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="../../styles/ui.css" />
     <link rel="stylesheet" href="../../styles/auth-common.css" />
     <link rel="stylesheet" href="./style.css" />
+    <script
+      src="https://kit.fontawesome.com/35dfed9802.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Log In</title>
   </head>
   <body>
@@ -25,28 +29,29 @@
       <main class="main">
         <form class="form-container">
           <div class="form-group">
-            <label for="email">이메일</label>
+            <label class="form-label" for="email">이메일</label>
             <input
+              class="form-input"
               id="email"
               type="email"
               name="email"
               placeholder="이메일을 입력해주세요."
-              required
             />
+            <div id="error-email" class="error-message"></div>
           </div>
           <div class="form-group">
-            <label for="password">비밀번호</label>
+            <label class="form-label" for="password">비밀번호</label>
             <input
+              class="form-input"
               id="password"
               type="password"
               name="password"
               placeholder="비밀번호를 입력해주세요."
-              required
             />
-            <button
-              class="show-hide-password"
-              aria-label="비밀번호 보기"
-            ></button>
+            <button class="show-hide-password" aria-label="비밀번호 보기">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+            <div id="error-password" class="error-message"></div>
           </div>
           <button class="submit-btn gradient-btn">로그인</button>
         </form>
@@ -68,5 +73,6 @@
         </div>
       </main>
     </div>
+    <script src="../../js/modules/login.js"></script>
   </body>
 </html>
