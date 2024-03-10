@@ -35,6 +35,7 @@
               name="email"
               placeholder="이메일을 입력해주세요."
             />
+            <div id="error-email" class="error-message"></div>
           </div>
           <div class="form-group">
             <label class="form-label" for="password">비밀번호</label>
@@ -45,24 +46,34 @@
               name="password"
               placeholder="비밀번호를 입력해주세요."
             />
-            <button class="show-hide-password" aria-label="비밀번호 보기">
+            <button
+              type="button"
+              class="show-hide-password"
+              aria-label="비밀번호 보기"
+            >
               <i class="fa-regular fa-eye"></i>
             </button>
+            <div id="error-password" class="error-message"></div>
           </div>
           <div class="form-group">
-            <label class="form-label" for="password-validation"
+            <label class="form-label" for="password-confirm"
               >비밀번호 확인</label
             >
             <input
               class="form-input"
-              id="password"
+              id="password-confirm"
               type="password"
-              name="password-validation"
+              name="password-confirm"
               placeholder="비밀번호를 한번 더 입력해주세요."
             />
-            <button class="show-hide-password" aria-label="비밀번호 보기">
+            <button
+              type="button"
+              class="show-hide-password"
+              aria-label="비밀번호 보기"
+            >
               <i class="fa-regular fa-eye"></i>
             </button>
+            <div id="error-password-confirm" class="error-message"></div>
           </div>
           <button class="submit-btn gradient-btn">회원가입</button>
         </form>
@@ -84,5 +95,6 @@
         </div>
       </main>
     </div>
+    <script src="../../js/modules/signup.js"></script>
   </body>
 </html>
