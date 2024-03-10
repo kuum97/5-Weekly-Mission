@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 15px;
 }
 
 .form-group {
@@ -14,27 +14,27 @@
   position: relative;
 }
 
-.form-group label {
+.form-label {
   margin-bottom: 15px;
 }
 
-.form-group input {
+.form-input {
   height: 60px;
   border-radius: 8px;
   border: 1px solid var(--gray-500);
   padding-left: 10px;
 }
 
-input[type="email"]:focus,
-input[type="password"]:focus {
+.form-input:focus {
   border-color: var(--primary);
 }
 
 .show-hide-password {
   border: none;
+  background: none;
   position: absolute;
   right: 20px;
-  top: 57px;
+  top: 52px;
 }
 
 .submit-btn {
@@ -48,4 +48,15 @@ input[type="password"]:focus {
 
 .submit-btn:hover {
   cursor: pointer;
+}
+
+.error-message {
+  color: var(--red);
+  height: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.error-border-red {
+  border: 1px solid var(--red);
 }
