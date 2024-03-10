@@ -21,7 +21,7 @@ function isEmailValid(email) {
     return false;
   }
 
-  true;
+  return true;
 }
 
 function isPasswordValid(password) {
@@ -30,7 +30,7 @@ function isPasswordValid(password) {
     return false;
   }
 
-  true;
+  return true;
 }
 
 //=====================================
@@ -77,27 +77,32 @@ function handlePasswordShowHideClick(e) {
 }
 
 function handleFormSubmit(e) {
+  e.preventDefault();
+
   const email = emailInput.value;
   const password = passwordInput.value;
 
-  // 테스트용 코드=====================
-  if (email === "test@codeit.com" && password === "codeit101") {
-    e.preventDefault();
-    window.location.href = "../folder/index.html";
-  }
-  // ===============================
-
   if (email.trim().length === 0) {
-    e.preventDefault();
     handleEmailFocusout();
     return emailInput.focus();
   }
 
   if (password.trim().length === 0) {
-    e.preventDefault();
     handlePasswordFocusout();
     return passwordInput.focus();
   }
+
+  // 테스트용 코드=====================
+  if (email === "test@codeit.com" && password === "codeit101") {
+    window.location.href = "../folder/index.html";
+  } else {
+    emailInput.classList.add("error-border-red");
+    emailError.innerText = "이메일 또는 비밀번호가 일치하지 않습니다.";
+    passwordInput.classList.add("error-border-red");
+    passwordError.innerText = "이메일 또는 비밀번호가 일치하지 않습니다.";
+    return console.log("재시도하세요.");
+  }
+  // ===============================
 
   console.log("제출이 완료되었습니다.");
 }
