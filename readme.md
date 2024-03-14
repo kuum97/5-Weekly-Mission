@@ -28,7 +28,7 @@
 
 ### week4 수정사항
 
-1. 데이터 변경에 따라 UI를 조작하는 UI Controller와 실제 비즈니스 로직을 담아 처리하는 Service 로직을 구분하여 가독성과 확장에 용이하도록 수정합니다.
+1. 데이터 변경에 따라 UI를 조작하는 UI Controller와 실제 비즈니스 로직을 담아 처리하는 Service 로직을 구분하여 가독성과 확장에 용이하도록 수정합니다. DRY코드를 지향합니다.
 2. validation로직과 error 핸들링을 분리하여 함수의 목적을 뚜렷하게 구분합니다.
 3. handlePasswordShowHideClick -> handleTogglePasswordShowButtonClick
 4. 제출 로직을 수정하여 이벤트 발생 시 실행되어야하는 로직을 명확하게 합니다.
