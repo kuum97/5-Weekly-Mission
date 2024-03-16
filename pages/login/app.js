@@ -1,3 +1,7 @@
+import { isEmailValid, isPasswordValid } from "../../js/validate.js";
+
+/* CONTROLLER LOGIC */
+
 const loginForm = document.querySelector(".form-container");
 const emailInput = document.querySelector("input[type='email']");
 const passwordInput = document.querySelector("input[type='password']");
@@ -6,63 +10,43 @@ const emailError = document.getElementById("error-email");
 const passwordError = document.getElementById("error-password");
 const eyeIcon = document.querySelector(".fa-eye");
 
-//=====================================
-//Utility Function
+function showErrorEmailInput(email) {
+  const validatedEmail = isEmailValid(email);
 
-function isEmailValid(email) {
-  if (email.length === 0) {
-    emailError.innerText = "이메일을 입력해 주세요.";
-    return false;
-  }
-
-  if (!email.includes("@")) {
-    emailError.innerText =
-      "올바른 형식으로 입력해 주세요. 예: example@email.com";
-    return false;
-  }
-
-  return true;
-}
-
-function isPasswordValid(password) {
-  if (password.length === 0) {
-    passwordError.innerText = "비밀번호를 입력해 주세요.";
-    return false;
-  }
-
-  return true;
-}
-
-//=====================================
-//Event Handler Function
-
-function handleEmailFocusout() {
-  const isValid = isEmailValid(emailInput.value);
-
-  if (isValid === false) {
+  if (!validatedEmail.isValid) {
+    emailError.innerText = validatedEmail.message;
     emailInput.classList.add("error-border-red");
-    return console.log("다시 입력하세요.");
   } else {
-    emailInput.classList.remove("error-border-red");
     emailError.innerText = "";
-    return console.log("올바르게 입력했습니다.");
+    emailInput.classList.remove("error-border-red");
   }
 }
 
-function handlePasswordFocusout() {
-  const isValid = isPasswordValid(passwordInput.value);
+const handleEmailFocusout = (e) => {
+  const email = e.target.value;
 
-  if (isValid === false) {
+  showErrorEmailInput(email);
+};
+
+function showErrorPasswordInput(password) {
+  const validatedPassword = isPasswordValid(password);
+
+  if (!validatedPassword.isValid) {
+    passwordError.innerText = validatedPassword.message;
     passwordInput.classList.add("error-border-red");
-    return console.log("다시 입력하세요.");
   } else {
-    passwordInput.classList.remove("error-border-red");
     passwordError.innerText = "";
-    return console.log("올바르게 입력했습니다.");
+    passwordInput.classList.remove("error-border-red");
   }
 }
 
-function handlePasswordShowHideClick(e) {
+const handlePasswordFocusout = (e) => {
+  const password = e.target.value;
+
+  showErrorPasswordInput(password);
+};
+
+const handleTogglePasswordShowButtonClick = (e) => {
   e.preventDefault();
 
   if (passwordInput.type === "password") {
@@ -74,21 +58,21 @@ function handlePasswordShowHideClick(e) {
     eyeIcon.classList.remove("fa-eye-slash");
     eyeIcon.classList.add("fa-eye");
   }
-}
+};
 
-function handleFormSubmit(e) {
+const handleFormSubmit = (e) => {
   e.preventDefault();
 
   const email = emailInput.value;
   const password = passwordInput.value;
 
-  if (email.trim().length === 0) {
-    handleEmailFocusout();
+  if (email.length === 0) {
+    showErrorEmailInput(email);
     return emailInput.focus();
   }
 
-  if (password.trim().length === 0) {
-    handlePasswordFocusout();
+  if (password.length === 0) {
+    showErrorPasswordInput(password);
     return passwordInput.focus();
   }
 
@@ -103,14 +87,9 @@ function handleFormSubmit(e) {
     return console.log("재시도하세요.");
   }
   // ===============================
-
-  console.log("제출이 완료되었습니다.");
-}
-
-//=====================================
-//Add Event listener
+};
 
 emailInput.addEventListener("focusout", handleEmailFocusout);
 passwordInput.addEventListener("focusout", handlePasswordFocusout);
-showHideBtn.addEventListener("click", handlePasswordShowHideClick);
+showHideBtn.addEventListener("click", handleTogglePasswordShowButtonClick);
 loginForm.addEventListener("submit", handleFormSubmit);
