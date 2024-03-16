@@ -1,65 +1,62 @@
-import { isEmailValid, isPasswordValid } from "../../js/validate.js";
+import {
+  isEmailValid,
+  isPasswordValid,
+  showValidationError,
+  hideValidationError,
+} from "../../js/auth.js";
 
 const loginForm = document.querySelector(".form-container");
 const emailInput = document.querySelector("input[type='email']");
 const passwordInput = document.getElementById("password");
 const passwordConfirmInput = document.getElementById("password-confirm");
-const showHideBtn = document.querySelector(".show-hide-password");
 const emailError = document.getElementById("error-email");
 const passwordError = document.getElementById("error-password");
 const passwordConfirmError = document.getElementById("error-password-confirm");
+const showHideBtns = document.querySelectorAll(".show-hide-password");
 const eyeIcons = document.querySelectorAll(".fa-eye");
-
-function showErrorEmailInput(email) {
-  const validatedEmail = isEmailValid(email);
-
-  if (!validatedEmail.isValid) {
-    emailError.innerText = validatedEmail.message;
-    emailInput.classList.add("error-border-red");
-  } else {
-    emailError.innerText = "";
-    emailInput.classList.remove("error-border-red");
-  }
-}
 
 const handleEmailFocusout = (e) => {
   const email = e.target.value;
+  const validatedEmailType = isEmailValid(email);
+  const errorMessage = validatedEmailType.error;
 
-  showErrorEmailInput(email);
-};
-
-function showErrorPasswordInput(password) {
-  const validatedPassword = isPasswordValid(password);
-
-  if (!validatedPassword.isValid) {
-    passwordError.innerText = validatedPassword.message;
-    passwordInput.classList.add("error-border-red");
+  if (errorMessage !== null) {
+    return showValidationError(emailInput, emailError, errorMessage);
   } else {
-    passwordError.innerText = "";
-    passwordInput.classList.remove("error-border-red");
+    return hideValidationError(emailInput, emailError);
   }
-}
+};
 
 const handlePasswordFocusout = (e) => {
   const password = e.target.value;
+  const validatedPasswordType = isPasswordValid(password);
+  const errorMessage = validatedPasswordType.error;
 
-  showErrorPasswordInput(password);
+  if (errorMessage !== null) {
+    return showValidationError(passwordInput, passwordError, errorMessage);
+  } else {
+    return hideValidationError(passwordInput, passwordError);
+  }
 };
 
-function showErrorConfirmPasswordInput(confirmPassword) {
-  if (confirmPassword !== passwordInput.value) {
-    passwordConfirmError.innerText = "비밀번호가 일치하지 않습니다.";
-    passwordConfirmInput.classList.add("error-border-red");
-  } else {
-    passwordConfirmError.innerText = "";
-    passwordConfirmInput.classList.remove("error-border-red");
-  }
-}
-
 const handlePasswordConfirmFocusout = (e) => {
+  const password = passwordInput.value;
   const confirmPassword = e.target.value;
+  const validatedConfirmPasswordType = isPasswordValid(
+    password,
+    confirmPassword
+  );
+  const errorMessage = validatedConfirmPasswordType.error;
 
-  showErrorConfirmPasswordInput(confirmPassword);
+  if (errorMessage !== null) {
+    return showValidationError(
+      passwordConfirmInput,
+      passwordConfirmError,
+      errorMessage
+    );
+  } else {
+    return hideValidationError(passwordConfirmInput, passwordConfirmError);
+  }
 };
 
 const handleTogglePasswordShowButtonClick = (e) => {
@@ -85,6 +82,22 @@ const handleTogglePasswordShowButtonClick = (e) => {
   }
 };
 
+function getUserByEmail(email) {
+  if (email === "test@codeit.com") {
+    return { email: "test@codeit.com" };
+  } else {
+    return null;
+  }
+}
+
+function signUpUser(email) {
+  const user = getUserByEmail(email);
+
+  if (user !== null) {
+    throw new Error("이미 사용 중인 이메일입니다.");
+  }
+}
+
 function handleFormSubmit(e) {
   e.preventDefault();
 
@@ -92,22 +105,24 @@ function handleFormSubmit(e) {
   const password = passwordInput.value;
   const confirmPassword = passwordConfirmInput.value;
 
-  if (email.length === 0) {
-    showErrorEmailInput(email);
+  if (!email) {
     return emailInput.focus();
   }
 
-  if (password.length === 0) {
-    showErrorPasswordInput(password);
+  if (!password) {
     return passwordInput.focus();
   }
 
-  if (confirmPassword.length === 0) {
-    showErrorConfirmPasswordInput(confirmPassword);
+  if (!confirmPassword) {
     return passwordConfirmInput.focus();
   }
 
-  window.location.href = "../login/index.html";
+  try {
+    signUpUser(email);
+    window.location.href = "../folder/index.html";
+  } catch (error) {
+    emailError.textContent = error;
+  }
 }
 
 //=====================================
@@ -119,5 +134,7 @@ passwordConfirmInput.addEventListener(
   "focusout",
   handlePasswordConfirmFocusout
 );
-showHideBtn.addEventListener("click", handleTogglePasswordShowButtonClick);
+showHideBtns.forEach((showHideBtn) =>
+  showHideBtn.addEventListener("click", handleTogglePasswordShowButtonClick)
+);
 loginForm.addEventListener("submit", handleFormSubmit);
