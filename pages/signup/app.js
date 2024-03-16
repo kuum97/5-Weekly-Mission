@@ -1,9 +1,11 @@
+
 import {
   isEmailValid,
   isPasswordValid,
   showValidationError,
   hideValidationError,
 } from "../../js/auth.js";
+
 
 const loginForm = document.querySelector(".form-container");
 const emailInput = document.querySelector("input[type='email']");
@@ -57,6 +59,7 @@ const handlePasswordConfirmFocusout = (e) => {
   } else {
     return hideValidationError(passwordConfirmInput, passwordConfirmError);
   }
+
 };
 
 const handleTogglePasswordShowButtonClick = (e) => {
@@ -98,6 +101,7 @@ function signUpUser(email) {
   }
 }
 
+
 function handleFormSubmit(e) {
   e.preventDefault();
 
@@ -123,6 +127,7 @@ function handleFormSubmit(e) {
   } catch (error) {
     emailError.textContent = error;
   }
+
 }
 
 //=====================================

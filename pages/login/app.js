@@ -5,6 +5,7 @@ import {
   hideValidationError,
 } from "../../js/auth.js";
 
+
 const loginForm = document.querySelector(".form-container");
 const emailInput = document.querySelector("input[type='email']");
 const passwordInput = document.querySelector("input[type='password']");
@@ -12,6 +13,7 @@ const showHideBtn = document.querySelector(".show-hide-password");
 const emailError = document.getElementById("error-email");
 const passwordError = document.getElementById("error-password");
 const eyeIcon = document.querySelector(".fa-eye");
+
 
 const handleEmailFocusout = (e) => {
   const email = e.target.value;
@@ -35,6 +37,7 @@ const handlePasswordFocusout = (e) => {
   } else {
     return hideValidationError(passwordInput, passwordError);
   }
+
 };
 
 const handleTogglePasswordShowButtonClick = (e) => {
@@ -51,6 +54,7 @@ const handleTogglePasswordShowButtonClick = (e) => {
   }
 };
 
+
 function getUserByEmail(email) {
   return { email: "test@codeit.com", password: "codeit101" };
 }
@@ -63,11 +67,13 @@ function loginUser({ email, password }) {
   }
 }
 
+
 const handleFormSubmit = (e) => {
   e.preventDefault();
 
   const email = emailInput.value;
   const password = passwordInput.value;
+
 
   if (!email) {
     return emailInput.focus();
@@ -84,6 +90,7 @@ const handleFormSubmit = (e) => {
     emailError.textContent = error;
     passwordError.textContent = error;
   }
+
 };
 
 emailInput.addEventListener("focusout", handleEmailFocusout);
