@@ -55,10 +55,29 @@
   margin-bottom: 40px;
 }
 
-.hero-section__img {
+.hero-section__img-box {
+  background-color: transparent;
   width: 70%;
   position: relative;
-  top: 10px;
+  overflow: hidden;
+}
+
+.hero-section__img-box::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  background: linear-gradient(to bottom, var(--white), var(--gray-500));
+}
+
+.hero-section__img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  position: relative;
+  top: 20px;
 }
 
 .hero-section__cta-btn {
