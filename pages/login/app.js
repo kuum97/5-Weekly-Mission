@@ -1,6 +1,10 @@
-import { isEmailValid, isPasswordValid } from "../../js/validate.js";
+import {
+  isEmailValid,
+  isPasswordValid,
+  showValidationError,
+  hideValidationError,
+} from "../../js/auth.js";
 
-/* CONTROLLER LOGIC */
 
 const loginForm = document.querySelector(".form-container");
 const emailInput = document.querySelector("input[type='email']");
@@ -10,40 +14,30 @@ const emailError = document.getElementById("error-email");
 const passwordError = document.getElementById("error-password");
 const eyeIcon = document.querySelector(".fa-eye");
 
-function showErrorEmailInput(email) {
-  const validatedEmail = isEmailValid(email);
-
-  if (!validatedEmail.isValid) {
-    emailError.innerText = validatedEmail.message;
-    emailInput.classList.add("error-border-red");
-  } else {
-    emailError.innerText = "";
-    emailInput.classList.remove("error-border-red");
-  }
-}
 
 const handleEmailFocusout = (e) => {
   const email = e.target.value;
+  const validatedEmailType = isEmailValid(email);
+  const errorMessage = validatedEmailType.error;
 
-  showErrorEmailInput(email);
-};
-
-function showErrorPasswordInput(password) {
-  const validatedPassword = isPasswordValid(password);
-
-  if (!validatedPassword.isValid) {
-    passwordError.innerText = validatedPassword.message;
-    passwordInput.classList.add("error-border-red");
+  if (errorMessage !== null) {
+    return showValidationError(emailInput, emailError, errorMessage);
   } else {
-    passwordError.innerText = "";
-    passwordInput.classList.remove("error-border-red");
+    return hideValidationError(emailInput, emailError);
   }
-}
+};
 
 const handlePasswordFocusout = (e) => {
   const password = e.target.value;
+  const validatedPasswordType = isPasswordValid(password);
+  const errorMessage = validatedPasswordType.error;
 
-  showErrorPasswordInput(password);
+  if (errorMessage !== null) {
+    return showValidationError(passwordInput, passwordError, errorMessage);
+  } else {
+    return hideValidationError(passwordInput, passwordError);
+  }
+
 };
 
 const handleTogglePasswordShowButtonClick = (e) => {
@@ -60,33 +54,43 @@ const handleTogglePasswordShowButtonClick = (e) => {
   }
 };
 
+
+function getUserByEmail(email) {
+  return { email: "test@codeit.com", password: "codeit101" };
+}
+
+function loginUser({ email, password }) {
+  const user = getUserByEmail(email);
+
+  if (!user || user.password !== password) {
+    throw new Error("이메일 또는 비밀번호가 일치하지 않습니다.");
+  }
+}
+
+
 const handleFormSubmit = (e) => {
   e.preventDefault();
 
   const email = emailInput.value;
   const password = passwordInput.value;
 
-  if (email.length === 0) {
-    showErrorEmailInput(email);
+
+  if (!email) {
     return emailInput.focus();
   }
 
-  if (password.length === 0) {
-    showErrorPasswordInput(password);
+  if (!password) {
     return passwordInput.focus();
   }
 
-  // 테스트용 코드=====================
-  if (email === "test@codeit.com" && password === "codeit101") {
+  try {
+    loginUser({ email, password });
     window.location.href = "../folder/index.html";
-  } else {
-    emailInput.classList.add("error-border-red");
-    emailError.innerText = "이메일 또는 비밀번호가 일치하지 않습니다.";
-    passwordInput.classList.add("error-border-red");
-    passwordError.innerText = "이메일 또는 비밀번호가 일치하지 않습니다.";
-    return console.log("재시도하세요.");
+  } catch (error) {
+    emailError.textContent = error;
+    passwordError.textContent = error;
   }
-  // ===============================
+
 };
 
 emailInput.addEventListener("focusout", handleEmailFocusout);
