@@ -104,7 +104,8 @@
 }
 
 .main-section__img {
-  width: 90%;
+  width: 430px;
+  height: 400px;
 }
 
 .main-section__title {
@@ -162,8 +163,13 @@
     padding: 0 32px;
   }
 
-  .hero-section__img {
-    max-width: 700px;
+  .hero-section__title {
+    font-size: 45px;
+  }
+
+  .hero-section__cta-btn,
+  .nav__login-btn {
+    font-size: 20px;
   }
 
   .main-section {
@@ -173,7 +179,8 @@
   }
 
   .main-section__img {
-    max-width: 600px;
+    width: 330px;
+    height: 300px;
   }
 
   .main-section__title {
@@ -199,14 +206,11 @@
     font-size: 18px;
   }
 
-  .hero-section__img {
-    margin: 0 32px;
-  }
-
   .main-section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     padding: 32px;
     gap: 20px;
   }
@@ -221,6 +225,11 @@
 
   .main-section__description {
     font-size: 15px;
+  }
+
+  .main-section__img {
+    width: 280px;
+    height: 250px;
   }
 
   .footer-container {
