@@ -1,8 +1,8 @@
 import {
   isEmailValid,
   isPasswordValid,
-  showValidationError,
-  hideValidationError,
+  isPasswordConfirmValid,
+  toggleValidationResult,
 } from "../../js/auth.js";
 
 const loginForm = document.querySelector(".form-container");
@@ -17,46 +17,28 @@ const eyeIcons = document.querySelectorAll(".fa-eye");
 
 const handleEmailFocusout = (e) => {
   const email = e.target.value;
-  const validatedEmailType = isEmailValid(email);
-  const errorMessage = validatedEmailType.error;
+  const validationResult = isEmailValid(email);
 
-  if (errorMessage !== null) {
-    return showValidationError(emailInput, emailError, errorMessage);
-  } else {
-    return hideValidationError(emailInput, emailError);
-  }
+  toggleValidationResult(emailInput, emailError, validationResult.error);
 };
 
 const handlePasswordFocusout = (e) => {
   const password = e.target.value;
-  const validatedPasswordType = isPasswordValid(password);
-  const errorMessage = validatedPasswordType.error;
+  const validationResult = isPasswordValid(password);
 
-  if (errorMessage !== null) {
-    return showValidationError(passwordInput, passwordError, errorMessage);
-  } else {
-    return hideValidationError(passwordInput, passwordError);
-  }
+  toggleValidationResult(passwordInput, passwordError, validationResult.error);
 };
 
 const handlePasswordConfirmFocusout = (e) => {
   const password = passwordInput.value;
   const confirmPassword = e.target.value;
-  const validatedConfirmPasswordType = isPasswordValid(
-    password,
-    confirmPassword
-  );
-  const errorMessage = validatedConfirmPasswordType.error;
+  const validationResult = isPasswordConfirmValid(password, confirmPassword);
 
-  if (errorMessage !== null) {
-    return showValidationError(
-      passwordConfirmInput,
-      passwordConfirmError,
-      errorMessage
-    );
-  } else {
-    return hideValidationError(passwordConfirmInput, passwordConfirmError);
-  }
+  toggleValidationResult(
+    passwordConfirmInput,
+    passwordConfirmError,
+    validationResult.error
+  );
 };
 
 const handleTogglePasswordShowButtonClick = (e) => {

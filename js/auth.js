@@ -14,7 +14,7 @@ export function isEmailValid(email) {
   return { error: null };
 }
 
-export function isPasswordValid(password, confirmPassword = null) {
+export function isPasswordValid(password) {
   if (password.length === 0) {
     return { error: "비밀번호를 입력해 주세요." };
   }
@@ -28,7 +28,15 @@ export function isPasswordValid(password, confirmPassword = null) {
     };
   }
 
-  if (confirmPassword !== null && confirmPassword !== password) {
+  return { error: null };
+}
+
+export function isPasswordConfirmValid(password, confirmPassword) {
+  if (confirmPassword.length === 0) {
+    return { error: "비밀번호를 한 번 더 입력해주세요." };
+  }
+
+  if (password !== confirmPassword) {
     return { error: "비밀번호가 일치하지 않습니다." };
   }
 
@@ -37,16 +45,24 @@ export function isPasswordValid(password, confirmPassword = null) {
 
 /* error handling */
 
-export function showValidationError(
-  errorBorderElement,
-  errorElement,
-  errorMessage
-) {
+function showValidationError(errorBorderElement, errorElement, errorMessage) {
   errorBorderElement.classList.add("error-border-red");
   errorElement.textContent = errorMessage;
 }
 
-export function hideValidationError(errorBorderElement, errorElement) {
+function hideValidationError(errorBorderElement, errorElement) {
   errorBorderElement.classList.remove("error-border-red");
   errorElement.textContent = "";
+}
+
+export function toggleValidationResult(
+  errorBorderElement,
+  errorElement,
+  errorMessage
+) {
+  if (errorMessage) {
+    return showValidationError(errorBorderElement, errorElement, errorMessage);
+  } else {
+    return hideValidationError(errorBorderElement, errorElement, errorMessage);
+  }
 }
