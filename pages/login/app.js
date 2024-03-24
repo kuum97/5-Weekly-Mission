@@ -40,19 +40,7 @@ const handleTogglePasswordShowButtonClick = (e) => {
   }
 };
 
-function getUserByEmail(email) {
-  return { email: "test@codeit.com", password: "codeit101" };
-}
-
-function loginUser({ email, password }) {
-  const user = getUserByEmail(email);
-
-  if (!user || user.password !== password) {
-    throw new Error("이메일 또는 비밀번호가 일치하지 않습니다.");
-  }
-}
-
-const handleFormSubmit = (e) => {
+const handleFormSubmit = async (e) => {
   e.preventDefault();
 
   const email = emailInput.value;
@@ -67,11 +55,28 @@ const handleFormSubmit = (e) => {
   }
 
   try {
-    loginUser({ email, password });
-    window.location.href = "../folder/index.html";
+    const response = await fetch("https://bootcamp-api.codeit.kr/api/sign-in", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+
+    if (response.ok) {
+      return (window.location.href = "../folder/index.html");
+    }
+
+    if (response.status === 400) {
+      emailError.textContent = "이메일 또는 비밀번호가 일치하지 않습니다.";
+      passwordError.textContent = "이메일 또는 비밀번호가 일치하지 않습니다.";
+      return;
+    }
   } catch (error) {
-    emailError.textContent = error;
-    passwordError.textContent = error;
+    return console.log(error);
   }
 };
 

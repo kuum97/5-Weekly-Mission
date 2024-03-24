@@ -62,7 +62,7 @@ export function toggleValidationResult(
 ) {
   if (errorMessage) {
     return showValidationError(errorBorderElement, errorElement, errorMessage);
-  } else {
-    return hideValidationError(errorBorderElement, errorElement, errorMessage);
   }
+
+  return hideValidationError(errorBorderElement, errorElement, errorMessage);
 }

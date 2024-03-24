@@ -64,23 +64,7 @@ const handleTogglePasswordShowButtonClick = (e) => {
   }
 };
 
-function getUserByEmail(email) {
-  if (email === "test@codeit.com") {
-    return { email: "test@codeit.com" };
-  } else {
-    return null;
-  }
-}
-
-function signUpUser(email) {
-  const user = getUserByEmail(email);
-
-  if (user !== null) {
-    throw new Error("이미 사용 중인 이메일입니다.");
-  }
-}
-
-function handleFormSubmit(e) {
+const handleFormSubmit = async (e) => {
   e.preventDefault();
 
   const email = emailInput.value;
@@ -100,12 +84,31 @@ function handleFormSubmit(e) {
   }
 
   try {
-    signUpUser(email);
-    window.location.href = "../folder/index.html";
+    const response = await fetch(
+      "https://bootcamp-api.codeit.kr/api/check-email",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      return (window.location.href = "../folder/index.html");
+    }
+
+    if (response.status === 409) {
+      emailError.textContent = "이미 존재하는 이메일입니다.";
+      return;
+    }
   } catch (error) {
-    emailError.textContent = error;
+    return console.log(error);
   }
-}
+};
 
 //=====================================
 //Add Event listener
