@@ -14,7 +14,9 @@ export function isEmailValid(email) {
   return { error: null };
 }
 
+
 export function isPasswordValid(password) {
+
   if (password.length === 0) {
     return { error: "비밀번호를 입력해 주세요." };
   }
@@ -28,6 +30,7 @@ export function isPasswordValid(password) {
     };
   }
 
+
   return { error: null };
 }
 
@@ -37,6 +40,7 @@ export function isPasswordConfirmValid(password, confirmPassword) {
   }
 
   if (password !== confirmPassword) {
+
     return { error: "비밀번호가 일치하지 않습니다." };
   }
 
@@ -60,6 +64,7 @@ export function toggleValidationResult(
   errorElement,
   errorMessage
 ) {
+
   if (errorMessage) {
     return showValidationError(errorBorderElement, errorElement, errorMessage);
   }

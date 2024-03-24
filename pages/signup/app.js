@@ -21,6 +21,7 @@ const handleEmailFocusout = (e) => {
   const validationResult = isEmailValid(email);
 
   toggleValidationResult(emailInput, emailError, validationResult.error);
+
 };
 
 const handlePasswordFocusout = (e) => {
