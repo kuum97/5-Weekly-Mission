@@ -3,6 +3,7 @@ import {
   isPasswordValid,
   isPasswordConfirmValid,
   toggleValidationResult,
+  togglePasswordShowButtonClick,
 } from "../../js/auth.js";
 
 const loginForm = document.querySelector(".form-container");
@@ -44,24 +45,7 @@ const handlePasswordConfirmFocusout = (e) => {
 const handleTogglePasswordShowButtonClick = (e) => {
   e.preventDefault();
 
-  if (
-    passwordInput.type === "password" &&
-    passwordConfirmInput.type === "password"
-  ) {
-    passwordInput.type = "text";
-    passwordConfirmInput.type = "text";
-    eyeIcons.forEach((eyeIcon) => {
-      eyeIcon.classList.remove("fa-eye");
-      eyeIcon.classList.add("fa-eye-slash");
-    });
-  } else {
-    passwordInput.type = "password";
-    passwordConfirmInput.type = "password";
-    eyeIcons.forEach((eyeIcon) => {
-      eyeIcon.classList.remove("fa-eye-slash");
-      eyeIcon.classList.add("fa-eye");
-    });
-  }
+  togglePasswordShowButtonClick(passwordInput, passwordConfirmInput, eyeIcons);
 };
 
 const handleFormSubmit = async (e) => {

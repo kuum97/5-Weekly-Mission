@@ -2,6 +2,7 @@ import {
   isEmailValid,
   isPasswordValid,
   toggleValidationResult,
+  togglePasswordShowButtonClick,
 } from "../../js/auth.js";
 
 const loginForm = document.querySelector(".form-container");
@@ -10,7 +11,7 @@ const passwordInput = document.querySelector("input[type='password']");
 const showHideBtn = document.querySelector(".show-hide-password");
 const emailError = document.getElementById("error-email");
 const passwordError = document.getElementById("error-password");
-const eyeIcon = document.querySelector(".fa-eye");
+const eyeIcons = document.querySelectorAll(".fa-eye");
 
 const handleEmailFocusout = (e) => {
   const email = e.target.value;
@@ -29,15 +30,7 @@ const handlePasswordFocusout = (e) => {
 const handleTogglePasswordShowButtonClick = (e) => {
   e.preventDefault();
 
-  if (passwordInput.type === "password") {
-    passwordInput.type = "text";
-    eyeIcon.classList.remove("fa-eye");
-    eyeIcon.classList.add("fa-eye-slash");
-  } else {
-    passwordInput.type = "password";
-    eyeIcon.classList.remove("fa-eye-slash");
-    eyeIcon.classList.add("fa-eye");
-  }
+  togglePasswordShowButtonClick(passwordInput, eyeIcons);
 };
 
 const handleFormSubmit = async (e) => {

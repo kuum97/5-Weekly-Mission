@@ -66,3 +66,30 @@ export function toggleValidationResult(
 
   return hideValidationError(errorBorderElement, errorElement, errorMessage);
 }
+
+/* password display */
+
+export function togglePasswordShowButtonClick(
+  passwordInput,
+  passwordConfirmInput = null,
+  eyeIcons
+) {
+  if (
+    passwordInput.type === "password" &&
+    passwordConfirmInput.type === "password"
+  ) {
+    passwordInput.type = "text";
+    passwordConfirmInput.type = "text";
+    eyeIcons.forEach((eyeIcon) => {
+      eyeIcon.classList.remove("fa-eye");
+      eyeIcon.classList.add("fa-eye-slash");
+    });
+  } else {
+    passwordInput.type = "password";
+    passwordConfirmInput.type = "password";
+    eyeIcons.forEach((eyeIcon) => {
+      eyeIcon.classList.remove("fa-eye-slash");
+      eyeIcon.classList.add("fa-eye");
+    });
+  }
+}
