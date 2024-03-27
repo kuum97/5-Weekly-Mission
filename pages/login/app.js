@@ -1,10 +1,9 @@
 import {
   isEmailValid,
   isPasswordValid,
-  showValidationError,
-  hideValidationError,
+  toggleValidationResult,
+  togglePasswordShowButtonClick,
 } from "../../js/auth.js";
-
 
 const loginForm = document.querySelector(".form-container");
 const emailInput = document.querySelector("input[type='email']");
@@ -12,68 +11,33 @@ const passwordInput = document.querySelector("input[type='password']");
 const showHideBtn = document.querySelector(".show-hide-password");
 const emailError = document.getElementById("error-email");
 const passwordError = document.getElementById("error-password");
-const eyeIcon = document.querySelector(".fa-eye");
-
+const eyeIcons = document.querySelectorAll(".fa-eye");
 
 const handleEmailFocusout = (e) => {
   const email = e.target.value;
-  const validatedEmailType = isEmailValid(email);
-  const errorMessage = validatedEmailType.error;
+  const validationResult = isEmailValid(email);
 
-  if (errorMessage !== null) {
-    return showValidationError(emailInput, emailError, errorMessage);
-  } else {
-    return hideValidationError(emailInput, emailError);
-  }
+  toggleValidationResult(emailInput, emailError, validationResult.error);
 };
 
 const handlePasswordFocusout = (e) => {
   const password = e.target.value;
-  const validatedPasswordType = isPasswordValid(password);
-  const errorMessage = validatedPasswordType.error;
+  const validationResult = isPasswordValid(password);
 
-  if (errorMessage !== null) {
-    return showValidationError(passwordInput, passwordError, errorMessage);
-  } else {
-    return hideValidationError(passwordInput, passwordError);
-  }
-
+  toggleValidationResult(passwordInput, passwordError, validationResult.error);
 };
 
 const handleTogglePasswordShowButtonClick = (e) => {
   e.preventDefault();
 
-  if (passwordInput.type === "password") {
-    passwordInput.type = "text";
-    eyeIcon.classList.remove("fa-eye");
-    eyeIcon.classList.add("fa-eye-slash");
-  } else {
-    passwordInput.type = "password";
-    eyeIcon.classList.remove("fa-eye-slash");
-    eyeIcon.classList.add("fa-eye");
-  }
+  togglePasswordShowButtonClick(passwordInput, eyeIcons);
 };
 
-
-function getUserByEmail(email) {
-  return { email: "test@codeit.com", password: "codeit101" };
-}
-
-function loginUser({ email, password }) {
-  const user = getUserByEmail(email);
-
-  if (!user || user.password !== password) {
-    throw new Error("이메일 또는 비밀번호가 일치하지 않습니다.");
-  }
-}
-
-
-const handleFormSubmit = (e) => {
+const handleFormSubmit = async (e) => {
   e.preventDefault();
 
   const email = emailInput.value;
   const password = passwordInput.value;
-
 
   if (!email) {
     return emailInput.focus();
@@ -84,13 +48,29 @@ const handleFormSubmit = (e) => {
   }
 
   try {
-    loginUser({ email, password });
-    window.location.href = "../folder/index.html";
-  } catch (error) {
-    emailError.textContent = error;
-    passwordError.textContent = error;
-  }
+    const response = await fetch("https://bootcamp-api.codeit.kr/api/sign-in", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
 
+    if (response.ok) {
+      return (window.location.href = "../folder/index.html");
+    }
+
+    if (response.status === 400) {
+      emailError.textContent = "이메일 또는 비밀번호가 일치하지 않습니다.";
+      passwordError.textContent = "이메일 또는 비밀번호가 일치하지 않습니다.";
+      return;
+    }
+  } catch (error) {
+    return console.log(error);
+  }
 };
 
 emailInput.addEventListener("focusout", handleEmailFocusout);

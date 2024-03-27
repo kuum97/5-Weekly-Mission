@@ -1,11 +1,10 @@
-
 import {
   isEmailValid,
   isPasswordValid,
-  showValidationError,
-  hideValidationError,
+  isPasswordConfirmValid,
+  toggleValidationResult,
+  togglePasswordShowButtonClick,
 } from "../../js/auth.js";
-
 
 const loginForm = document.querySelector(".form-container");
 const emailInput = document.querySelector("input[type='email']");
@@ -19,90 +18,38 @@ const eyeIcons = document.querySelectorAll(".fa-eye");
 
 const handleEmailFocusout = (e) => {
   const email = e.target.value;
-  const validatedEmailType = isEmailValid(email);
-  const errorMessage = validatedEmailType.error;
+  const validationResult = isEmailValid(email);
 
-  if (errorMessage !== null) {
-    return showValidationError(emailInput, emailError, errorMessage);
-  } else {
-    return hideValidationError(emailInput, emailError);
-  }
+  toggleValidationResult(emailInput, emailError, validationResult.error);
+
 };
 
 const handlePasswordFocusout = (e) => {
   const password = e.target.value;
-  const validatedPasswordType = isPasswordValid(password);
-  const errorMessage = validatedPasswordType.error;
+  const validationResult = isPasswordValid(password);
 
-  if (errorMessage !== null) {
-    return showValidationError(passwordInput, passwordError, errorMessage);
-  } else {
-    return hideValidationError(passwordInput, passwordError);
-  }
+  toggleValidationResult(passwordInput, passwordError, validationResult.error);
 };
 
 const handlePasswordConfirmFocusout = (e) => {
   const password = passwordInput.value;
   const confirmPassword = e.target.value;
-  const validatedConfirmPasswordType = isPasswordValid(
-    password,
-    confirmPassword
+  const validationResult = isPasswordConfirmValid(password, confirmPassword);
+
+  toggleValidationResult(
+    passwordConfirmInput,
+    passwordConfirmError,
+    validationResult.error
   );
-  const errorMessage = validatedConfirmPasswordType.error;
-
-  if (errorMessage !== null) {
-    return showValidationError(
-      passwordConfirmInput,
-      passwordConfirmError,
-      errorMessage
-    );
-  } else {
-    return hideValidationError(passwordConfirmInput, passwordConfirmError);
-  }
-
 };
 
 const handleTogglePasswordShowButtonClick = (e) => {
   e.preventDefault();
 
-  if (
-    passwordInput.type === "password" &&
-    passwordConfirmInput.type === "password"
-  ) {
-    passwordInput.type = "text";
-    passwordConfirmInput.type = "text";
-    eyeIcons.forEach((eyeIcon) => {
-      eyeIcon.classList.remove("fa-eye");
-      eyeIcon.classList.add("fa-eye-slash");
-    });
-  } else {
-    passwordInput.type = "password";
-    passwordConfirmInput.type = "password";
-    eyeIcons.forEach((eyeIcon) => {
-      eyeIcon.classList.remove("fa-eye-slash");
-      eyeIcon.classList.add("fa-eye");
-    });
-  }
+  togglePasswordShowButtonClick(passwordInput, passwordConfirmInput, eyeIcons);
 };
 
-function getUserByEmail(email) {
-  if (email === "test@codeit.com") {
-    return { email: "test@codeit.com" };
-  } else {
-    return null;
-  }
-}
-
-function signUpUser(email) {
-  const user = getUserByEmail(email);
-
-  if (user !== null) {
-    throw new Error("이미 사용 중인 이메일입니다.");
-  }
-}
-
-
-function handleFormSubmit(e) {
+const handleFormSubmit = async (e) => {
   e.preventDefault();
 
   const email = emailInput.value;
@@ -122,13 +69,31 @@ function handleFormSubmit(e) {
   }
 
   try {
-    signUpUser(email);
-    window.location.href = "../folder/index.html";
-  } catch (error) {
-    emailError.textContent = error;
-  }
+    const response = await fetch(
+      "https://bootcamp-api.codeit.kr/api/check-email",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      }
+    );
 
-}
+    if (response.ok) {
+      return (window.location.href = "../folder/index.html");
+    }
+
+    if (response.status === 409) {
+      emailError.textContent = "이미 존재하는 이메일입니다.";
+      return;
+    }
+  } catch (error) {
+    return console.log(error);
+  }
+};
 
 //=====================================
 //Add Event listener
