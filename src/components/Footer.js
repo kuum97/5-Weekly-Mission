@@ -1,16 +1,17 @@
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import styles from "./Footer.module.css";
 
 function Footer() {
   return (
-    <footer>
-      <div>
+    <footer className={styles.container}>
+      <div className={styles.companyInfo}>
         <span>©codeit-2023</span>
       </div>
-      <div>
+      <div className={styles.forUser}>
         <a href="./pages/privacy/index.html">Privacy Policy</a>
         <a href="./pages/faq/index.html">FAQ</a>
       </div>
-      <div>
+      <div className={styles.socialMedia}>
         <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
           <FaFacebook />
         </a>

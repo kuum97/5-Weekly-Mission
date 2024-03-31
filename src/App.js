@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import "./global.css";
 import FavoriteLinkCards from "./components/FavoriteLinkCards";
 import Footer from "./components/Footer";
 import GlobalNavigationBar from "./components/GlobalNavigationBar";
-import SearchBar from "./components/SearchBar";
-import UserFavoriteTitle from "./components/UserFavoriteTitle";
+import UserProfileAndTitle from "./components/UserProfileAndTitle";
 import { getFolder, getUser } from "./api";
 
 function App() {
@@ -44,22 +44,18 @@ function App() {
         isUserLoggedIn={isUserLoggedIn}
       />
       {isUserLoggedIn ? (
-        <UserFavoriteTitle
+        <UserProfileAndTitle
           userProfileData={userProfileData}
           folderData={folderData}
         />
       ) : (
         <div>로그인해주세요.</div>
       )}
-      <div>
-        {/* container 컴포넌트로 스타일 적용 가능할 듯 함 */}
-        <SearchBar />
-        {userProfileData ? (
-          <FavoriteLinkCards folderData={folderData} />
-        ) : (
-          <div>로그인해주세요</div>
-        )}
-      </div>
+      {userProfileData ? (
+        <FavoriteLinkCards folderData={folderData} />
+      ) : (
+        <div>로그인해주세요</div>
+      )}
       <Footer />
     </>
   );

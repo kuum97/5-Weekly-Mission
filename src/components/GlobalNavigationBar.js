@@ -1,19 +1,22 @@
 import mainLogo from "../assets/Linkbrary.png";
 import Avatar from "./Avatar";
+import styles from "./GlobalNavigationBar.module.css";
 
 function GlobalNavigationBar({ handleLogin, userProfileData, isUserLoggedIn }) {
   const { profileImageSource, email } = userProfileData;
 
   return (
-    <div>
-      <img src={mainLogo} alt="logo" />
+    <div className={styles.container}>
+      <img className={styles.logo} src={mainLogo} alt="logo" />
       {isUserLoggedIn ? (
-        <div>
-          <Avatar src={profileImageSource} />
+        <div className={styles.profileContainer}>
+          <Avatar size="small" src={profileImageSource} />
           <span>{email}</span>
         </div>
       ) : (
-        <button onClick={handleLogin}>로그인</button>
+        <button className={styles.loginBtn} onClick={handleLogin}>
+          로그인
+        </button>
       )}
     </div>
   );

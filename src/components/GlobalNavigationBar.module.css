@@ -1,0 +1,55 @@
+.container {
+  width: 100%;
+  height: 110px;
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 200px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginBtn {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.profileContainer {
+  display: flex;
+  align-items: center;
+}
+
+.profileContainer img {
+  margin-right: 20px;
+}
+
+.profileContainer span {
+  display: inline-block;
+  font-size: 16px;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .container {
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .container {
+    padding: 0 32px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  .profileContainer span {
+    display: none;
+  }
+}

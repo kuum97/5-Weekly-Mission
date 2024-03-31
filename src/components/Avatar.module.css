@@ -1,0 +1,13 @@
+.avatar {
+  border-radius: 9999px;
+}
+
+.small {
+  width: 35px;
+  height: 35px;
+}
+
+.medium {
+  width: 100px;
+  height: 100px;
+}
