@@ -1,22 +1,30 @@
-function FavoriteLinkCard() {
+function FavoriteLinkCard({ link }) {
+  const { url, createdAt, description, imageSource } = link;
+
   return (
     <div>
-      <img src="#" alt="cardImage" /> {/* "/api/sample/folder" 이미지 */}
+      <a href={url} target="_blank" rel="noreferrer">
+        <img src={imageSource} alt="cardImage" />
+      </a>
       <div>
-        <div>10 minutes ago</div> {/* "/api/sample/folder" createdAt */}
-        <div>description</div> {/* "/api/sample/folder" description */}
-        <div>2023. 3. 15</div> {/* "/api/sample/folder" createdAt */}
+        <div></div>
+        <div>{description}</div>
+        <div>{createdAt}</div>
       </div>
     </div>
   );
 }
 
-function FavoriteLinkCards() {
+function FavoriteLinkCards({ folderData }) {
+  const { links } = folderData;
+
   return (
     <ul>
-      <li>
-        <FavoriteLinkCard />
-      </li>
+      {links.map((link) => (
+        <li key={link.id}>
+          <FavoriteLinkCard link={link} />
+        </li>
+      ))}
     </ul>
   );
 }

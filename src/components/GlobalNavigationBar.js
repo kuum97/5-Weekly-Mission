@@ -1,8 +1,8 @@
 import mainLogo from "../assets/Linkbrary.png";
 import Avatar from "./Avatar";
 
-function GlobalNavigationBar({ handleLogin, userData, isUserLoggedIn }) {
-  const { profileImageSource, email } = userData;
+function GlobalNavigationBar({ handleLogin, userProfileData, isUserLoggedIn }) {
+  const { profileImageSource, email } = userProfileData;
 
   return (
     <div>
