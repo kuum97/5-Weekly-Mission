@@ -4,7 +4,7 @@ import FavoriteLinkCards from "./components/FavoriteLinkCards";
 import Footer from "./components/Footer";
 import GlobalNavigationBar from "./components/GlobalNavigationBar";
 import UserProfileAndTitle from "./components/UserProfileAndTitle";
-import { getFolder, getUser } from "./api";
+import { getFolder, getUser } from "./services/api";
 
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
