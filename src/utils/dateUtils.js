@@ -24,7 +24,7 @@ export function displayCreatedTime(date) {
     }
   }
 
-  return `방금 전`;
+  return "방금 전";
 }
 
 export function formatDateString(date) {
