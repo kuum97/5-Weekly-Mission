@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import "./global.css";
 import FavoriteLinkCards from "./components/FavoriteLinkCards";
 import Footer from "./components/Footer";
-import GlobalNavigationBar from "./components/GlobalNavigationBar";
 import UserProfileAndTitle from "./components/UserProfileAndTitle";
 import { getFolder, getUser } from "./services/api";
+import SharedHeader from "./components/SharedHeader";
 
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -38,7 +38,7 @@ function App() {
 
   return (
     <>
-      <GlobalNavigationBar
+      <SharedHeader
         handleLogin={handleLogin}
         userProfileData={userProfileData}
         isUserLoggedIn={isUserLoggedIn}

@@ -1,8 +1,8 @@
 import mainLogo from "../assets/Linkbrary.png";
 import Avatar from "./Avatar";
-import styles from "./GlobalNavigationBar.module.css";
+import styles from "./SharedHeader.module.css";
 
-function GlobalNavigationBar({ handleLogin, userProfileData, isUserLoggedIn }) {
+function SharedHeader({ handleLogin, userProfileData, isUserLoggedIn }) {
   const { profileImageSource, email } = userProfileData;
 
   return (
@@ -22,4 +22,4 @@ function GlobalNavigationBar({ handleLogin, userProfileData, isUserLoggedIn }) {
   );
 }
 
-export default GlobalNavigationBar;
+export default SharedHeader;
