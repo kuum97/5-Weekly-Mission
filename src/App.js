@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./global.css";
 import FavoriteLinkCards from "./components/FavoriteLinkCards";
 import Footer from "./components/Footer";
@@ -11,7 +11,7 @@ function App() {
   const [userProfileData, setUserProfileData] = useState("");
   const [folderData, setFolderData] = useState("");
 
-  const handleLogin = async () => {
+  const handleLogin = useCallback(async () => {
     try {
       const user = await getUser();
       if (!user) {
@@ -30,11 +30,11 @@ function App() {
     } catch (error) {
       return console.error(error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     handleLogin();
-  }, []);
+  }, [handleLogin]);
 
   return (
     <>
