@@ -1,0 +1,62 @@
+.container {
+  width: 100%;
+  display: grid;
+  grid-template: auto / 1fr 1fr 1fr;
+  padding: 40px 104px;
+  margin-top: 70px;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.container a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.companyInfo {
+  display: flex;
+  align-items: center;
+}
+
+.forUser {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.socialMedia {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .container {
+    padding: 30px 60px;
+    grid-template:
+      "b c" 90px
+      "a ." 20px/ 1fr 1fr;
+  }
+
+  .forUser {
+    font-size: 14px;
+    grid-area: b;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .companyInfo {
+    font-size: 14px;
+    grid-area: a;
+  }
+
+  .socialMedia {
+    grid-area: c;
+  }
+
+  .socialMedia a {
+    height: 16px;
+  }
+}
