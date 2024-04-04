@@ -1,8 +1,8 @@
 import mainLogo from "../assets/Linkbrary.png";
 import Avatar from "./Avatar";
-import styles from "./SharedHeader.module.css";
+import styles from "./Header.module.css";
 
-function SharedHeader({ handleLogin, userProfileData, isUserLoggedIn }) {
+function Header({ handleLogin, userProfileData, isUserLoggedIn }) {
   const { profileImageSource, email } = userProfileData;
 
   return (
@@ -22,4 +22,4 @@ function SharedHeader({ handleLogin, userProfileData, isUserLoggedIn }) {
   );
 }
 
-export default SharedHeader;
+export default Header;

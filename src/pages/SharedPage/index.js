@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import "./global.css";
-import FavoriteLinkCards from "./components/FavoriteLinkCards";
-import Footer from "./components/Footer";
+import { getFolder, getUser } from "../../services/api";
+import Header from "../../globalComponents/Header";
+import Footer from "../../globalComponents/Footer";
+import FavoriteLinkCards from "../../globalComponents/FavoriteLinkCards";
 import UserProfileAndTitle from "./components/UserProfileAndTitle";
-import { getFolder, getUser } from "./services/api";
-import SharedHeader from "./components/SharedHeader";
+import "../../global.css";
 
-function App() {
+function SharedPage() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [userProfileData, setUserProfileData] = useState("");
   const [folderData, setFolderData] = useState("");
@@ -38,7 +38,7 @@ function App() {
 
   return (
     <>
-      <SharedHeader
+      <Header
         handleLogin={handleLogin}
         userProfileData={userProfileData}
         isUserLoggedIn={isUserLoggedIn}
@@ -61,4 +61,4 @@ function App() {
   );
 }
 
-export default App;
+export default SharedPage;

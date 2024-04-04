@@ -1,4 +1,4 @@
-import Avatar from "./Avatar";
+import Avatar from "../../../globalComponents/Avatar";
 import styles from "./UserProfileAndTitle.module.css";
 
 function UserProfileAndTitle({ userProfileData, folderData }) {
