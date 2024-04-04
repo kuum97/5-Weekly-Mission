@@ -11,21 +11,21 @@ function FavoriteLinkCard({ link }) {
   const src = imageSource || errorImage;
 
   return (
-    <div className={styles.container}>
-      <a
-        className={styles.linkImageAnchor}
-        href={url}
-        target="_blank"
-        rel="noreferrer"
-      >
+    <a
+      className={styles.linkImageAnchor}
+      href={url}
+      target="_blank"
+      rel="noreferrer"
+    >
+      <div className={styles.imageWrapper}>
         <img className={styles.linkImage} src={src} alt="cardImage" />
-      </a>
+      </div>
       <div className={styles.linkInfo}>
         <div className={styles.linkInfoContent}>{createdTime}</div>
         <div className={styles.linkInfoContent}>{description}</div>
         <div className={styles.linkInfoContent}>{createdAtFormat}</div>
       </div>
-    </div>
+    </a>
   );
 }
 
