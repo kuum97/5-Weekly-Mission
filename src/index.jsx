@@ -6,6 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import SharedPage from "./pages/SharedPage";
+import FolderPage from "./pages/FolderPage";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/shared",
     element: <SharedPage />,
+  },
+  {
+    path: "/folder/:userId",
+    element: <FolderPage />,
   },
 ]);
 
