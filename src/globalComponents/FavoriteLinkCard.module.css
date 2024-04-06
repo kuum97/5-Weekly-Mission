@@ -21,7 +21,7 @@
   width: 340px;
   height: 200px;
   object-fit: cover;
-  transition: transform 0.1s ease;
+  transition: transform 0.3s ease;
 }
 
 .linkImageAnchor:hover .linkImage {
@@ -31,9 +31,15 @@
 .linkInfo {
   padding: 15px;
   height: 135px;
+  border-radius: 0 0 15px 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.linkImageAnchor:hover .linkInfo {
+  background-color: var(--gray-400);
 }
 
 .linkInfoContent:first-child {

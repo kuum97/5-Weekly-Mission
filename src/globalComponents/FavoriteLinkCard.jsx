@@ -3,7 +3,7 @@ import errorImage from "../assets/error.png";
 import { displayCreatedTime, formatDateString } from "../utils/dateUtils";
 
 function FavoriteLinkCard({ link }) {
-  const { url, createdAt, description, imageSource } = link;
+  const { url, createdAt, description, imageSource, title } = link;
 
   const createdTime = displayCreatedTime(createdAt);
   const createdAtFormat = formatDateString(createdAt);
@@ -18,7 +18,7 @@ function FavoriteLinkCard({ link }) {
       rel="noreferrer"
     >
       <div className={styles.imageWrapper}>
-        <img className={styles.linkImage} src={src} alt="cardImage" />
+        <img className={styles.linkImage} src={src} alt={title} />
       </div>
       <div className={styles.linkInfo}>
         <div className={styles.linkInfoContent}>{createdTime}</div>
