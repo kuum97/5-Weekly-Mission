@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     element: <SharedPage />,
   },
   {
-    path: "/folder/:userId",
+    path: "/folder",
     element: <FolderPage />,
   },
 ]);

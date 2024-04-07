@@ -2,11 +2,9 @@ import SearchBar from "./SearchBar";
 import styles from "./FavoriteLinkCards.module.css";
 import FavoriteLinkCard from "./FavoriteLinkCard";
 
-function FavoriteLinkCards({ folderData }) {
-  const { links } = folderData;
-
+function FavoriteLinkCards({ links }) {
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <SearchBar />
       <ul className={styles.linkList}>
         {links.map((link) => (
@@ -15,7 +13,7 @@ function FavoriteLinkCards({ folderData }) {
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }
 

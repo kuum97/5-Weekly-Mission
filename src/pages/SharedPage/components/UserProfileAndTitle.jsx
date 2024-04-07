@@ -1,13 +1,13 @@
 import Avatar from "../../../globalComponents/Avatar";
 import styles from "./UserProfileAndTitle.module.css";
 
-function UserProfileAndTitle({ userProfileData, folderData }) {
+function UserProfileAndTitle({ userName, folderName, folderImage }) {
   return (
-    <div className={styles.container}>
-      <Avatar size="medium" src={folderData.owner.profileImageSource} />
-      <div className={styles.userName}>@{userProfileData.name}</div>
-      <div className={styles.folderName}>{folderData.name}</div>
-    </div>
+    <section className={styles.container}>
+      <Avatar size="medium" src={folderImage} />
+      <div className={styles.userName}>@{userName}</div>
+      <div className={styles.folderName}>{folderName}</div>
+    </section>
   );
 }
 
