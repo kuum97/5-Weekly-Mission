@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 
-const useAsync = (asyncFunc, userId) => {
+const useAsync = (asyncFunc, userId, folderId) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState({});
   const [error, setError] = useState(null);
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
     try {
       let result;
-      if (userId) {
+      if (userId && folderId) {
+        result = await asyncFunc(userId, folderId);
+      } else if (userId) {
         result = await asyncFunc(userId);
       } else {
         result = await asyncFunc();
@@ -20,7 +22,7 @@ const useAsync = (asyncFunc, userId) => {
     } finally {
       setIsLoading(false);
     }
-  }, [asyncFunc, userId]);
+  }, [asyncFunc, userId, folderId]);
 
   useEffect(() => {
     fetchData();

@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 1060px;
+}
+
+.listContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.folderButtonList {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.folderButtonList button {
+  background-color: var(--white);
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+  padding: 8px 12px 8px 12px;
+  text-align: center;
+}
+
+.folderAddButton {
+  border: none;
+  background: none;
+  color: var(--primary);
+}
+
+.controlContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.selectedFolderName {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.folderControl {
+  display: flex;
+  gap: 3px;
+}
+
+.folderControl button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  gap: 2px;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .container {
+    width: 705px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .container {
+    width: 325px;
+  }
+}

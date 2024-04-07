@@ -1,49 +1,57 @@
-import { useCallback, useEffect, useState } from "react";
-import { getFolder, getUser } from "../../services/api";
 import Header from "../../globalComponents/Header";
 import Footer from "../../globalComponents/Footer";
-import FavoriteLinkCards from "../../globalComponents/FavoriteLinkCards";
 import UserProfileAndTitle from "./components/UserProfileAndTitle";
-import "../../global.css";
+import SharedLinkCards from "./components/SharedLinkCards";
+import { useEffect, useState } from "react";
+import { getFolder, getUser } from "../../services/api";
 import useAsync from "../../services/useAsync";
+import "../../global.css";
 
 function SharedPage() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const [user, setUser] = useState("");
-  const [folder, setFolder] = useState("");
-  const { value: userProfileData } = useAsync(getUser);
-  const { value: folderData } = useAsync(getFolder);
-
-  const handleLogin = useCallback(() => {
-    if (!userProfileData) return;
-    setUser(userProfileData);
-    if (!folderData) return;
-    setFolder(folderData);
-    setIsUserLoggedIn(true);
-  }, [userProfileData, folderData]);
+  const {
+    value: userProfileData,
+    isLoading: isLoadingUser,
+    error: userError,
+  } = useAsync(getUser);
+  const {
+    value: folderData,
+    isLoading: isLoadingFolders,
+    error: foldersError,
+  } = useAsync(getFolder);
 
   useEffect(() => {
-    handleLogin();
-  }, [handleLogin]);
+    if (!isLoadingUser && userProfileData) {
+      setIsUserLoggedIn(true);
+    }
+  }, [isLoadingUser, userProfileData]);
+
+  if (isLoadingUser || isLoadingFolders) {
+    return <div>Loading...</div>;
+  }
+
+  if (userError || foldersError) {
+    return <div>Error loading data.</div>;
+  }
 
   return (
     <>
       <Header
-        handleLogin={handleLogin}
-        userProfileData={userProfileData}
+        userAvatarImage={userProfileData.profileImageSource}
+        userProfileEmail={userProfileData.email}
         userLogInSuccess={isUserLoggedIn}
       />
       {isUserLoggedIn ? (
         <UserProfileAndTitle
-          userName={user.name}
-          folderName={folder.name}
-          folderImage={folder.owner.profileImageSource}
+          userName={userProfileData.name}
+          folderName={folderData.name}
+          folderImage={folderData.owner.profileImageSource}
         />
       ) : (
         <div>로그인해주세요.</div>
       )}
       {isUserLoggedIn ? (
-        <FavoriteLinkCards links={folder.links} />
+        <SharedLinkCards links={folderData.links} />
       ) : (
         <div>로그인해주세요.</div>
       )}

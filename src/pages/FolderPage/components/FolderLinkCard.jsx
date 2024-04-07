@@ -1,14 +1,14 @@
-import styles from "./FavoriteLinkCard.module.css";
-import errorImage from "../assets/error.png";
-import { displayCreatedTime, formatDateString } from "../utils/dateUtils";
+import { displayCreatedTime, formatDateString } from "../../../utils/dateUtils";
+import defaultImage from "../../../assets/card-default.png";
+import styles from "../styles/FolderLinkCard.module.css";
 
-function FavoriteLinkCard({ link }) {
-  const { url, createdAt, description, imageSource, title } = link;
+function FolderLinkCard({ link }) {
+  const { url, description, title, created_at, image_source } = link;
 
-  const createdTime = displayCreatedTime(createdAt);
-  const createdAtFormat = formatDateString(createdAt);
+  const createdTime = displayCreatedTime(created_at);
+  const createdAtFormat = formatDateString(created_at);
 
-  const src = imageSource || errorImage;
+  const src = image_source || defaultImage;
 
   return (
     <a
@@ -29,4 +29,4 @@ function FavoriteLinkCard({ link }) {
   );
 }
 
-export default FavoriteLinkCard;
+export default FolderLinkCard;
