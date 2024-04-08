@@ -4,21 +4,22 @@
   margin-bottom: 10px;
   width: 340px;
   height: 335px;
-  border: 1px solid transparent;
+  border: none;
   border-radius: 15px;
   box-shadow: 0 0 15px 2px var(--gray-400);
 }
 
 .imageWrapper {
-  width: 340px;
+  width: 100%;
   height: 200px;
   border-radius: 15px 15px 0 0;
   overflow: hidden;
+  position: relative;
 }
 
 .linkImage {
   border-radius: 15px 15px 0 0;
-  width: 340px;
+  width: 100%;
   height: 200px;
   object-fit: cover;
   transition: transform 0.3s ease;
@@ -36,6 +37,7 @@
   flex-direction: column;
   justify-content: center;
   transition: background-color 0.3s ease;
+  position: relative;
 }
 
 .linkImageAnchor:hover .linkInfo {
@@ -46,6 +48,9 @@
   font-size: 13px;
   font-weight: 400;
   color: var(--gray-600);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .linkInfoContent:nth-child(2) {
@@ -58,14 +63,55 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 48px;
-  line-height: 24px;
+  height: 48px;
+  line-height: 1.5;
 }
 
-.linkInfoContent:last-child {
+.linkInfoContent:nth-child(3) {
   font-size: 14px;
   font-weight: 400;
   color: var(--gray-700);
+}
+
+.starIcon {
+  color: var(--gray-600);
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.kebabButton {
+  background-color: transparent;
+  border: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  width: 100px;
+  position: absolute;
+  right: -55px;
+  top: 35px;
+  z-index: 1;
+}
+
+.modal button {
+  padding: 7px 12px;
+  width: 100px;
+  border: none;
+  box-shadow: 0 0 15px 2px var(--gray-400);
+}
+
+.modal button:first-child {
+  background-color: var(--white);
+}
+
+.modal button:nth-child(2) {
+  background-color: var(--gray-400);
 }
 
 @media (min-width: 375px) and (max-width: 767px) {

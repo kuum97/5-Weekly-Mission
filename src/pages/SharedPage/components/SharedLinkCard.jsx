@@ -1,6 +1,6 @@
 import { displayCreatedTime, formatDateString } from "../../../utils/dateUtils";
 import defaultImage from "../../../assets/card-default.png";
-import styles from "../styles/SharedLinkCard.module.css";
+import styles from "../../LinkCard.module.css";
 
 function SharedLinkCard({ link }) {
   const { url, description, title, createdAt, imageSource } = link;

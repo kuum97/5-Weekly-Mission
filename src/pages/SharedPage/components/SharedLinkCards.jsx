@@ -1,6 +1,6 @@
 import SearchBar from "../../../globalComponents/SearchBar";
 import SharedLinkCard from "./SharedLinkCard";
-import styles from "../styles/SharedLinkCards.module.css";
+import styles from "../../LinkCards.module.css";
 
 function SharedLinkCards({ links }) {
   return (
