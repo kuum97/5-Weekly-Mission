@@ -9,6 +9,7 @@
   width: 100%;
   justify-content: space-between;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .folderButtonList {
@@ -36,7 +37,6 @@
 
 .controlContainer {
   display: flex;
-
   width: 100%;
   justify-content: space-between;
   align-items: center;
@@ -73,6 +73,14 @@
   }
 
   .folderAddButton {
-    display: none;
+    width: 130px;
+    height: 35px;
+    padding: 8px 24px;
+    color: var(--white);
+    background-color: var(--primary);
+    position: absolute;
+    bottom: -500px;
+    left: 95px;
+    border-radius: 20px;
   }
 }

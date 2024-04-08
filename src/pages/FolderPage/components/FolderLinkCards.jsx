@@ -15,7 +15,9 @@ function FolderLinkCards({ links }) {
           </ul>
         </section>
       ) : (
-        <div className={styles.container}>저장된 링크가 없습니다.</div>
+        <div className={`${styles.container} ${styles.empty}`}>
+          저장된 링크가 없습니다.
+        </div>
       )}
     </>
   );
