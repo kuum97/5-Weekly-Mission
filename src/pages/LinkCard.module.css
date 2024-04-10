@@ -1,0 +1,123 @@
+.linkImageAnchor {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: 10px;
+  width: 340px;
+  height: 335px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 0 15px 2px var(--gray-400);
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 200px;
+  border-radius: 15px 15px 0 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.linkImage {
+  border-radius: 15px 15px 0 0;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.linkImageAnchor:hover .linkImage {
+  transform: scale(1.3);
+}
+
+.linkInfo {
+  padding: 15px;
+  height: 135px;
+  border-radius: 0 0 15px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.linkImageAnchor:hover .linkInfo {
+  background-color: var(--gray-400);
+}
+
+.linkInfoContent:first-child {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-600);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.linkInfoContent:nth-child(2) {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--black);
+  margin: 10px 0 10px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 48px;
+  line-height: 1.5;
+}
+
+.linkInfoContent:nth-child(3) {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gray-700);
+}
+
+.starIcon {
+  color: var(--gray-600);
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.kebabButton {
+  background-color: transparent;
+  border: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  width: 100px;
+  position: absolute;
+  right: -55px;
+  top: 35px;
+  z-index: 1;
+}
+
+.modal button {
+  padding: 7px 12px;
+  width: 100px;
+  border: none;
+  box-shadow: 0 0 15px 2px var(--gray-400);
+}
+
+.modal button:first-child {
+  background-color: var(--white);
+}
+
+.modal button:nth-child(2) {
+  background-color: var(--gray-400);
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .container,
+  .linkImageAnchor,
+  .linkImage {
+    width: 325px;
+  }
+}
