@@ -1,26 +1,13 @@
-function Modal() {
+import styles from "./Modal.module.css";
+
+function Modal({ children }) {
   return (
-    <div>
-      <div>
-        <h1>title</h1>
-        <h2>subtitle</h2>
-        <form>
-          <input type="text" />
-          <button>submit</button>
-        </form>
-        <div>
-          <a href="/">kakao</a>
-          <a href="/">facebook</a>
-          <a href="/">link</a>
-        </div>
-        <ul>
-          <li>a</li>
-          <li>b</li>
-          <li>c</li>
-          <li>d</li>
-          <button>add</button>
-        </ul>
-        <button>x</button>
+    <div className={styles.background}>
+      <div className={styles.container}>
+        <h1 className={styles.title}>title</h1>
+        <h2 className={styles.subTitle}>subtitle</h2>
+        {children}
+        <button className={styles.exitButton}>X</button>
       </div>
     </div>
   );
