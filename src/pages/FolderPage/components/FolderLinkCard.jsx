@@ -12,13 +12,13 @@ function FolderLinkCard({ link }) {
 
   const src = image_source || defaultImage;
 
-  const handleToggleModal = (e) => {
+  const handleToggleDropDown = (e) => {
     e.preventDefault();
 
     const button = e.currentTarget;
     const linkInfo = button.closest(`.${styles.linkInfo}`);
-    const modal = linkInfo.querySelector(`.${styles.modal}`);
-    modal.classList.toggle(styles.hidden);
+    const dropdown = linkInfo.querySelector(`.${styles.dropdown}`);
+    dropdown.classList.toggle(styles.hidden);
   };
 
   return (
@@ -35,13 +35,13 @@ function FolderLinkCard({ link }) {
       <div className={styles.linkInfo}>
         <div className={styles.linkInfoContent}>
           <div>{createdTime}</div>
-          <button onClick={handleToggleModal} className={styles.kebabButton}>
+          <button onClick={handleToggleDropDown} className={styles.kebabButton}>
             <img src={kebab} alt="menu" />
           </button>
         </div>
         <div className={styles.linkInfoContent}>{description}</div>
         <div className={styles.linkInfoContent}>{createdAtFormat}</div>
-        <div className={`${styles.modal} ${styles.hidden}`}>
+        <div className={`${styles.dropdown} ${styles.hidden}`}>
           <button>삭제하기</button>
           <button>폴더에 추가</button>
         </div>

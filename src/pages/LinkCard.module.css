@@ -91,7 +91,7 @@
   display: none;
 }
 
-.modal {
+.dropdown {
   width: 100px;
   position: absolute;
   right: -55px;
@@ -99,18 +99,18 @@
   z-index: 1;
 }
 
-.modal button {
+.dropdown button {
   padding: 7px 12px;
   width: 100px;
   border: none;
   box-shadow: 0 0 15px 2px var(--gray-400);
 }
 
-.modal button:first-child {
+.dropdown button:first-child {
   background-color: var(--white);
 }
 
-.modal button:nth-child(2) {
+.dropdown button:nth-child(2) {
   background-color: var(--gray-400);
 }
 

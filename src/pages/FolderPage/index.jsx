@@ -6,7 +6,6 @@ import { getFoldersByUserId, getUserById } from "../../services/api";
 import useAsync from "../../services/useAsync";
 import "../../global.css";
 import FoldersController from "./components/FoldersController";
-import Modal from "../../globalComponents/Modal";
 
 function FolderPage() {
   let userId = 1;
@@ -43,7 +42,6 @@ function FolderPage() {
         userProfileEmail={userProfileData.email}
         userLogInSuccess={isUserLoggedIn}
       />
-      <Modal />
       {isUserLoggedIn ? (
         <>
           <AddLinkForm />
