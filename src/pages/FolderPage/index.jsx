@@ -6,7 +6,6 @@ import { getFoldersByUserId, getUserById } from "../../services/api";
 import useAsync from "../../services/useAsync";
 import "../../global.css";
 import FoldersController from "./components/FoldersController";
-import Modal from "../../globalComponents/Modal";
 
 function FolderPage() {
   let userId = 1;
@@ -38,7 +37,6 @@ function FolderPage() {
 
   return (
     <>
-      <Modal />
       <Header
         userAvatarImage={userProfileData.image_source}
         userProfileEmail={userProfileData.email}

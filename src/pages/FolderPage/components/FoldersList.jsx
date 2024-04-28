@@ -1,5 +1,7 @@
+import { useState } from "react";
 import styles from "../styles/FoldersList.module.css";
 import { FaRegShareSquare, FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
+import Modal from "../../../globalComponents/Modal";
 
 function FoldersList({
   handleClick,
@@ -7,6 +9,12 @@ function FoldersList({
   selectedFolderName,
   selectedFolderId,
 }) {
+  const [onModal, setOnModal] = useState(false);
+
+  const handleClickModal = () => {
+    setOnModal(!onModal);
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.listContainer}>
@@ -22,7 +30,10 @@ function FoldersList({
             </li>
           ))}
         </ul>
-        <button className={styles.folderAddButton}>폴더 추가 +</button>
+        <button className={styles.folderAddButton} onClick={handleClickModal}>
+          폴더 추가 +
+        </button>
+        {onModal && <Modal onClick={handleClickModal} />}
       </div>
       <div className={styles.controlContainer}>
         <div className={styles.selectedFolderName}>{selectedFolderName}</div>
