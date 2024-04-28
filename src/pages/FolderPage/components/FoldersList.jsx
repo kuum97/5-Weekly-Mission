@@ -33,7 +33,18 @@ function FoldersList({
         <button className={styles.folderAddButton} onClick={handleClickModal}>
           폴더 추가 +
         </button>
-        {onModal && <Modal onClick={handleClickModal} />}
+        {onModal && (
+          <Modal onClick={handleClickModal} title={"폴더 추가"}>
+            <form className={styles.formContainer}>
+              <input
+                className={styles.formInput}
+                type="text"
+                placeholder="내용 입력"
+              />
+              <button className={styles.formButton}>추가하기</button>
+            </form>
+          </Modal>
+        )}
       </div>
       <div className={styles.controlContainer}>
         <div className={styles.selectedFolderName}>{selectedFolderName}</div>
