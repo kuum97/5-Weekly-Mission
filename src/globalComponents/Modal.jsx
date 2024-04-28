@@ -7,7 +7,7 @@ function Modal({ children, onClick, title, subTitle }) {
         <h1 className={styles.title}>{title}</h1>
         {subTitle && <h2 className={styles.subTitle}>{subTitle}</h2>}
         {children}
-        <button className={styles.exitButton} onClick={onClick}>
+        <button className={styles.exitButton} onClick={() => onClick("exit")}>
           X
         </button>
       </div>
