@@ -3,8 +3,22 @@ import defaultImage from "../../../assets/card-default.png";
 import styles from "../../LinkCard.module.css";
 import { FaRegStar } from "react-icons/fa6";
 import kebab from "../../../assets/kebab.svg";
+import { useState } from "react";
+import Modal from "../../../globalComponents/Modal";
 
 function FolderLinkCard({ link }) {
+  const [onModal, setOnModal] = useState(false);
+  const [actionType, setActionType] = useState("");
+
+  const handleClickModal = (actionType) => {
+    if (actionType === "exit") {
+      return setOnModal(false);
+    }
+
+    setActionType(actionType);
+    setOnModal(true);
+  };
+
   const { url, description, title, created_at, image_source } = link;
 
   const createdTime = displayCreatedTime(created_at);
@@ -14,6 +28,7 @@ function FolderLinkCard({ link }) {
 
   const handleToggleDropDown = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const button = e.currentTarget;
     const linkInfo = button.closest(`.${styles.linkInfo}`);
@@ -22,16 +37,13 @@ function FolderLinkCard({ link }) {
   };
 
   return (
-    <a
-      className={styles.linkImageAnchor}
-      href={url}
-      target="_blank"
-      rel="noreferrer"
-    >
-      <div className={styles.imageWrapper}>
-        <img className={styles.linkImage} src={src} alt={title} />
-        <FaRegStar className={styles.starIcon} />
-      </div>
+    <div className={styles.linkContainer}>
+      <a href={url} target="_blank" rel="noreferrer">
+        <div className={styles.imageWrapper}>
+          <img className={styles.linkImage} src={src} alt={title} />
+          <FaRegStar className={styles.starIcon} />
+        </div>
+      </a>
       <div className={styles.linkInfo}>
         <div className={styles.linkInfoContent}>
           <div>{createdTime}</div>
@@ -42,11 +54,52 @@ function FolderLinkCard({ link }) {
         <div className={styles.linkInfoContent}>{description}</div>
         <div className={styles.linkInfoContent}>{createdAtFormat}</div>
         <div className={`${styles.dropdown} ${styles.hidden}`}>
-          <button>삭제하기</button>
-          <button>폴더에 추가</button>
+          <button onClick={() => handleClickModal("deleteLink")}>
+            삭제하기
+          </button>
+          <button onClick={() => handleClickModal("addLink")}>
+            폴더에 추가
+          </button>
         </div>
       </div>
-    </a>
+      {onModal && actionType === "deleteLink" ? (
+        <Modal
+          onClick={() => handleClickModal()}
+          title={"링크 삭제"}
+          subTitle={url}
+        >
+          <form className={styles.formContainer}>
+            <button className={`${styles.formButton} ${styles.redBackground}`}>
+              삭제하기
+            </button>
+          </form>
+        </Modal>
+      ) : actionType === "addLink" ? (
+        <Modal
+          onClick={() => handleClickModal()}
+          title={"폴더에 추가"}
+          subTitle={"링크 주소"}
+        >
+          <form className={styles.formContainer}>
+            <ul className={styles.inputList}>
+              <li>
+                <button>코딩 팁</button>
+              </li>
+              <li>
+                <button>채용 사이트</button>
+              </li>
+              <li>
+                <button>유용한 글</button>
+              </li>
+              <li>
+                <button>나만의 장소</button>
+              </li>
+            </ul>
+            <button className={styles.formButton}>추가하기</button>
+          </form>
+        </Modal>
+      ) : null}
+    </div>
   );
 }
 
