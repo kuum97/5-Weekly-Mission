@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { FaRegShareSquare, FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
-import styles from "../styles/FoldersList.module.css";
-import Modal from "../../../globalComponents/Modal";
-import kakao from "../../../assets/kakaotalk.png";
-import facebook from "../../../assets/facebook.png";
-import share from "../../../assets/share.png";
+import styles from "./FoldersList.module.css";
+import { FaPencilAlt, FaRegShareSquare, FaRegTrashAlt } from "react-icons/fa";
+import Modal from "../../../../globalComponents/Modal";
+import kakao from "../../../../assets/kakaotalk.png";
+import facebook from "../../../../assets/facebook.png";
+import share from "../../../../assets/share.png";
 
 function FolderAddForm() {
   return (

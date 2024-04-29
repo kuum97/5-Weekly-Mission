@@ -1,11 +1,10 @@
-import Header from "../../globalComponents/Header";
-import Footer from "../../globalComponents/Footer";
-import LinkAddForm from "./components/LinkAddForm";
 import { useEffect, useState } from "react";
-import { getFoldersByUserId, getUserById } from "../../services/api";
 import useAsync from "../../services/useAsync";
-import "../../global.css";
-import FoldersController from "./components/FoldersController";
+import { getFoldersByUserId, getUserById } from "../../services/api";
+import Header from "../../globalComponents/Header";
+import LinkAddForm from "./components/LinkAddForm";
+import FoldersController from "./components/FolderController";
+import Footer from "../../globalComponents/Footer";
 
 function FolderPage() {
   let userId = 1;

@@ -1,5 +1,5 @@
 import { FaLink } from "react-icons/fa";
-import styles from "../styles/LinkAddForm.module.css";
+import styles from "./LinkAddForm.module.css";
 
 function LinkAddForm() {
   return (

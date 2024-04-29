@@ -1,6 +1,6 @@
-import mainLogo from "../assets/Linkbrary.png";
-import Avatar from "./Avatar";
-import styles from "./styles/Header.module.css";
+import mainLogo from "../../assets/Linkbrary.png";
+import styles from "./Header.module.css";
+import Avatar from "../Avatar";
 
 function Header({ userAvatarImage, userProfileEmail, userLogInSuccess }) {
   return (

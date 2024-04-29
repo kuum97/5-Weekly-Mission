@@ -1,11 +1,11 @@
-import FolderLinkCards from "./FolderLinkCards";
-import SearchBar from "../../../globalComponents/SearchBar";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getLinksByUserIdAndFolderId } from "../../../services/api";
-import useAsync from "../../../services/useAsync";
-import FoldersList from "./FoldersList";
-import styles from "../styles/FoldersController.module.css";
+import useAsync from "../../../../services/useAsync";
+import { getLinksByUserIdAndFolderId } from "../../../../services/api";
+import styles from "./FoldersController.module.css";
+import SearchBar from "../../../../globalComponents/SearchBar";
+import FoldersList from "../FoldersList";
+import FolderLinkCards from "../FolderLinkCards";
 
 function FoldersController({ folders, userId }) {
   const [loading, setLoading] = useState(true);

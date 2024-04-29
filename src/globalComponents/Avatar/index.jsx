@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import styles from "./styles/Avatar.module.css";
+import styles from "./Avatar.module.css";
 
 function Avatar({ src, size }) {
   const avatarClass = classNames(styles.avatar, {

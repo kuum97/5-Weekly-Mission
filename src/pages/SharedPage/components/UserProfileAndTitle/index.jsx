@@ -1,5 +1,5 @@
-import Avatar from "../../../globalComponents/Avatar";
-import styles from "../styles/UserProfileAndTitle.module.css";
+import styles from "./UserProfileAndTitle.module.css";
+import Avatar from "../../../../globalComponents/Avatar";
 
 function UserProfileAndTitle({ userName, folderName, folderImage }) {
   return (

@@ -1,5 +1,5 @@
-import FolderLinkCard from "./FolderLinkCard";
-import styles from "../../LinkCards.module.css";
+import styles from "../../../LinkCards.module.css";
+import FolderLinkCard from "../FolderLinkCard";
 
 function FolderLinkCards({ links }) {
   return (

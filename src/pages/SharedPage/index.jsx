@@ -1,11 +1,11 @@
-import Header from "../../globalComponents/Header";
-import Footer from "../../globalComponents/Footer";
-import UserProfileAndTitle from "./components/UserProfileAndTitle";
-import SharedLinkCards from "./components/SharedLinkCards";
 import { useEffect, useState } from "react";
-import { getFolder, getUser } from "../../services/api";
-import useAsync from "../../services/useAsync";
 import "../../global.css";
+import useAsync from "../../services/useAsync";
+import { getFolder, getUser } from "../../services/api";
+import Header from "../../globalComponents/Header";
+import UserProfileAndTitle from "./components/UserProfileAndTitle";
+import SharedLinkCards from "./components/SharedLinkCards/SharedLinkCards";
+import Footer from "../../globalComponents/Footer";
 
 function SharedPage() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
