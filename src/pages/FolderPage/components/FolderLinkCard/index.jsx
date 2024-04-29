@@ -8,46 +8,8 @@ import kebab from "../../../../assets/kebab.svg";
 import styles from "../../../LinkCard.module.css";
 import { FaRegStar } from "react-icons/fa";
 import Modal from "../../../../globalComponents/Modal";
-
-function LinkDeleteForm() {
-  return (
-    <>
-      <h1 className={styles.title}>링크 삭제</h1>
-      <h2 className={styles.subTitle}>url</h2>
-      <form className={styles.formContainer}>
-        <button className={`${styles.formButton} ${styles.redBackground}`}>
-          삭제하기
-        </button>
-      </form>
-    </>
-  );
-}
-
-function LinkAddToFolderForm() {
-  return (
-    <>
-      <h1 className={styles.title}>폴더에 추가</h1>
-      <h2 className={styles.subTitle}>링크 주소</h2>
-      <form className={styles.formContainer}>
-        <ul className={styles.inputList}>
-          <li>
-            <button>코딩 팁</button>
-          </li>
-          <li>
-            <button>채용 사이트</button>
-          </li>
-          <li>
-            <button>유용한 글</button>
-          </li>
-          <li>
-            <button>나만의 장소</button>
-          </li>
-        </ul>
-        <button className={styles.formButton}>추가하기</button>
-      </form>
-    </>
-  );
-}
+import LinkAddToFolderForm from "./components/LinkAddToFolderForm";
+import LinkDeleteForm from "./components/LinkDeleteForm";
 
 function FolderLinkCard({ link }) {
   const [onModal, setOnModal] = useState(false);
