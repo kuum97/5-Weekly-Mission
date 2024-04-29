@@ -19,7 +19,7 @@ function FoldersList({
   const handleClickModal = (actionType) => {
     const actionTypes = {
       add: <FolderAddForm />,
-      share: <SocialShareBox />,
+      share: <SocialShareBox title={selectedFolderName} />,
       modify: <FolderEditForm />,
       delete: <FolderDeleteForm />,
     };

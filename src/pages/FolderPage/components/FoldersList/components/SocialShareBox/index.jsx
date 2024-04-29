@@ -2,10 +2,18 @@ import styles from "../../../../../../globalComponents/Modal/ModalChildren.modul
 import kakao from "../../../../../../assets/kakaotalk.png";
 import facebook from "../../../../../../assets/facebook.png";
 import share from "../../../../../../assets/share.png";
+import defaultImg from "../../../../../../assets/card-default.png";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
-function SocialShareBox() {
+function SocialShareBox({ title }) {
   const location = useLocation();
+
+  useEffect(() => {
+    if (window.Kakao && !window.Kakao.isInitialized()) {
+      window.Kakao.init("a841341da0099a5d1291638b48030745");
+    }
+  }, []);
 
   const handleCopyToClipBoard = async () => {
     const url = window.location.origin + location.pathname + location.search;
@@ -18,13 +26,40 @@ function SocialShareBox() {
     }
   };
 
+  const handleShareToKakao = (title) => {
+    window.Kakao.Link.sendDefault({
+      objectType: "feed",
+      content: {
+        title: title,
+        description: "유용한 링크를 모은 폴더를 공유합니다.",
+        imageUrl: defaultImg,
+        link: {
+          mobileWebUrl: window.location.href,
+          webUrl: window.location.href,
+        },
+      },
+      buttons: [
+        {
+          title: "웹으로 보기",
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
+          },
+        },
+      ],
+    });
+  };
+
   return (
     <>
       <h1 className={styles.title}>폴더 공유</h1>
       <h2 className={styles.subTitle}>폴더명</h2>
       <div className={styles.shareBox}>
         <div className={styles.shareButtonWrapper}>
-          <button className={styles.shareButton}>
+          <button
+            className={styles.shareButton}
+            onClick={() => handleShareToKakao(title)}
+          >
             <img src={kakao} alt="kakaoBtn" />
           </button>
           <span>카카오톡</span>
