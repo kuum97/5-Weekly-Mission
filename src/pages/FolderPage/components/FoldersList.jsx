@@ -6,6 +6,53 @@ import kakao from "../../../assets/kakaotalk.png";
 import facebook from "../../../assets/facebook.png";
 import share from "../../../assets/share.png";
 
+function FolderAddForm() {
+  return (
+    <form className={styles.formContainer}>
+      <input className={styles.formInput} type="text" placeholder="내용 입력" />
+      <button className={styles.formButton}>추가하기</button>
+    </form>
+  );
+}
+
+function SocialShareBox() {
+  return (
+    <div className={styles.shareBox}>
+      <div className={styles.shareButton}>
+        <img src={kakao} alt="kakaoBtn" />
+        <span>카카오톡</span>
+      </div>
+      <div className={styles.shareButton}>
+        <img src={facebook} alt="facebookBtn" />
+        <span>페이스북</span>
+      </div>
+      <div className={styles.shareButton}>
+        <img src={share} alt="shareBtn" />
+        <span>링크 복사</span>
+      </div>
+    </div>
+  );
+}
+
+function FolderEditForm() {
+  return (
+    <form className={styles.formContainer}>
+      <input className={styles.formInput} type="text" placeholder="유용한 팁" />
+      <button className={styles.formButton}>변경하기</button>
+    </form>
+  );
+}
+
+function FolderDeleteForm() {
+  return (
+    <form className={styles.formContainer}>
+      <button className={`${styles.formButton} ${styles.redBackground}`}>
+        삭제하기
+      </button>
+    </form>
+  );
+}
+
 function FoldersList({
   handleClick,
   folders,
@@ -13,14 +60,17 @@ function FoldersList({
   selectedFolderId,
 }) {
   const [onModal, setOnModal] = useState(false);
-  const [actionType, setActionType] = useState("");
+  const [modalContent, setModalContent] = useState(null);
 
   const handleClickModal = (actionType) => {
-    if (actionType === "exit") {
-      return setOnModal(false);
-    }
+    const actionTypes = {
+      add: <FolderAddForm />,
+      share: <SocialShareBox />,
+      modify: <FolderEditForm />,
+      delete: <FolderDeleteForm />,
+    };
 
-    setActionType(actionType);
+    setModalContent(actionTypes[actionType]);
     setOnModal(true);
   };
 
@@ -65,62 +115,9 @@ function FoldersList({
           </div>
         )}
       </div>
-      {onModal && actionType === "add" ? (
-        <Modal onClick={() => handleClickModal()} title={"폴더 추가"}>
-          <form className={styles.formContainer}>
-            <input
-              className={styles.formInput}
-              type="text"
-              placeholder="내용 입력"
-            />
-            <button className={styles.formButton}>추가하기</button>
-          </form>
-        </Modal>
-      ) : actionType === "share" ? (
-        <Modal
-          onClick={() => handleClickModal()}
-          title={"폴더 공유"}
-          subTitle={"폴더명"}
-        >
-          <div className={styles.shareBox}>
-            <div className={styles.shareButton}>
-              <img src={kakao} alt="kakaoBtn" />
-              <span>카카오톡</span>
-            </div>
-            <div className={styles.shareButton}>
-              <img src={facebook} alt="facebookBtn" />
-              <span>페이스북</span>
-            </div>
-            <div className={styles.shareButton}>
-              <img src={share} alt="shareBtn" />
-              <span>링크 복사</span>
-            </div>
-          </div>
-        </Modal>
-      ) : actionType === "modify" ? (
-        <Modal onClick={() => handleClickModal()} title={"폴더 이름 변경"}>
-          <form className={styles.formContainer}>
-            <input
-              className={styles.formInput}
-              type="text"
-              placeholder="유용한 팁"
-            />
-            <button className={styles.formButton}>변경하기</button>
-          </form>
-        </Modal>
-      ) : actionType === "delete" ? (
-        <Modal
-          onClick={() => handleClickModal()}
-          title={"폴더 삭제"}
-          subTitle={"폴더명"}
-        >
-          <form className={styles.formContainer}>
-            <button className={`${styles.formButton} ${styles.redBackground}`}>
-              삭제하기
-            </button>
-          </form>
-        </Modal>
-      ) : null}
+      {onModal && (
+        <Modal onClick={() => setOnModal(false)}>{modalContent}</Modal>
+      )}
     </section>
   );
 }

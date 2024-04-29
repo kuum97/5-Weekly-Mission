@@ -1,7 +1,7 @@
 import { FaLink } from "react-icons/fa";
-import styles from "../styles/AddLinkForm.module.css";
+import styles from "../styles/LinkAddForm.module.css";
 
-function AddLinkForm() {
+function LinkAddForm() {
   return (
     <section className={styles.container}>
       <form className={styles.form}>
@@ -17,4 +17,4 @@ function AddLinkForm() {
   );
 }
 
-export default AddLinkForm;
+export default LinkAddForm;

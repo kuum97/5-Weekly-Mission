@@ -1,6 +1,6 @@
 import Header from "../../globalComponents/Header";
 import Footer from "../../globalComponents/Footer";
-import AddLinkForm from "./components/AddLinkForm";
+import LinkAddForm from "./components/LinkAddForm";
 import { useEffect, useState } from "react";
 import { getFoldersByUserId, getUserById } from "../../services/api";
 import useAsync from "../../services/useAsync";
@@ -44,7 +44,7 @@ function FolderPage() {
       />
       {isUserLoggedIn ? (
         <>
-          <AddLinkForm />
+          <LinkAddForm />
           <FoldersController folders={foldersData} userId={userId} />
         </>
       ) : (
