@@ -36,7 +36,7 @@
   position: relative;
 }
 
-.linkImageAnchor:hover .linkInfo {
+.linkContainer:hover .linkInfo {
   background-color: var(--gray-400);
 }
 
