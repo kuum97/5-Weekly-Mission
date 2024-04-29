@@ -6,16 +6,57 @@ import kebab from "../../../assets/kebab.svg";
 import { useState } from "react";
 import Modal from "../../../globalComponents/Modal";
 
+function LinkDeleteForm() {
+  return (
+    <>
+      <h1 className={styles.title}>링크 삭제</h1>
+      <h2 className={styles.subTitle}>url</h2>
+      <form className={styles.formContainer}>
+        <button className={`${styles.formButton} ${styles.redBackground}`}>
+          삭제하기
+        </button>
+      </form>
+    </>
+  );
+}
+
+function LinkAddToFolderForm() {
+  return (
+    <>
+      <h1 className={styles.title}>폴더에 추가</h1>
+      <h2 className={styles.subTitle}>링크 주소</h2>
+      <form className={styles.formContainer}>
+        <ul className={styles.inputList}>
+          <li>
+            <button>코딩 팁</button>
+          </li>
+          <li>
+            <button>채용 사이트</button>
+          </li>
+          <li>
+            <button>유용한 글</button>
+          </li>
+          <li>
+            <button>나만의 장소</button>
+          </li>
+        </ul>
+        <button className={styles.formButton}>추가하기</button>
+      </form>
+    </>
+  );
+}
+
 function FolderLinkCard({ link }) {
   const [onModal, setOnModal] = useState(false);
-  const [actionType, setActionType] = useState("");
+  const [modalContent, setModalContent] = useState(null);
 
   const handleClickModal = (actionType) => {
-    if (actionType === "exit") {
-      return setOnModal(false);
-    }
+    const actionTypes = {
+      deleteLink: <LinkDeleteForm />,
+      addLink: <LinkAddToFolderForm />,
+    };
 
-    setActionType(actionType);
+    setModalContent(actionTypes[actionType]);
     setOnModal(true);
   };
 
@@ -62,43 +103,9 @@ function FolderLinkCard({ link }) {
           </button>
         </div>
       </div>
-      {onModal && actionType === "deleteLink" ? (
-        <Modal
-          onClick={() => handleClickModal()}
-          title={"링크 삭제"}
-          subTitle={url}
-        >
-          <form className={styles.formContainer}>
-            <button className={`${styles.formButton} ${styles.redBackground}`}>
-              삭제하기
-            </button>
-          </form>
-        </Modal>
-      ) : actionType === "addLink" ? (
-        <Modal
-          onClick={() => handleClickModal()}
-          title={"폴더에 추가"}
-          subTitle={"링크 주소"}
-        >
-          <form className={styles.formContainer}>
-            <ul className={styles.inputList}>
-              <li>
-                <button>코딩 팁</button>
-              </li>
-              <li>
-                <button>채용 사이트</button>
-              </li>
-              <li>
-                <button>유용한 글</button>
-              </li>
-              <li>
-                <button>나만의 장소</button>
-              </li>
-            </ul>
-            <button className={styles.formButton}>추가하기</button>
-          </form>
-        </Modal>
-      ) : null}
+      {onModal && (
+        <Modal onClick={() => setOnModal(false)}>{modalContent}</Modal>
+      )}
     </div>
   );
 }
