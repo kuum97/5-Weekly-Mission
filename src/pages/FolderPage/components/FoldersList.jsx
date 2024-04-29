@@ -8,48 +8,70 @@ import share from "../../../assets/share.png";
 
 function FolderAddForm() {
   return (
-    <form className={styles.formContainer}>
-      <input className={styles.formInput} type="text" placeholder="내용 입력" />
-      <button className={styles.formButton}>추가하기</button>
-    </form>
+    <>
+      <h1 className={styles.title}>폴더 추가</h1>
+      <form className={styles.formContainer}>
+        <input
+          className={styles.formInput}
+          type="text"
+          placeholder="내용 입력"
+        />
+        <button className={styles.formButton}>추가하기</button>
+      </form>
+    </>
   );
 }
 
 function SocialShareBox() {
   return (
-    <div className={styles.shareBox}>
-      <div className={styles.shareButton}>
-        <img src={kakao} alt="kakaoBtn" />
-        <span>카카오톡</span>
+    <>
+      <h1 className={styles.title}>폴더 공유</h1>
+      <h2 className={styles.subTitle}>폴더명</h2>
+      <div className={styles.shareBox}>
+        <div className={styles.shareButton}>
+          <img src={kakao} alt="kakaoBtn" />
+          <span>카카오톡</span>
+        </div>
+        <div className={styles.shareButton}>
+          <img src={facebook} alt="facebookBtn" />
+          <span>페이스북</span>
+        </div>
+        <div className={styles.shareButton}>
+          <img src={share} alt="shareBtn" />
+          <span>링크 복사</span>
+        </div>
       </div>
-      <div className={styles.shareButton}>
-        <img src={facebook} alt="facebookBtn" />
-        <span>페이스북</span>
-      </div>
-      <div className={styles.shareButton}>
-        <img src={share} alt="shareBtn" />
-        <span>링크 복사</span>
-      </div>
-    </div>
+    </>
   );
 }
 
 function FolderEditForm() {
   return (
-    <form className={styles.formContainer}>
-      <input className={styles.formInput} type="text" placeholder="유용한 팁" />
-      <button className={styles.formButton}>변경하기</button>
-    </form>
+    <>
+      <h1 className={styles.title}>폴더 이름 변경</h1>
+      <form className={styles.formContainer}>
+        <input
+          className={styles.formInput}
+          type="text"
+          placeholder="유용한 팁"
+        />
+        <button className={styles.formButton}>변경하기</button>
+      </form>
+    </>
   );
 }
 
 function FolderDeleteForm() {
   return (
-    <form className={styles.formContainer}>
-      <button className={`${styles.formButton} ${styles.redBackground}`}>
-        삭제하기
-      </button>
-    </form>
+    <>
+      <h1 className={styles.title}>폴더 삭제</h1>
+      <h2 className={styles.subTitle}>폴더명</h2>
+      <form className={styles.formContainer}>
+        <button className={`${styles.formButton} ${styles.redBackground}`}>
+          삭제하기
+        </button>
+      </form>
+    </>
   );
 }
 

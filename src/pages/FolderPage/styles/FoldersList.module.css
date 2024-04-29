@@ -114,6 +114,18 @@
   color: var(--black);
 }
 
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.subTitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gray-600);
+}
+
 @media (min-width: 768px) and (max-width: 1199px) {
   .container {
     width: 705px;

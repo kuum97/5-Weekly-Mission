@@ -1,11 +1,9 @@
 import styles from "./Modal.module.css";
 
-function Modal({ children, onClick, title, subTitle }) {
+function Modal({ children, onClick }) {
   return (
     <div className={styles.background}>
       <div className={styles.container}>
-        <h1 className={styles.title}>{title}</h1>
-        {subTitle && <h2 className={styles.subTitle}>{subTitle}</h2>}
         {children}
         <button className={styles.exitButton} onClick={onClick}>
           X

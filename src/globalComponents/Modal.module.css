@@ -22,18 +22,6 @@
   position: relative;
 }
 
-.title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--black);
-}
-
-.subTitle {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--gray-600);
-}
-
 .exitButton {
   width: 24px;
   height: 24px;
