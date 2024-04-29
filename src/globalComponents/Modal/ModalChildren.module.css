@@ -41,7 +41,7 @@
   margin-top: 10px;
 }
 
-.shareButton {
+.shareButtonWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,6 +49,12 @@
   font-size: 13px;
   font-weight: 400;
   color: var(--black);
+}
+
+.shareButton {
+  background: none;
+  border: none;
+  border-radius: 100%;
 }
 
 .title {
