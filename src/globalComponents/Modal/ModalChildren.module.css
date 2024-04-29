@@ -62,3 +62,25 @@
   font-weight: 400;
   color: var(--gray-600);
 }
+
+.inputList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputList button {
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 15px;
+}
+
+.inputList button:active {
+  background-color: var(--gray-400);
+  color: var(--primary);
+}
