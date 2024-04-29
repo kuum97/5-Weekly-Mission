@@ -8,6 +8,11 @@ import { useEffect } from "react";
 
 function SocialShareBox({ title }) {
   const location = useLocation();
+  const currentUrl =
+    window.location.origin + location.pathname + location.search;
+  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+    currentUrl
+  )}`;
 
   useEffect(() => {
     if (window.Kakao && !window.Kakao.isInitialized()) {
@@ -16,9 +21,8 @@ function SocialShareBox({ title }) {
   }, []);
 
   const handleCopyToClipBoard = async () => {
-    const url = window.location.origin + location.pathname + location.search;
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(currentUrl);
       alert("클립보드에 복사되었습니다!");
     } catch (error) {
       console.error("클립보드 복사 실패:", error);
@@ -65,9 +69,11 @@ function SocialShareBox({ title }) {
           <span>카카오톡</span>
         </div>
         <div className={styles.shareButtonWrapper}>
-          <button className={styles.shareButton}>
-            <img src={facebook} alt="facebookBtn" />
-          </button>
+          <a href={facebookShareUrl} target="_blank" rel="noopener noreferrer">
+            <button className={styles.shareButton}>
+              <img src={facebook} alt="facebookBtn" />
+            </button>
+          </a>
           <span>페이스북</span>
         </div>
         <div className={styles.shareButtonWrapper}>
