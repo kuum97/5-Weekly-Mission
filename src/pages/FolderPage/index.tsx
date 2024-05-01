@@ -6,19 +6,20 @@ import LinkAddForm from "./components/LinkAddForm";
 import FoldersController from "./components/FolderController";
 import Footer from "../../globalComponents/Footer";
 
+const SAMPLE_USER_ID = 1;
+
 function FolderPage() {
-  let userId = 1;
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const {
     value: userProfileData,
     isLoading: isLoadingUser,
     error: userError,
-  } = useAsync(getUserById, userId);
+  } = useAsync(getUserById, SAMPLE_USER_ID);
   const {
     value: foldersData,
     isLoading: isLoadingFolders,
     error: foldersError,
-  } = useAsync(getFoldersByUserId, userId);
+  } = useAsync(getFoldersByUserId, SAMPLE_USER_ID);
 
   useEffect(() => {
     if (!isLoadingUser && userProfileData) {
@@ -44,7 +45,7 @@ function FolderPage() {
       {isUserLoggedIn ? (
         <>
           <LinkAddForm />
-          <FoldersController folders={foldersData} userId={userId} />
+          <FoldersController folders={foldersData} userId={SAMPLE_USER_ID} />
         </>
       ) : (
         <div>로그인해주세요.</div>

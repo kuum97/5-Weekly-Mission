@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "jsx": "preserve",
+    "module": "ESNext",
+    "moduleResolution": "node10",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.test.ts", "build", "scripts"]
+}
