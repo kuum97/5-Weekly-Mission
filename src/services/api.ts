@@ -1,5 +1,38 @@
 const BASE_URL = "https://bootcamp-api.codeit.kr/api";
 
+interface SampleUser {
+  id: number;
+  name: string;
+  email: string;
+  profileImageSource: string;
+}
+
+interface SampleFolderOwner {
+  id: number;
+  name: string;
+  profileImageSource: string;
+}
+
+interface SampleLink {
+  id: number;
+  createdAt: string;
+  url: string;
+  title: string;
+  description: string;
+  imageSource: string;
+}
+
+interface SampleFolder {
+  id: number;
+  name: string;
+  owner: SampleFolderOwner;
+  links?: SampleLink[];
+}
+
+interface SampleFolderResponse {
+  folder: SampleFolder;
+}
+
 interface UserData {
   id: number;
   created_at: string;
@@ -7,10 +40,6 @@ interface UserData {
   image_source: string;
   email: string;
   auth_id: string;
-}
-
-interface UserResponse {
-  data: UserData[];
 }
 
 interface FolderData {
@@ -24,10 +53,6 @@ interface FolderData {
   };
 }
 
-interface FolderResponse {
-  data: FolderData[];
-}
-
 interface LinkData {
   id: number;
   created_at: string;
@@ -39,39 +64,42 @@ interface LinkData {
   folder_id: number;
 }
 
-interface LinkResponse {
-  data: LinkData[];
+interface Response<Data> {
+  data: Data[];
 }
 
-export async function getUser() {
+export async function getUser(): Promise<SampleUser> {
   const response = await fetch(`${BASE_URL}/sample/user`);
-  const user = await response.json();
-
   if (!response.ok) {
     throw new Error("잘못된 요청입니다.");
   }
+
+  const user: SampleUser = await response.json();
+
   return user;
 }
 
-export async function getFolder() {
+export async function getFolder(): Promise<SampleFolder> {
   const response = await fetch(`${BASE_URL}/sample/folder`);
-  const data = await response.json();
-  const { folder } = data;
-
   if (!response.ok) {
     throw new Error("잘못된 요청입니다.");
   }
+
+  const data: SampleFolderResponse = await response.json();
+  const { folder } = data;
+
   return folder;
 }
 
 export async function getUserById(userId: number): Promise<UserData> {
   const response = await fetch(`${BASE_URL}/users/${userId}`);
-  const user: UserResponse = await response.json();
-  const { data } = user;
-
   if (!response.ok) {
     throw new Error("잘못된 요청입니다.");
   }
+
+  const user: Response<UserData> = await response.json();
+  const { data } = user;
+
   return data[0];
 }
 
@@ -79,12 +107,13 @@ export async function getFoldersByUserId(
   userId: number
 ): Promise<FolderData[]> {
   const response = await fetch(`${BASE_URL}/users/${userId}/folders`);
-  const folders: FolderResponse = await response.json();
-  const { data } = folders;
-
   if (!response.ok) {
     throw new Error("잘못된 요청입니다.");
   }
+
+  const folders: Response<FolderData> = await response.json();
+  const { data } = folders;
+
   return data;
 }
 
@@ -96,12 +125,14 @@ export async function getLinksByUserIdAndFolderId(
   if (folderId) {
     url += `?folderId=${folderId}`;
   }
-  const response = await fetch(url);
-  const links: LinkResponse = await response.json();
-  const { data } = links;
 
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error("잘못된 요청입니다.");
   }
+
+  const links: Response<LinkData> = await response.json();
+  const { data } = links;
+
   return data;
 }
