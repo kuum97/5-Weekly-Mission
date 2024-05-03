@@ -13,7 +13,7 @@ interface SampleFolderOwner {
   profileImageSource: string;
 }
 
-interface SampleLink {
+export interface SampleLink {
   id: number;
   createdAt: string;
   url: string;

@@ -52,7 +52,7 @@ function SharedPage() {
             folderName={folderData.name}
             folderImage={folderData.owner.profileImageSource}
           />
-          <SharedLinkCards links={folderData.links} />
+          <SharedLinkCards links={folderData.links || []} />
         </>
       ) : (
         <div>로그인해주세요.</div>

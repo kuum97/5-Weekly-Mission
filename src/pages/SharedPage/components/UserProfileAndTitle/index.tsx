@@ -1,7 +1,17 @@
 import styles from "./UserProfileAndTitle.module.css";
 import Avatar from "../../../../globalComponents/Avatar";
 
-function UserProfileAndTitle({ userName, folderName, folderImage }) {
+interface UserProfileAndTitleProps {
+  userName: string;
+  folderName: string;
+  folderImage: string;
+}
+
+function UserProfileAndTitle({
+  userName,
+  folderName,
+  folderImage,
+}: UserProfileAndTitleProps) {
   return (
     <section className={styles.container}>
       <Avatar size="medium" src={folderImage} />

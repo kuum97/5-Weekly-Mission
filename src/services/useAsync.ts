@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-interface CustomAsyncReturns<T> {
+export interface CustomAsyncReturns<T> {
   isLoading: boolean;
   value: T | null;
   error: Error | null;
