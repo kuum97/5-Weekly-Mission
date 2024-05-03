@@ -1,6 +1,6 @@
 const BASE_URL = "https://bootcamp-api.codeit.kr/api";
 
-interface SampleUser {
+export interface SampleUser {
   id: number;
   name: string;
   email: string;
@@ -22,7 +22,7 @@ interface SampleLink {
   imageSource: string;
 }
 
-interface SampleFolder {
+export interface SampleFolder {
   id: number;
   name: string;
   owner: SampleFolderOwner;

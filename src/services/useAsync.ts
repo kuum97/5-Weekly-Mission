@@ -5,12 +5,14 @@ interface CustomAsyncReturns<T> {
   error: Error | null;
 }
 
-type asyncFunc = <T>(userId?: number, folderId?: number) => Promise<T>;
+type asyncFunc<T> = (userId?: number, folderId?: number) => Promise<T>;
+
+type asyncFuncNoArgs<T> = () => Promise<T>;
 
 const useAsync = <T>(
-  asyncFunc: asyncFunc,
-  userId: number,
-  folderId: number
+  asyncFunc: asyncFuncNoArgs<T> | asyncFunc<T>,
+  userId?: number,
+  folderId?: number
 ): CustomAsyncReturns<T> => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [value, setValue] = useState<T | null>(null);
@@ -21,11 +23,11 @@ const useAsync = <T>(
     try {
       let result;
       if (userId && folderId) {
-        result = await asyncFunc<T>(userId, folderId);
+        result = await asyncFunc(userId, folderId);
       } else if (userId) {
-        result = await asyncFunc<T>(userId);
+        result = await asyncFunc(userId);
       } else {
-        result = await asyncFunc<T>();
+        result = await asyncFunc();
       }
       setValue(result);
     } catch (error: unknown) {
