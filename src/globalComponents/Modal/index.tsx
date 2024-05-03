@@ -1,6 +1,11 @@
 import styles from "./Modal.module.css";
 
-function Modal({ children, onClick }) {
+interface ModalProps {
+  children: React.ReactNode;
+  onClick: () => void;
+}
+
+function Modal({ children, onClick }: ModalProps) {
   return (
     <div className={styles.background}>
       <div className={styles.container}>

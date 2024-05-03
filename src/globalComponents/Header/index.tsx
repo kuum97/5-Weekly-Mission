@@ -2,7 +2,17 @@ import mainLogo from "../../assets/Linkbrary.png";
 import styles from "./Header.module.css";
 import Avatar from "../Avatar";
 
-function Header({ userAvatarImage, userProfileEmail, userLogInSuccess }) {
+interface HeaderProps {
+  userAvatarImage: string;
+  userProfileEmail: string;
+  userLogInSuccess: boolean;
+}
+
+function Header({
+  userAvatarImage,
+  userProfileEmail,
+  userLogInSuccess,
+}: HeaderProps) {
   return (
     <header className={styles.container}>
       <img className={styles.logo} src={mainLogo} alt="logo" />

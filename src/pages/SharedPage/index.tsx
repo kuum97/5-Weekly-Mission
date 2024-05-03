@@ -46,16 +46,14 @@ function SharedPage() {
         userLogInSuccess={isUserLoggedIn}
       />
       {isUserLoggedIn ? (
-        <UserProfileAndTitle
-          userName={userProfileData.name}
-          folderName={folderData.name}
-          folderImage={folderData.owner.profileImageSource}
-        />
-      ) : (
-        <div>로그인해주세요.</div>
-      )}
-      {isUserLoggedIn ? (
-        <SharedLinkCards links={folderData.links} />
+        <>
+          <UserProfileAndTitle
+            userName={userProfileData.name}
+            folderName={folderData.name}
+            folderImage={folderData.owner.profileImageSource}
+          />
+          <SharedLinkCards links={folderData.links} />
+        </>
       ) : (
         <div>로그인해주세요.</div>
       )}
