@@ -3,11 +3,11 @@ import SearchBar from "../../../../globalComponents/SearchBar";
 import SharedLinkCard from "../SharedLinkCard";
 import { SampleLink } from "services/api";
 
-interface LinksComponentProps {
+interface SharedLinkCardsProps {
   links: SampleLink[] | undefined;
 }
 
-function SharedLinkCards({ links }: LinksComponentProps) {
+function SharedLinkCards({ links }: SharedLinkCardsProps) {
   return (
     <section className={styles.container}>
       <SearchBar />

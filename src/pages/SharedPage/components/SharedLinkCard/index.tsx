@@ -4,8 +4,13 @@ import {
 } from "../../../../utils/dateUtils";
 import defaultImage from "../../../../assets/card-default.png";
 import styles from "../../../LinkCard.module.css";
+import { SampleLink } from "services/api";
 
-function SharedLinkCard({ link }) {
+interface SharedLinkCardProps {
+  link: SampleLink;
+}
+
+function SharedLinkCard({ link }: SharedLinkCardProps) {
   const { url, description, title, createdAt, imageSource } = link;
 
   const createdTime = displayCreatedTime(createdAt);
