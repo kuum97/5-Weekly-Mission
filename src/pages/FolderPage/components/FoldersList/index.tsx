@@ -7,19 +7,14 @@ import SocialShareBox from "./components/SocialShareBox";
 import FolderEditForm from "./components/FolderEditForm";
 import FolderDeleteForm from "./components/FolderDeleteForm";
 
-function FoldersList({
-  handleClick,
-  folders,
-  selectedFolderName,
-  selectedFolderId,
-}) {
+function FoldersList({ handleClick, folders, selectedFolderId }) {
   const [onModal, setOnModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
   const handleClickModal = (actionType) => {
     const actionTypes = {
       add: <FolderAddForm />,
-      share: <SocialShareBox title={selectedFolderName} />,
+      share: <SocialShareBox />,
       modify: <FolderEditForm />,
       delete: <FolderDeleteForm />,
     };
@@ -51,7 +46,7 @@ function FoldersList({
         </button>
       </div>
       <div className={styles.controlContainer}>
-        <div className={styles.selectedFolderName}>{selectedFolderName}</div>
+        <div className={styles.selectedFolderName}>폴더명</div>
         {selectedFolderId && (
           <div className={styles.folderControl}>
             <button onClick={() => handleClickModal("share")}>

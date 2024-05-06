@@ -40,7 +40,7 @@ function FolderPage() {
     return <div>Error loading data.</div>;
   }
 
-  if (!userProfileData) {
+  if (!userProfileData || !foldersData) {
     return <div>No Data Available</div>;
   }
 
