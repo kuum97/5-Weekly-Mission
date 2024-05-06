@@ -1,10 +1,7 @@
-import {
-  displayCreatedTime,
-  formatDateString,
-} from "../../../../utils/dateUtils";
-import defaultImage from "../../../../assets/card-default.png";
-import styles from "../../../LinkCard.module.css";
 import { SampleLink } from "services/api";
+import { displayCreatedTime, formatDateString } from "@utils/dateUtils";
+import defaultImage from "@assets/card-default.png";
+import styles from "pages/LinkCard.module.css";
 
 interface SharedLinkCardProps {
   link: SampleLink;

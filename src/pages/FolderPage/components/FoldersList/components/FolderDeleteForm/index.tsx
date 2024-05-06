@@ -1,4 +1,4 @@
-import styles from "../../../../../../globalComponents/Modal/ModalChildren.module.css";
+import styles from "globalComponents/Modal/ModalChildren.module.css";
 
 function FolderDeleteForm() {
   return (

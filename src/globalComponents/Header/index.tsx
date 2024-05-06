@@ -1,6 +1,6 @@
-import mainLogo from "../../assets/Linkbrary.png";
+import mainLogo from "@assets/Linkbrary.png";
 import styles from "./Header.module.css";
-import Avatar from "../Avatar";
+import Avatar from "globalComponents/Avatar";
 
 interface HeaderProps {
   userAvatarImage: string;

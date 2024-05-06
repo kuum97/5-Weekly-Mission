@@ -1,10 +1,10 @@
-import styles from "../../../../../../globalComponents/Modal/ModalChildren.module.css";
-import kakao from "../../../../../../assets/kakaotalk.png";
-import facebook from "../../../../../../assets/facebook.png";
-import share from "../../../../../../assets/share.png";
-import defaultImg from "../../../../../../assets/card-default.png";
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import kakao from "@assets/kakaotalk.png";
+import facebook from "@assets/facebook.png";
+import share from "@assets/share.png";
+import defaultImg from "@assets/card-default.png";
+import styles from "globalComponents/Modal/ModalChildren.module.css";
 
 function SocialShareBox({ title }) {
   const location = useLocation();

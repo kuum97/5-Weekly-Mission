@@ -1,15 +1,12 @@
 import { useState } from "react";
-import {
-  displayCreatedTime,
-  formatDateString,
-} from "../../../../utils/dateUtils";
-import defaultImage from "../../../../assets/card-default.png";
-import kebab from "../../../../assets/kebab.svg";
-import styles from "../../../LinkCard.module.css";
-import { FaRegStar } from "react-icons/fa";
-import Modal from "../../../../globalComponents/Modal";
+import { displayCreatedTime, formatDateString } from "@utils/dateUtils";
+import Modal from "globalComponents/Modal";
 import LinkAddToFolderForm from "./components/LinkAddToFolderForm";
 import LinkDeleteForm from "./components/LinkDeleteForm";
+import defaultImage from "@assets/card-default.png";
+import kebab from "@assets/kebab.svg";
+import { FaRegStar } from "react-icons/fa";
+import styles from "pages/LinkCard.module.css";
 
 function FolderLinkCard({ link }) {
   const [onModal, setOnModal] = useState(false);
