@@ -1,3 +1,5 @@
+import { Params } from "./useAsync";
+
 const BASE_URL = "https://bootcamp-api.codeit.kr/api";
 
 export interface SampleUser {
@@ -33,7 +35,7 @@ interface SampleFolderResponse {
   folder: SampleFolder;
 }
 
-interface UserData {
+export interface UserData {
   id: number;
   created_at: string;
   name: string;
@@ -42,7 +44,7 @@ interface UserData {
   auth_id: string;
 }
 
-interface FolderData {
+export interface FolderData {
   id: number;
   created_at: string;
   name: string;
@@ -91,7 +93,7 @@ export async function getFolder(): Promise<SampleFolder> {
   return folder;
 }
 
-export async function getUserById(userId: number): Promise<UserData> {
+export async function getUserById({ userId }: Params): Promise<UserData> {
   const response = await fetch(`${BASE_URL}/users/${userId}`);
   if (!response.ok) {
     throw new Error("잘못된 요청입니다.");
@@ -103,9 +105,9 @@ export async function getUserById(userId: number): Promise<UserData> {
   return data[0];
 }
 
-export async function getFoldersByUserId(
-  userId: number
-): Promise<FolderData[]> {
+export async function getFoldersByUserId({
+  userId,
+}: Params): Promise<FolderData[]> {
   const response = await fetch(`${BASE_URL}/users/${userId}/folders`);
   if (!response.ok) {
     throw new Error("잘못된 요청입니다.");
@@ -117,10 +119,10 @@ export async function getFoldersByUserId(
   return data;
 }
 
-export async function getLinksByUserIdAndFolderId(
-  userId: number,
-  folderId?: number
-): Promise<LinkData[]> {
+export async function getLinksByUserIdAndFolderId({
+  userId,
+  folderId,
+}: Params): Promise<LinkData[]> {
   let url = `${BASE_URL}/users/${userId}/links`;
   if (folderId) {
     url += `?folderId=${folderId}`;

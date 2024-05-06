@@ -5,14 +5,17 @@ export interface CustomAsyncReturns<T> {
   error: Error | null;
 }
 
-type asyncFunc<T> = (userId?: number, folderId?: number) => Promise<T>;
+export interface Params {
+  userId?: number;
+  folderId?: number;
+}
 
-type asyncFuncNoArgs<T> = () => Promise<T>;
+type AsyncFunc<T> = (params: Params) => Promise<T>;
 
 const useAsync = <T>(
-  asyncFunc: asyncFuncNoArgs<T> | asyncFunc<T>,
-  userId?: number,
-  folderId?: number
+  asyncFunc: AsyncFunc<T>,
+  userId?: Params["userId"],
+  folderId?: Params["folderId"]
 ): CustomAsyncReturns<T> => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [value, setValue] = useState<T | null>(null);
@@ -22,13 +25,11 @@ const useAsync = <T>(
     setIsLoading(true);
     try {
       let result;
-      if (userId && folderId) {
-        result = await asyncFunc(userId, folderId);
-      } else if (userId) {
-        result = await asyncFunc(userId);
-      } else {
-        result = await asyncFunc();
-      }
+      const params: Params = {};
+      if (userId !== undefined) params.userId = userId;
+      if (folderId !== undefined) params.folderId = folderId;
+
+      result = await asyncFunc(params);
       setValue(result);
     } catch (error: unknown) {
       if (error instanceof Error) {

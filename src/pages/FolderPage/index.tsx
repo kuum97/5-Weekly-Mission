@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
-import useAsync from "../../services/useAsync";
-import { getFoldersByUserId, getUserById } from "../../services/api";
-import Header from "../../globalComponents/Header";
+import {
+  FolderData,
+  UserData,
+  getFoldersByUserId,
+  getUserById,
+} from "services/api";
+import useAsync from "services/useAsync";
+import Header from "globalComponents/Header";
+import Footer from "globalComponents/Footer";
 import LinkAddForm from "./components/LinkAddForm";
 import FoldersController from "./components/FolderController";
-import Footer from "../../globalComponents/Footer";
 
 const SAMPLE_USER_ID = 1;
 
@@ -14,12 +19,12 @@ function FolderPage() {
     value: userProfileData,
     isLoading: isLoadingUser,
     error: userError,
-  } = useAsync(getUserById, SAMPLE_USER_ID);
+  } = useAsync<UserData>(getUserById, SAMPLE_USER_ID);
   const {
     value: foldersData,
     isLoading: isLoadingFolders,
     error: foldersError,
-  } = useAsync(getFoldersByUserId, SAMPLE_USER_ID);
+  } = useAsync<FolderData[]>(getFoldersByUserId, SAMPLE_USER_ID);
 
   useEffect(() => {
     if (!isLoadingUser && userProfileData) {
@@ -33,6 +38,10 @@ function FolderPage() {
 
   if (userError || foldersError) {
     return <div>Error loading data.</div>;
+  }
+
+  if (!userProfileData) {
+    return <div>No Data Available</div>;
   }
 
   return (
