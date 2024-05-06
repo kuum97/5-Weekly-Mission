@@ -22,7 +22,7 @@ function FoldersController({ folders, userId }: FoldersControllerProps) {
     error,
   } = useAsync(getLinksByUserIdAndFolderId, userId, parseInt(selectedFolderId));
 
-  const handleClick = (folderId: string | null) => {
+  const handleClick = (folderId?: string) => {
     const newSearchParams = new URLSearchParams(searchParams);
 
     if (folderId) {
