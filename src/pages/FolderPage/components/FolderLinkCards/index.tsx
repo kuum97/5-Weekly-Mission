@@ -1,7 +1,12 @@
-import styles from "pages/LinkCards.module.css";
+import { LinkData } from "services/api";
 import FolderLinkCard from "pages/FolderPage/components/FolderLinkCard";
+import styles from "pages/LinkCards.module.css";
 
-function FolderLinkCards({ links }) {
+interface FolderLinkCardsProps {
+  links: LinkData[];
+}
+
+function FolderLinkCards({ links }: FolderLinkCardsProps) {
   return (
     <>
       {links && links.length > 0 ? (

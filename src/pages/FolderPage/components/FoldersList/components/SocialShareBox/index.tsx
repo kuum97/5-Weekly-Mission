@@ -5,8 +5,13 @@ import facebook from "@assets/facebook.png";
 import share from "@assets/share.png";
 import defaultImg from "@assets/card-default.png";
 import styles from "globalComponents/Modal/ModalChildren.module.css";
+import { KAKAO_KEY } from "pages/constants";
 
-function SocialShareBox({ title }) {
+interface SocialShareBoxProps {
+  title: string;
+}
+
+function SocialShareBox({ title }: SocialShareBoxProps) {
   const location = useLocation();
   const currentUrl =
     window.location.origin + location.pathname + location.search;
@@ -16,7 +21,7 @@ function SocialShareBox({ title }) {
 
   useEffect(() => {
     if (window.Kakao && !window.Kakao.isInitialized()) {
-      window.Kakao.init("a841341da0099a5d1291638b48030745");
+      window.Kakao.init(KAKAO_KEY);
     }
   }, []);
 
@@ -30,7 +35,7 @@ function SocialShareBox({ title }) {
     }
   };
 
-  const handleShareToKakao = (title) => {
+  const handleShareToKakao = (title: string) => {
     window.Kakao.Link.sendDefault({
       objectType: "feed",
       content: {

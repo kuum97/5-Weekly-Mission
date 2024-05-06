@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { displayCreatedTime, formatDateString } from "@utils/dateUtils";
 import Modal from "globalComponents/Modal";
 import LinkAddToFolderForm from "./components/LinkAddToFolderForm";
@@ -7,13 +7,22 @@ import defaultImage from "@assets/card-default.png";
 import kebab from "@assets/kebab.svg";
 import { FaRegStar } from "react-icons/fa";
 import styles from "pages/LinkCard.module.css";
+import { LinkData } from "services/api";
 
-function FolderLinkCard({ link }) {
+interface FolderLinkCardProps {
+  link: LinkData;
+}
+
+interface ActionTypes {
+  [actionType: string]: ReactElement;
+}
+
+function FolderLinkCard({ link }: FolderLinkCardProps) {
   const [onModal, setOnModal] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
+  const [modalContent, setModalContent] = useState<ReactElement | null>(null);
 
-  const handleClickModal = (actionType) => {
-    const actionTypes = {
+  const handleClickModal = (actionType: string) => {
+    const actionTypes: ActionTypes = {
       deleteLink: <LinkDeleteForm />,
       addLink: <LinkAddToFolderForm />,
     };
@@ -29,14 +38,15 @@ function FolderLinkCard({ link }) {
 
   const src = image_source || defaultImage;
 
-  const handleToggleDropDown = (e) => {
+  const handleToggleDropDown = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
     const button = e.currentTarget;
     const linkInfo = button.closest(`.${styles.linkInfo}`);
-    const dropdown = linkInfo.querySelector(`.${styles.dropdown}`);
-    dropdown.classList.toggle(styles.hidden);
+    const dropdown = linkInfo?.querySelector(`.${styles.dropdown}`);
+
+    dropdown?.classList.toggle(styles.hidden);
   };
 
   return (

@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { FolderData, getLinksByUserIdAndFolderId } from "services/api";
+import {
+  FolderData,
+  LinkData,
+  getLinksByUserIdAndFolderId,
+} from "services/api";
 import useAsync from "services/useAsync";
 import SearchBar from "globalComponents/SearchBar";
 import FoldersList from "../FoldersList";
@@ -20,7 +24,11 @@ function FoldersController({ folders, userId }: FoldersControllerProps) {
     value: links,
     isLoading,
     error,
-  } = useAsync(getLinksByUserIdAndFolderId, userId, parseInt(selectedFolderId));
+  } = useAsync<LinkData[]>(
+    getLinksByUserIdAndFolderId,
+    userId,
+    parseInt(selectedFolderId)
+  );
 
   const handleClick = (folderId?: string) => {
     const newSearchParams = new URLSearchParams(searchParams);
@@ -38,6 +46,10 @@ function FoldersController({ folders, userId }: FoldersControllerProps) {
       setLoading(false);
     }
   }, [isLoading, links]);
+
+  if (!links) {
+    return <div>No Data Available</div>;
+  }
 
   return (
     <section className={styles.container}>

@@ -55,7 +55,7 @@ export interface FolderData {
   };
 }
 
-interface LinkData {
+export interface LinkData {
   id: number;
   created_at: string;
   updated_at?: string;
