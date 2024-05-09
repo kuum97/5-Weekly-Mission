@@ -1,12 +1,8 @@
+import { FolderData, LinkData, getLinksByUserIdAndFolderId } from "@/lib/api";
+import useAsync from "@/lib/useAsync";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import {
-  FolderData,
-  LinkData,
-  getLinksByUserIdAndFolderId,
-} from "services/api";
-import useAsync from "services/useAsync";
-import SearchBar from "globalComponents/SearchBar";
+import SearchBar from "../SearchBar";
 import FoldersList from "../FoldersList";
 import FolderLinkCards from "../FolderLinkCards";
 import styles from "./FoldersController.module.css";

@@ -1,10 +1,10 @@
 import { ReactElement, useState } from "react";
-import { FolderData } from "services/api";
-import Modal from "globalComponents/Modal";
-import FolderAddForm from "./components/FolderAddForm";
-import SocialShareBox from "./components/SocialShareBox";
-import FolderEditForm from "./components/FolderEditForm";
-import FolderDeleteForm from "./components/FolderDeleteForm";
+import { FolderData } from "@/lib/api";
+import FolderAddForm from "../components/FolderAddForm";
+import SocialShareBox from "../components/SocialShareBox";
+import FolderEditForm from "../components/FolderEditForm";
+import FolderDeleteForm from "../components/FolderDeleteForm";
+import Modal from "../Modal";
 import { FaPencilAlt, FaRegShareSquare, FaRegTrashAlt } from "react-icons/fa";
 import styles from "./FoldersList.module.css";
 

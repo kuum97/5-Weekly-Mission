@@ -1,6 +1,6 @@
-import { LinkData } from "services/api";
-import FolderLinkCard from "pages/FolderPage/components/FolderLinkCard";
-import styles from "pages/LinkCards.module.css";
+import { LinkData } from "@/lib/api";
+import FolderLinkCard from "../FolderLinkCard";
+import styles from "../LinkCards.module.css";
 
 interface FolderLinkCardsProps {
   links: LinkData[];

@@ -1,7 +1,7 @@
-import { SampleLink } from "services/api";
-import SearchBar from "globalComponents/SearchBar";
-import styles from "pages/LinkCards.module.css";
-import SharedLinkCard from "pages/SharedPage/components/SharedLinkCard";
+import { SampleLink } from "@/lib/api";
+import SearchBar from "../SearchBar";
+import SharedLinkCard from "../SharedLinkCard";
+import styles from "../LinkCards.module.css";
 
 interface SharedLinkCardsProps {
   links: SampleLink[] | undefined;

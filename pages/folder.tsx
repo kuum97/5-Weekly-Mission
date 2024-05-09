@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
+import useAsync from "@/lib/useAsync";
 import {
   FolderData,
   UserData,
   getFoldersByUserId,
   getUserById,
-} from "services/api";
-import useAsync from "services/useAsync";
-import Header from "globalComponents/Header";
-import Footer from "globalComponents/Footer";
-import LinkAddForm from "./components/LinkAddForm";
-import FoldersController from "./components/FolderController";
+} from "@/lib/api";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import LinkAddForm from "@/components/LinkAddForm";
+import FoldersController from "@/components/FolderController";
 
 const SAMPLE_USER_ID = 1;
 
