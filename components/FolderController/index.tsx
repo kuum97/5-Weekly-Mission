@@ -1,7 +1,7 @@
-import { FolderData, LinkData, getLinksByUserIdAndFolderId } from "@/lib/api";
-import useAsync from "@/lib/useAsync";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import useAsync from "@/lib/useAsync";
+import { FolderData, LinkData, getLinksByUserIdAndFolderId } from "@/lib/api";
 import SearchBar from "../SearchBar";
 import FoldersList from "../FoldersList";
 import FolderLinkCards from "../FolderLinkCards";
@@ -15,7 +15,7 @@ interface FoldersControllerProps {
 function FoldersController({ folders, userId }: FoldersControllerProps) {
   const [loading, setLoading] = useState(true);
   const [selectedFolderId, setSelectedFolderId] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
+  const router = useRouter();
   const {
     value: links,
     isLoading,
@@ -27,13 +27,13 @@ function FoldersController({ folders, userId }: FoldersControllerProps) {
   );
 
   const handleClick = (folderId?: string) => {
-    const newSearchParams = new URLSearchParams(searchParams);
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, folderId: folderId },
+    });
 
     if (folderId) {
       setSelectedFolderId(folderId);
-      setSearchParams(newSearchParams);
-    } else {
-      newSearchParams.delete("folderId");
     }
   };
 

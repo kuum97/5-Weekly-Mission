@@ -1,4 +1,4 @@
-import Avatar from "globalComponents/Avatar";
+import Avatar from "../Avatar";
 import styles from "./UserProfileAndTitle.module.css";
 
 interface UserProfileAndTitleProps {

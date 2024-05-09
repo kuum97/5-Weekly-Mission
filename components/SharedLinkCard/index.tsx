@@ -2,7 +2,6 @@ import { SampleLink } from "@/lib/api";
 import { displayCreatedTime, formatDateString } from "@/lib/dateUtils";
 import defaultImage from "@/public/card-default.png";
 import styles from "../LinkCard.module.css";
-import Image from "next/image";
 
 interface SharedLinkCardProps {
   link: SampleLink;
@@ -25,7 +24,7 @@ function SharedLinkCard({ link }: SharedLinkCardProps) {
         rel="noreferrer"
       >
         <div className={styles.imageWrapper}>
-          <Image className={styles.linkImage} src={src} alt={title} />
+          <img className={styles.linkImage} src={src} alt={title} />
         </div>
       </a>
       <div className={styles.linkInfo}>
