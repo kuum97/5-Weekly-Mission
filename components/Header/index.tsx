@@ -1,6 +1,6 @@
 import Avatar from "../Avatar";
-import mainLogo from "@/public/Linkbrary.png";
 import styles from "./Header.module.css";
+import Image from "next/image";
 
 interface HeaderProps {
   userAvatarImage: string;
@@ -15,7 +15,14 @@ function Header({
 }: HeaderProps) {
   return (
     <header className={styles.container}>
-      <img className={styles.logo} src={String(mainLogo)} alt="logo" />
+      <div className={styles.logo}>
+        <Image
+          fill
+          src="/Linkbrary.png"
+          alt="logo"
+          style={{ objectFit: "contain" }}
+        />
+      </div>
       {userLogInSuccess ? (
         <div className={styles.profileContainer}>
           <Avatar size="small" src={userAvatarImage} />

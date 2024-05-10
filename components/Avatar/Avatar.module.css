@@ -1,5 +1,10 @@
 .avatar {
-  border-radius: 9999px;
+  position: relative;
+  margin-right: 6px;
+}
+
+.avatar img {
+  border-radius: 100%;
 }
 
 .small {

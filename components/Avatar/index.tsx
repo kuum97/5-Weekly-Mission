@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import styles from "./Avatar.module.css";
+import Image from "next/image";
 
 interface AvatarProps {
   src: string;
@@ -12,7 +13,11 @@ function Avatar({ src, size }: AvatarProps) {
     [styles.medium]: size === "medium",
   });
 
-  return <img className={avatarClass} src={src} alt="avatar" />;
+  return (
+    <div className={avatarClass}>
+      <Image fill src={src} alt="avatar" />
+    </div>
+  );
 }
 
 export default Avatar;
