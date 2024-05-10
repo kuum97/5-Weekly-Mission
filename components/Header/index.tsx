@@ -1,6 +1,6 @@
-import Avatar from "../Avatar";
-import styles from "./Header.module.css";
 import Image from "next/image";
+import Avatar from "@/components/Avatar";
+import styles from "@/components/Header/Header.module.css";
 
 interface HeaderProps {
   userAvatarImage: string;

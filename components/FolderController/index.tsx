@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useAsync from "@/lib/useAsync";
 import { FolderData, LinkData, getLinksByUserIdAndFolderId } from "@/lib/api";
-import SearchBar from "../SearchBar";
-import FoldersList from "../FoldersList";
-import FolderLinkCards from "../FolderLinkCards";
-import styles from "./FoldersController.module.css";
+import SearchBar from "@/components/SearchBar";
+import FoldersList from "@/components/FoldersList";
+import FolderLinkCards from "@/components/FolderLinkCards";
+import styles from "@/components/FolderController/FoldersController.module.css";
 
 interface FoldersControllerProps {
   folders: FolderData[];

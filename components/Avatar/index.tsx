@@ -1,6 +1,6 @@
-import classNames from "classnames";
-import styles from "./Avatar.module.css";
 import Image from "next/image";
+import classNames from "classnames";
+import styles from "@/components/Avatar/Avatar.module.css";
 
 interface AvatarProps {
   src: string;

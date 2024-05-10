@@ -1,5 +1,5 @@
-import styles from "@/components/Modal/ModalChildren.module.css";
 import Image from "next/image";
+import styles from "@/components/Modal/ModalChildren.module.css";
 
 interface SocialShareBoxProps {
   title: string;

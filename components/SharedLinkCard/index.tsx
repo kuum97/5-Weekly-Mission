@@ -1,7 +1,6 @@
 import { SampleLink } from "@/lib/api";
 import { displayCreatedTime, formatDateString } from "@/lib/dateUtils";
-import defaultImage from "@/public/card-default.png";
-import styles from "../LinkCard.module.css";
+import styles from "@/components/LinkCard.module.css";
 
 interface SharedLinkCardProps {
   link: SampleLink;
@@ -13,7 +12,7 @@ function SharedLinkCard({ link }: SharedLinkCardProps) {
   const createdTime = displayCreatedTime(createdAt);
   const createdAtFormat = formatDateString(createdAt);
 
-  const src = imageSource || String(defaultImage);
+  const src = imageSource || "/card-default.png";
 
   return (
     <div className={styles.linkContainer}>
@@ -24,7 +23,7 @@ function SharedLinkCard({ link }: SharedLinkCardProps) {
         rel="noreferrer"
       >
         <div className={styles.imageWrapper}>
-          <img className={styles.linkImage} src={src} alt={title} />
+          {/* <img className={styles.linkImage} src={src} alt={title} /> 넥스트 이미지 태그로 변경 */}
         </div>
       </a>
       <div className={styles.linkInfo}>
