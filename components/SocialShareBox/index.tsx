@@ -1,18 +1,12 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import kakao from "@assets/kakaotalk.png";
-import facebook from "@assets/facebook.png";
-import share from "@assets/share.png";
-import defaultImg from "@assets/card-default.png";
-import styles from "globalComponents/Modal/ModalChildren.module.css";
-import { KAKAO_KEY } from "pages/constants";
+import styles from "@/components/Modal/ModalChildren.module.css";
+import Image from "next/image";
 
 interface SocialShareBoxProps {
   title: string;
 }
 
 function SocialShareBox({ title }: SocialShareBoxProps) {
-  const location = useLocation();
+  /*   const location = useLocation();
   const currentUrl =
     window.location.origin + location.pathname + location.search;
   const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
@@ -57,7 +51,7 @@ function SocialShareBox({ title }: SocialShareBoxProps) {
         },
       ],
     });
-  };
+  }; */
 
   return (
     <>
@@ -67,26 +61,26 @@ function SocialShareBox({ title }: SocialShareBoxProps) {
         <div className={styles.shareButtonWrapper}>
           <button
             className={styles.shareButton}
-            onClick={() => handleShareToKakao(title)}
+            // onClick={() => handleShareToKakao(title)}
           >
-            <img src={kakao} alt="kakaoBtn" />
+            <Image src="/kakaotalk.png" alt="kakaoBtn" />
           </button>
           <span>카카오톡</span>
         </div>
         <div className={styles.shareButtonWrapper}>
-          <a href={facebookShareUrl} target="_blank" rel="noopener noreferrer">
+          <a href="#" target="_blank" rel="noopener noreferrer">
             <button className={styles.shareButton}>
-              <img src={facebook} alt="facebookBtn" />
+              <Image src="/facebook.png" alt="facebookBtn" />
             </button>
           </a>
           <span>페이스북</span>
         </div>
         <div className={styles.shareButtonWrapper}>
           <button
-            onClick={handleCopyToClipBoard}
+            // onClick={handleCopyToClipBoard}
             className={styles.shareButton}
           >
-            <img src={share} alt="shareBtn" />
+            <Image src="/share.png" alt="shareBtn" />
           </button>
           <span>링크 복사</span>
         </div>

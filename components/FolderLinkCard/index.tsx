@@ -1,13 +1,13 @@
-import React, { ReactElement, useState } from "react";
-import { displayCreatedTime, formatDateString } from "@utils/dateUtils";
-import Modal from "globalComponents/Modal";
-import LinkAddToFolderForm from "./components/LinkAddToFolderForm";
-import LinkDeleteForm from "./components/LinkDeleteForm";
-import defaultImage from "@assets/card-default.png";
-import kebab from "@assets/kebab.svg";
+import { ReactElement, useState } from "react";
+import { LinkData } from "@/lib/api";
+import { displayCreatedTime, formatDateString } from "@/lib/dateUtils";
+import Modal from "@/components/Modal";
+import LinkDeleteForm from "@/components/FolderLinkCard/components/LinkDeleteForm";
+import LinkAddToFolderForm from "@/components/FolderLinkCard/components/LinkAddToFolderForm";
+import styles from "@/components/LinkCard.module.css";
 import { FaRegStar } from "react-icons/fa";
-import styles from "pages/LinkCard.module.css";
-import { LinkData } from "services/api";
+import { GoKebabHorizontal } from "react-icons/go";
+import Image from "next/image";
 
 interface FolderLinkCardProps {
   link: LinkData;
@@ -36,7 +36,7 @@ function FolderLinkCard({ link }: FolderLinkCardProps) {
   const createdTime = displayCreatedTime(created_at);
   const createdAtFormat = formatDateString(created_at);
 
-  const src = image_source || defaultImage;
+  const src = image_source || "/card-default.png";
 
   const handleToggleDropDown = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -53,7 +53,9 @@ function FolderLinkCard({ link }: FolderLinkCardProps) {
     <div className={styles.linkContainer}>
       <a href={url} target="_blank" rel="noreferrer">
         <div className={styles.imageWrapper}>
-          <img className={styles.linkImage} src={src} alt={title} />
+          <div className={styles.linkImage}>
+            <Image fill src={src} alt={title} />
+          </div>
           <FaRegStar className={styles.starIcon} />
         </div>
       </a>
@@ -61,7 +63,7 @@ function FolderLinkCard({ link }: FolderLinkCardProps) {
         <div className={styles.linkInfoContent}>
           <div>{createdTime}</div>
           <button onClick={handleToggleDropDown} className={styles.kebabButton}>
-            <img src={kebab} alt="menu" />
+            <GoKebabHorizontal />
           </button>
         </div>
         <div className={styles.linkInfoContent}>{description}</div>
