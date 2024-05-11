@@ -54,7 +54,14 @@ function FolderLinkCard({ link }: FolderLinkCardProps) {
       <a href={url} target="_blank" rel="noreferrer">
         <div className={styles.imageWrapper}>
           <div className={styles.linkImage}>
-            <Image fill src={src} alt={title || "링크 카드"} priority />
+            <Image
+              fill
+              src={src}
+              alt={title || "링크 카드"}
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 767px) 325px, 340px"
+              priority
+            />
           </div>
           <FaRegStar className={styles.starIcon} />
         </div>

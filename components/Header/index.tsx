@@ -20,8 +20,9 @@ function Header({
           fill
           src="/Linkbrary.png"
           alt="logo"
-          objectFit="cover"
+          style={{ objectFit: "cover" }}
           sizes="(max-width: 767px) 100px, 133px"
+          priority
         />
       </div>
       {userLogInSuccess ? (
