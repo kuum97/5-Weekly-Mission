@@ -7,7 +7,7 @@ export interface CustomAsyncReturns<T> {
 
 export interface Params {
   userId?: number;
-  folderId?: number;
+  folderId?: number | null;
 }
 
 type AsyncFunc<T> = (params: Params) => Promise<T>;

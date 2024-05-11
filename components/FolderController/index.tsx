@@ -13,8 +13,8 @@ interface FoldersControllerProps {
 }
 
 function FoldersController({ folders, userId }: FoldersControllerProps) {
-  const [loading, setLoading] = useState(true);
-  const [selectedFolderId, setSelectedFolderId] = useState("");
+  const [currentLinks, setCurrentLinks] = useState<LinkData[]>([]);
+  const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
   const router = useRouter();
   const {
     value: links,
@@ -23,34 +23,34 @@ function FoldersController({ folders, userId }: FoldersControllerProps) {
   } = useAsync<LinkData[]>(
     getLinksByUserIdAndFolderId,
     userId,
-    parseInt(selectedFolderId)
+    selectedFolderId
   );
 
-  const handleClick = (folderId?: string) => {
+  const handleClick = (folderId: number | null) => {
     router.push({
       pathname: router.pathname,
-      query: { ...router.query, folderId: folderId },
+      query: { ...router.query, folderId },
     });
 
-    if (folderId) {
-      setSelectedFolderId(folderId);
+    if (!folderId) {
+      router.push({
+        pathname: router.pathname,
+      });
     }
+
+    setSelectedFolderId(folderId);
   };
 
   useEffect(() => {
-    if (!isLoading && links) {
-      setLoading(false);
+    if (links) {
+      setCurrentLinks(links);
     }
-  }, [isLoading, links]);
-
-  if (!links) {
-    return <div>No Data Available</div>;
-  }
+  }, [links]);
 
   return (
     <section className={styles.container}>
       <SearchBar />
-      {loading ? (
+      {isLoading ? (
         <div>Loading...</div>
       ) : error ? (
         <div>Error loading data.</div>
@@ -61,7 +61,7 @@ function FoldersController({ folders, userId }: FoldersControllerProps) {
             folders={folders}
             selectedFolderId={selectedFolderId}
           />
-          <FolderLinkCards links={links} />
+          <FolderLinkCards links={currentLinks} />
         </>
       )}
     </section>
