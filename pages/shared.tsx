@@ -56,7 +56,6 @@ function SharedPage() {
       ) : (
         <div>로그인해주세요.</div>
       )}
-      <Footer />
     </>
   );
 }

@@ -6,7 +6,6 @@ import {
   getFoldersByUserId,
   getUserById,
 } from "@/lib/api";
-import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import LinkAddForm from "@/components/LinkAddForm";
 import FoldersController from "@/components/FolderController";
@@ -59,7 +58,6 @@ function FolderPage() {
       ) : (
         <div>로그인해주세요.</div>
       )}
-      <Footer />
     </>
   );
 }
