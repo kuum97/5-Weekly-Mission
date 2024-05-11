@@ -1,6 +1,7 @@
 import { SampleLink } from "@/lib/api";
 import { displayCreatedTime, formatDateString } from "@/lib/dateUtils";
 import styles from "@/components/LinkCard.module.css";
+import Image from "next/image";
 
 interface SharedLinkCardProps {
   link: SampleLink;
@@ -23,7 +24,16 @@ function SharedLinkCard({ link }: SharedLinkCardProps) {
         rel="noreferrer"
       >
         <div className={styles.imageWrapper}>
-          {/* <img className={styles.linkImage} src={src} alt={title} /> 넥스트 이미지 태그로 변경 */}
+          <div className={styles.linkImage}>
+            <Image
+              fill
+              src={src}
+              alt={title || "링크 카드"}
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 767px) 325px, 340px"
+              priority
+            />
+          </div>
         </div>
       </a>
       <div className={styles.linkInfo}>

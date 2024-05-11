@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useAsync from "@/lib/useAsync";
 import { SampleFolder, SampleUser, getFolder, getUser } from "@/lib/api";
-import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import SharedLinkCards from "@/components/SharedLinkCards/SharedLinkCards";
 import UserProfileAndTitle from "@/components/UserProfileAndTitle";
@@ -51,7 +50,7 @@ function SharedPage() {
             folderName={folderData.name}
             folderImage={folderData.owner.profileImageSource}
           />
-          <SharedLinkCards links={folderData.links || []} />
+          {folderData.links && <SharedLinkCards links={folderData.links} />}
         </>
       ) : (
         <div>로그인해주세요.</div>

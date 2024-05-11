@@ -4,15 +4,16 @@ import styles from "@/components/LinkCards.module.css";
 
 interface FolderLinkCardsProps {
   links: LinkData[];
+  searchedLinks: LinkData[] | null;
 }
 
-function FolderLinkCards({ links }: FolderLinkCardsProps) {
+function FolderLinkCards({ links, searchedLinks }: FolderLinkCardsProps) {
   return (
     <>
-      {links && links.length > 0 ? (
+      {links.length > 0 ? (
         <section className={styles.container}>
           <ul className={styles.linkList}>
-            {links.map((link) => (
+            {(searchedLinks ? searchedLinks : links).map((link) => (
               <li key={link.id}>
                 <FolderLinkCard link={link} />
               </li>

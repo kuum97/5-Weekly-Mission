@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import useAsync from "@/lib/useAsync";
 import { FolderData, LinkData, getLinksByUserIdAndFolderId } from "@/lib/api";
@@ -13,7 +13,7 @@ interface FoldersControllerProps {
 }
 
 function FoldersController({ folders, userId }: FoldersControllerProps) {
-  const [currentLinks, setCurrentLinks] = useState<LinkData[]>([]);
+  const [searchedLinks, setSearchedLinks] = useState<LinkData[] | null>(null);
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
   const router = useRouter();
   const {
@@ -26,7 +26,7 @@ function FoldersController({ folders, userId }: FoldersControllerProps) {
     selectedFolderId
   );
 
-  const handleClick = (folderId: number | null) => {
+  const handleClickFolder = (folderId: number | null) => {
     router.push({
       pathname: router.pathname,
       query: { ...router.query, folderId },
@@ -41,28 +41,31 @@ function FoldersController({ folders, userId }: FoldersControllerProps) {
     setSelectedFolderId(folderId);
   };
 
-  useEffect(() => {
-    if (links) {
-      setCurrentLinks(links);
-    }
-  }, [links]);
+  const handleSearchByKeyword = (keyword: string) => {
+    if (!links) return console.log("링크가 존재하지 않습니다!");
+    const searchedLink = links?.filter((link) => link.title?.includes(keyword));
+    if (!searchedLink) return console.log("해당 링크가 존재하지 않습니다!");
+    setSearchedLinks(searchedLink);
+  };
 
   return (
     <section className={styles.container}>
-      <SearchBar />
+      <SearchBar onSearch={handleSearchByKeyword} />
       {isLoading ? (
         <div>Loading...</div>
       ) : error ? (
         <div>Error loading data.</div>
       ) : (
-        <>
-          <FoldersList
-            handleClick={handleClick}
-            folders={folders}
-            selectedFolderId={selectedFolderId}
-          />
-          <FolderLinkCards links={currentLinks} />
-        </>
+        links && (
+          <>
+            <FoldersList
+              handleClick={handleClickFolder}
+              folders={folders}
+              selectedFolderId={selectedFolderId}
+            />
+            <FolderLinkCards links={links} searchedLinks={searchedLinks} />
+          </>
+        )
       )}
     </section>
   );
