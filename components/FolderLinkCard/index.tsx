@@ -1,4 +1,5 @@
 import { ReactElement, useState } from "react";
+import Image from "next/image";
 import { LinkData } from "@/lib/api";
 import { displayCreatedTime, formatDateString } from "@/lib/dateUtils";
 import Modal from "@/components/Modal";
@@ -7,7 +8,6 @@ import LinkAddToFolderForm from "@/components/FolderLinkCard/components/LinkAddT
 import styles from "@/components/LinkCard.module.css";
 import { FaRegStar } from "react-icons/fa";
 import { GoKebabHorizontal } from "react-icons/go";
-import Image from "next/image";
 
 interface FolderLinkCardProps {
   link: LinkData;
@@ -54,7 +54,7 @@ function FolderLinkCard({ link }: FolderLinkCardProps) {
       <a href={url} target="_blank" rel="noreferrer">
         <div className={styles.imageWrapper}>
           <div className={styles.linkImage}>
-            <Image fill src={src} alt={title} />
+            <Image fill src={src} alt={title || "링크 카드"} priority />
           </div>
           <FaRegStar className={styles.starIcon} />
         </div>
