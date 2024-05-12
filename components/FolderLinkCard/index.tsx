@@ -3,11 +3,11 @@ import Image from "next/image";
 import { LinkData } from "@/lib/api";
 import { displayCreatedTime, formatDateString } from "@/lib/dateUtils";
 import Modal from "@/components/Modal";
-import LinkDeleteForm from "@/components/FolderLinkCard/components/LinkDeleteForm";
-import LinkAddToFolderForm from "@/components/FolderLinkCard/components/LinkAddToFolderForm";
 import styles from "@/components/LinkCard.module.css";
 import { FaRegStar } from "react-icons/fa";
 import { GoKebabHorizontal } from "react-icons/go";
+import LinkDeleteForm from "../Modal/childrens/LinkDeleteForm";
+import LinkAddToFolderForm from "../Modal/childrens/LinkAddToFolderForm";
 
 interface FolderLinkCardProps {
   link: LinkData;
