@@ -1,0 +1,86 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 1060px;
+}
+
+.listContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.folderButtonList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.folderButtonList button {
+  flex-shrink: 0;
+  background-color: var(--white);
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+  padding: 8px 12px 8px 12px;
+  text-align: center;
+}
+
+.folderAddButton {
+  width: 75px;
+  border: none;
+  background: none;
+  color: var(--primary);
+}
+
+.controlContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.selectedFolderName {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.folderControl {
+  display: flex;
+  gap: 3px;
+}
+
+.folderControl button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  gap: 2px;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .container {
+    width: 705px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .container {
+    width: 325px;
+  }
+
+  .folderAddButton {
+    width: 130px;
+    height: 35px;
+    padding: 8px 24px;
+    color: var(--white);
+    background-color: var(--primary);
+    position: absolute;
+    bottom: -500px;
+    left: 95px;
+    border-radius: 20px;
+  }
+}

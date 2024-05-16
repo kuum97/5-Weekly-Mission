@@ -1,0 +1,92 @@
+.formContainer {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.formInput {
+  width: 100%;
+  padding: 15px 18px;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  color: var(--black);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.formButton {
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 10px;
+  border: none;
+  background: var(--primary-gradient);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.redBackground {
+  background: none;
+  background-color: var(--red);
+}
+
+.shareBox {
+  width: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 10px;
+}
+
+.shareButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+.shareButton {
+  background: none;
+  border: none;
+  border-radius: 100%;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.subTitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gray-600);
+}
+
+.inputList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputList button {
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 15px;
+}
+
+.inputList button:active {
+  background-color: var(--gray-400);
+  color: var(--primary);
+}

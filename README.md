@@ -1,40 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Styles
 
-## Getting Started
+### Week7
 
-First, run the development server:
+1. 상단 네비게이션 바, 푸터를 랜딩 페이지와 동일한 스타일과 규칙으로 만듭니다. (week 1 ~ 3 요구사항 참고)
+2. Static, no image, Hover 상태 디자인을 보여주는 카드 컴포넌트를 만듭니다.
+3. Hover 상태에서 이미지가 기본 크기의 130%로 변합니다.
+4. 카드 컴포넌트를 클릭하면 해당 링크로 새로운 창을 띄워서 이동합니다.
+5. Tablet에서 카드 리스트가 화면의 너비 1124px를 기준으로 이상일 때는 3열로 작을 때는 2열로 배치됩니다.
+6. Tablet, Mobile에서 좌우 최소 여백은 32px 입니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Week8
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. 반응형을 위한 스타일코드들을 리팩토링 합니다.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## API & Logic
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Week7
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. 상단 네비게이션 바에 프로필 영역의 데이터는 https://bootcamp-api.codeit.kr/docs 에 명세된 “/api/sample/user”를 활용합니다.
+2. 상단 네비게이션 바에 프로필 영역의 데이터가 없는 경우 “로그인” 버튼이 보이도록 만듭니다.
+3. 폴더 소유자, 폴더 이름 영역, 링크들에 대한 데이터는 “/api/sample/folder”를 활용합니다.
+4. 커스텀 hook을 만들어 사용합니다.(선택)
+5. shared 페이지는 외부 유저에게 자신의 폴더 데이터 하나를 공유할 때 유저가 보게되는 화면 입니다.
+6. 카드 컴포넌트에서 createdAt 데이터 기준으로 현재 Date와 차이에 따라 아래와 같은 규칙으로 설정해 주세요.
+   - 2분 미만은 “1 minute ago”
+   - 59분 이하는 “OO minutes ago”
+   - 60분 이상은 “1 hour ago”
+   - 23시간 이하는 “OO hours ago”
+   - 24시간 이상은 “1 day ago”
+   - 30일 이하는 “OO days ago”
+   - 31일 이상은 “1 month ago”
+   - 11달 이하는 “OO months ago”
+   - 12달 이상은 “1 year ago”
+   - OO달 이상은 “{OO/12(소수점 버린 정수)} years ago”
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Week8
 
-## Learn More
+1. useEffect 훅의 내부로직과 디펜던스를 올바르게 수정합니다.
+2. api와 util함수들을 디렉토리를 따로 생성해 관리를 쉽게 합니다.
+3. GNB의 네이밍을 더 목적에 맞게 수정합니다.
+4. 시간경과 함수의 하드코딩이 된 부분을 더 명확하고 깔끔하게 수정합니다.
+5. 시간경과 함수의 조건문을 수정합니다.
 
-To learn more about Next.js, take a look at the following resources:
+### Week13
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. 기존의 프로젝트를 nextjs로 마이그레이션 합니다.
+2. 폴더페이지에서 아이디가 있는 폴더로 변경했을 때 전체폴더로 돌아갈 수 없는 문제를 해결합니다.
+3. 검색바의 기능을 구현합니다.
+4. 로그인, 회원가입에 필요한 인풋을 구현합니다.
+5. 기존의 react-router-dom으로 구현했던 쿼리파라미터 관련 로직을 next의 useRouter로 변경합니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Week14
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. 소셜공유 로직을 분리합니다.
+2. 모달 컴포넌트를 더 명확하고 간단하게 리팩토링합니다.
