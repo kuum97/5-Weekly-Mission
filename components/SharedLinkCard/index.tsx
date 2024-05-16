@@ -13,7 +13,7 @@ function SharedLinkCard({ link }: SharedLinkCardProps) {
   const createdTime = displayCreatedTime(createdAt);
   const createdAtFormat = formatDateString(createdAt);
 
-  const src = imageSource || "/card-default.png";
+  const src = imageSource || "/images/card-default.png";
 
   return (
     <div className={styles.linkContainer}>
