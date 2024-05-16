@@ -1,6 +1,6 @@
-import { LinkData } from "@/lib/api";
+import { LinkData } from "@/types/link";
 import FolderLinkCard from "@/components/FolderLinkCard";
-import styles from "@/components/LinkCards.module.css";
+import styles from "../LinkCards.module.css";
 
 interface FolderLinkCardsProps {
   links: LinkData[];

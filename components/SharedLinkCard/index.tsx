@@ -1,7 +1,7 @@
-import { SampleLink } from "@/lib/api";
-import { displayCreatedTime, formatDateString } from "@/lib/dateUtils";
-import styles from "@/components/LinkCard.module.css";
 import Image from "next/image";
+import { SampleLink } from "@/types/link";
+import { displayCreatedTime, formatDateString } from "@/utils/date";
+import styles from "../LinkCard.module.css";
 
 interface SharedLinkCardProps {
   link: SampleLink;

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import useAsync from "@/lib/useAsync";
-import { SampleFolder, SampleUser, getFolder, getUser } from "@/lib/api";
-import Header from "@/components/Header";
-import SharedLinkCards from "@/components/SharedLinkCards/SharedLinkCards";
+import useAsync from "@/hooks/useAsync";
+import { getFolder, getUser } from "@/api";
+import Header from "@/common/Header";
+import SharedLinkCards from "@/components/SharedLinkCards";
 import UserProfileAndTitle from "@/components/UserProfileAndTitle";
+import { SampleUser } from "@/types/user";
+import { SampleFolder } from "@/types/folder";
 
 function SharedPage() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
