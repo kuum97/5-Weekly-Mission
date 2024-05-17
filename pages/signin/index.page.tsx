@@ -2,6 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaEyeSlash } from "react-icons/fa";
 import styles from "./index.module.css";
+import SocialButton from "@/common/SocialButton";
+
+const socialSrcs: string[] = ["/images/kakaotalk.png", "/images/google.png"];
 
 function Signin() {
   return (
@@ -65,20 +68,15 @@ function Signin() {
           </form>
           <div className={styles.socialLoginContainer}>
             <span>소셜 로그인</span>
-            <div className="social-login__btns">
-              <a
-                className="social-login__btn social-login__google"
-                href="https://www.google.com/"
-              >
-                <img src="../../assets/images/google_logo.svg" />
-              </a>
-              <a
-                className="social-login__btn social-login__kakao"
-                href="https://www.kakaocorp.com/page/"
-              >
-                <img src="../../assets/images/kakao_logo.svg" />
-              </a>
-            </div>
+            <ul className={styles.socialLoginBtns}>
+              {socialSrcs.map((src: string, i: number) => (
+                <li className={styles.socialLoginBtn} key={i}>
+                  <SocialButton>
+                    <Image width={42} height={42} src={src} alt="logo" />
+                  </SocialButton>
+                </li>
+              ))}
+            </ul>
           </div>
         </main>
       </div>

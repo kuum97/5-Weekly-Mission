@@ -119,24 +119,6 @@
   display: flex;
 }
 
-.socialLoginBtn {
-  padding: 5px;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 5px;
-  box-shadow: 1px 2px 2px var(--gray-500);
-}
-
-.socialLoginGoogle {
-  background-color: var(--white);
-}
-
-.socialLoginKakao {
-  background-color: #f5e14b;
-}
-
 @media (min-width: 375px) and (max-width: 767px) {
   .loginContainer {
     padding: 0 32px;
