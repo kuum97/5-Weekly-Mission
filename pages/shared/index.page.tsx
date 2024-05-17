@@ -9,11 +9,11 @@ import CardListPagesLayout from "@/components/CardListPagesLayout";
 
 function SharedPage() {
   const { user } = useUserState();
-  const {
-    value: folderData,
-    isLoading: isLoadingFolders,
-    error: foldersError,
-  } = useAsync<SampleFolder>(getFolder, {});
+  // const {
+  //   value: folderData,
+  //   isLoading: isLoadingFolders,
+  //   error: foldersError,
+  // } = useAsync<SampleFolder>(getFolder, {});
 
   if (isLoadingFolders) {
     return <div>Loading...</div>;

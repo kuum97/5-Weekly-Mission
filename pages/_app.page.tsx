@@ -1,7 +1,6 @@
 import { ReactElement, ReactNode } from "react";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
-import Footer from "@/common/Footer";
 import "@/styles/global.css";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {

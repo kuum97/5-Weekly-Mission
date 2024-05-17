@@ -8,11 +8,11 @@ import { useUserState } from "@/hooks/useUserState";
 
 function FolderPage() {
   const { user } = useUserState();
-  const {
-    value: foldersData,
-    isLoading: isLoadingFolders,
-    error: foldersError,
-  } = useAsync<FolderData[]>(getFoldersByUserId, { SAMPLE_USER_ID });
+  // const {
+  //   value: foldersData,
+  //   isLoading: isLoadingFolders,
+  //   error: foldersError,
+  // } = useAsync<FolderData[]>(getFoldersByUserId, { SAMPLE_USER_ID });
 
   if (isLoadingFolders) {
     return <div>Loading...</div>;

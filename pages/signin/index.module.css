@@ -1,0 +1,149 @@
+.loginContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--gray-300);
+}
+
+.header {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.homeLink {
+  width: 210px;
+  height: 40px;
+  position: relative;
+}
+
+.headerSecondLine {
+  margin-top: 20px;
+}
+
+.toSignupLink {
+  margin-left: 10px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.formLabel {
+  margin-bottom: 15px;
+}
+
+.formInput {
+  height: 60px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-500);
+  padding-left: 10px;
+}
+
+.formInput:focus {
+  border-color: var(--primary);
+}
+
+.toggleVisibleBtn {
+  border: none;
+  background: none;
+  position: absolute;
+  right: 20px;
+  top: 52px;
+}
+
+.submitBtn {
+  font-size: 20px;
+  width: 100%;
+  height: 60px;
+  border: none;
+  border-radius: 8px;
+  color: var(--white);
+  background: var(--primary-gradient);
+  margin-bottom: 30px;
+}
+
+.submitBtn:hover {
+  cursor: pointer;
+}
+
+.errorMessage {
+  color: var(--red);
+  height: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.errorBorder {
+  border: 1px solid var(--red);
+}
+
+.socialLoginContainer {
+  width: 100%;
+  max-width: 400px;
+  height: 60px;
+  background-color: var(--gray-400);
+  border: 1px solid var(--gray-500);
+  border-radius: 8px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.socialLoginBtns {
+  display: flex;
+}
+
+.socialLoginBtn {
+  padding: 5px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+  box-shadow: 1px 2px 2px var(--gray-500);
+}
+
+.socialLoginGoogle {
+  background-color: var(--white);
+}
+
+.socialLoginKakao {
+  background-color: #f5e14b;
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .loginContainer {
+    padding: 0 32px;
+  }
+
+  .formContainer,
+  .socialLoginContainer {
+    max-width: 400px;
+  }
+}
