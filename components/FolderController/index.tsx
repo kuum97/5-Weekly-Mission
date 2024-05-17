@@ -60,7 +60,7 @@ function FoldersController({ folders, userId }: FoldersControllerProps) {
         links && (
           <>
             <FoldersList
-              handleClick={handleClickFolder}
+              onClick={handleClickFolder}
               folders={folders}
               selectedFolderId={selectedFolderId}
             />

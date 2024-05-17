@@ -9,7 +9,7 @@ import FolderDeleteForm from "@/common/Modal/childrens/FolderDeleteForm";
 import styles from "./index.module.css";
 
 interface FoldersListProps {
-  handleClick: (folderId: number | null) => void;
+  onClick: (folderId: number | null) => void;
   folders: FolderData[];
   selectedFolderId: number | null;
 }
@@ -18,11 +18,7 @@ interface ActionTypes {
   [actionType: string]: ReactElement;
 }
 
-function FoldersList({
-  handleClick,
-  folders,
-  selectedFolderId,
-}: FoldersListProps) {
+function FoldersList({ onClick, folders, selectedFolderId }: FoldersListProps) {
   const [modalContent, setModalContent] = useState<ReactElement | null>(null);
   const currentFolder = folders.find(
     (folder) => folder.id === selectedFolderId
@@ -44,13 +40,11 @@ function FoldersList({
       <div className={styles.listContainer}>
         <ul className={styles.folderButtonList}>
           <li>
-            <button onClick={() => handleClick(null)}>전체</button>
+            <button onClick={() => onClick(null)}>전체</button>
           </li>
           {folders.map((folder) => (
             <li key={folder.id}>
-              <button onClick={() => handleClick(folder.id)}>
-                {folder.name}
-              </button>
+              <button onClick={() => onClick(folder.id)}>{folder.name}</button>
             </li>
           ))}
         </ul>
