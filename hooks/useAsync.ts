@@ -1,3 +1,4 @@
+import { Params } from "@/api";
 import { useCallback, useEffect, useState } from "react";
 
 export interface CustomAsyncReturns<T> {
@@ -6,17 +7,11 @@ export interface CustomAsyncReturns<T> {
   error: Error | null;
 }
 
-export interface Params {
-  userId?: number;
-  folderId?: number | null;
-}
-
 type AsyncFunc<T> = (params: Params) => Promise<T>;
 
 const useAsync = <T>(
   asyncFunc: AsyncFunc<T>,
-  userId?: Params["userId"],
-  folderId?: Params["folderId"]
+  params: Params
 ): CustomAsyncReturns<T> => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [value, setValue] = useState<T | null>(null);
@@ -25,12 +20,7 @@ const useAsync = <T>(
   const fetchData = useCallback(async () => {
     setIsLoading(true);
     try {
-      let result;
-      const params: Params = {};
-      if (userId !== undefined) params.userId = userId;
-      if (folderId !== undefined) params.folderId = folderId;
-
-      result = await asyncFunc(params);
+      const result = await asyncFunc(params);
       setValue(result);
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -39,7 +29,7 @@ const useAsync = <T>(
     } finally {
       setIsLoading(false);
     }
-  }, [asyncFunc, userId, folderId]);
+  }, [asyncFunc, params]);
 
   useEffect(() => {
     fetchData();

@@ -13,7 +13,7 @@ function SharedPage() {
     value: folderData,
     isLoading: isLoadingFolders,
     error: foldersError,
-  } = useAsync<SampleFolder>(getFolder);
+  } = useAsync<SampleFolder>(getFolder, {});
 
   if (isLoadingFolders) {
     return <div>Loading...</div>;

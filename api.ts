@@ -2,8 +2,11 @@ import { SampleUser, UserData } from "@/types/user";
 import { FolderData, SampleFolder } from "@/types/folder";
 import { Response, SampleFolderResponse } from "@/types/response";
 import { LinkData } from "@/types/link";
-import { Params } from "@/hooks/useAsync";
 import { CODEIT_BASE_URL } from "@/constants";
+
+export interface Params {
+  [key: string]: number | null;
+}
 
 export async function getUser(): Promise<SampleUser> {
   const response = await fetch(`${CODEIT_BASE_URL}/sample/user`);

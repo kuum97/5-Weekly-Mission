@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Avatar from "@/common/Avatar";
 import styles from "./index.module.css";
-import { useInitializeUser } from "@/hooks/useLogin";
+import { useInitializeUser } from "@/hooks/useInitializeUser";
 import { useUserState } from "@/hooks/useUserState";
+import { SAMPLE_USER_ID } from "@/constants";
 
 function Header() {
-  useInitializeUser();
+  useInitializeUser({ SAMPLE_USER_ID });
   const { user } = useUserState();
 
   return (
@@ -22,7 +23,7 @@ function Header() {
       </div>
       {user ? (
         <div className={styles.profileContainer}>
-          <Avatar size="small" src={user.profileImageSource} />
+          <Avatar size="small" src={user.image_source} />
           <span>{user.email}</span>
         </div>
       ) : (

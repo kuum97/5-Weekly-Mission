@@ -22,11 +22,10 @@ function FoldersController({ folders, userId }: FoldersControllerProps) {
     value: links,
     isLoading,
     error,
-  } = useAsync<LinkData[]>(
-    getLinksByUserIdAndFolderId,
+  } = useAsync<LinkData[]>(getLinksByUserIdAndFolderId, {
     userId,
-    selectedFolderId
-  );
+    selectedFolderId,
+  });
 
   const handleClickFolder = (folderId: number | null) => {
     router.push({

@@ -1,12 +1,12 @@
 import { create } from "zustand";
-import { SampleUser } from "@/types/user";
+import { SampleUser, UserData } from "@/types/user";
 
 interface UserStateProps {
-  user: SampleUser | null;
-  setUser: (user: SampleUser) => void;
+  user: SampleUser | UserData | null;
+  setUser: (user: SampleUser | UserData) => void;
 }
 
 export const useUserState = create<UserStateProps>((set) => ({
   user: null,
-  setUser: (user: SampleUser) => set({ user }),
+  setUser: (user: SampleUser | UserData) => set({ user }),
 }));
