@@ -1,11 +1,11 @@
 import AuthInput from "@/common/Auth/Input";
 import styles from "../index.module.css";
 
-interface SigninFormProps {
+interface SignupFormProps {
   ref: any;
 }
 
-function SigninForm({ ref }: SigninFormProps) {
+function SignupForm({ ref }: SignupFormProps) {
   return (
     <form className={styles.formContainer}>
       <AuthInput
@@ -20,11 +20,17 @@ function SigninForm({ ref }: SigninFormProps) {
         placeholder="비밀번호를 입력해주세요"
         ref={ref}
       />
+      <AuthInput
+        type="password"
+        label="비밀번호 확인"
+        placeholder="비밀번호와 일치하는 값을 입력해주세요"
+        ref={ref}
+      />
       <button className={styles.submitBtn} type="submit">
-        로그인
+        회원가입
       </button>
     </form>
   );
 }
 
-export default SigninForm;
+export default SignupForm;

@@ -1,4 +1,4 @@
-.loginContainer {
+.container {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -31,12 +31,7 @@
 }
 
 @media (min-width: 375px) and (max-width: 767px) {
-  .loginContainer {
+  .container {
     padding: 0 32px;
-  }
-
-  .formContainer,
-  .socialLoginContainer {
-    max-width: 400px;
   }
 }

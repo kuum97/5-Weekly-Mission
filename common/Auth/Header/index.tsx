@@ -30,7 +30,7 @@ function AuthHeader({ purpose }: AuthHeaderProps) {
           (purpose === "signup" && (
             <>
               <span>이미 회원이신가요?</span>
-              <Link className={styles.toSignupLink} href="/signip">
+              <Link className={styles.toSignupLink} href="/signin">
                 로그인 하기
               </Link>
             </>
