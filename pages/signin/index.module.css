@@ -8,83 +8,11 @@
   background-color: var(--gray-300);
 }
 
-.header {
-  margin-bottom: 30px;
-  display: flex;
-  flex-direction: column;
-}
-
-.homeLink {
-  width: 210px;
-  height: 40px;
-  position: relative;
-}
-
-.headerSecondLine {
-  margin-top: 20px;
-}
-
-.toSignupLink {
-  margin-left: 10px;
-  color: var(--primary);
-  font-weight: 600;
-}
-
 .main {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.formContainer {
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
-.formGroup {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  position: relative;
-}
-
-.formLabel {
-  margin-bottom: 15px;
-}
-
-.formInput {
-  height: 60px;
-  border-radius: 8px;
-  border: 1px solid var(--gray-500);
-  padding-left: 10px;
-}
-
-.formInput:focus {
-  border-color: var(--primary);
-}
-
-.toggleVisibleBtn {
-  border: none;
-  background: none;
-  position: absolute;
-  right: 20px;
-  top: 52px;
-}
-
-.submitBtn {
-  font-size: 20px;
-  width: 100%;
-  height: 60px;
-  border: none;
-  border-radius: 8px;
-  color: var(--white);
-  background: var(--primary-gradient);
-  margin-bottom: 30px;
 }
 
 .submitBtn:hover {
@@ -100,23 +28,6 @@
 
 .errorBorder {
   border: 1px solid var(--red);
-}
-
-.socialLoginContainer {
-  width: 100%;
-  max-width: 400px;
-  height: 60px;
-  background-color: var(--gray-400);
-  border: 1px solid var(--gray-500);
-  border-radius: 8px;
-  padding: 0 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.socialLoginBtns {
-  display: flex;
 }
 
 @media (min-width: 375px) and (max-width: 767px) {

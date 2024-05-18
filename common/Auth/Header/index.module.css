@@ -1,0 +1,21 @@
+.header {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.homeLink {
+  width: 210px;
+  height: 40px;
+  position: relative;
+}
+
+.headerSecondLine {
+  margin-top: 20px;
+}
+
+.toSignupLink {
+  margin-left: 10px;
+  color: var(--primary);
+  font-weight: 600;
+}
