@@ -3,6 +3,10 @@
 export const KAKAO_KEY = "a841341da0099a5d1291638b48030745";
 export const CODEIT_BASE_URL = "https://bootcamp-api.codeit.kr/api";
 export const SAMPLE_USER_ID = 1;
+export const SOCIALLINKS = [
+  { href: "https://www.kakaocorp.com/page", src: "/images/kakaotalk.png" },
+  { href: "https://www.google.com", src: "/images/google.png" },
+];
 
 //Date
 
