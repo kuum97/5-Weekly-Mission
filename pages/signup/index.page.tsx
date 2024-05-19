@@ -1,5 +1,5 @@
-import { useForm } from "react-hook-form";
-import { postEmailCheck } from "@/api";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { postEmailCheck, postSignup } from "@/api";
 import { emailPattern, passwordPattern } from "@/constants";
 import AuthHeader from "@/common/Auth/Header";
 import AuthForm, { FormValues } from "@/common/Auth/Form";
@@ -7,8 +7,10 @@ import AuthInput from "@/common/Auth/Input";
 import SocialAuthBox from "@/components/SocialAuthBox";
 import styles from "@/styles/Auth.module.css";
 import React from "react";
+import { useRouter } from "next/router";
 
 function Signup() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -39,11 +41,27 @@ function Signup() {
     }
   };
 
+  const handleSignup: SubmitHandler<FormValues> = async (data) => {
+    const { email, password } = data;
+
+    try {
+      await postSignup({ email, password });
+
+      router.push("/folder");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <AuthHeader purpose="signup" />
       <main className={styles.main}>
-        <AuthForm purpose="signup" onSubmit={handleSubmit}>
+        <AuthForm
+          purpose="signup"
+          handleSubmit={handleSubmit}
+          onSubmit={handleSignup}
+        >
           <AuthInput
             label="이메일"
             type="text"
