@@ -19,17 +19,6 @@
   cursor: pointer;
 }
 
-.errorMessage {
-  color: var(--red);
-  height: 10px;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-.errorBorder {
-  border: 1px solid var(--red);
-}
-
 @media (min-width: 375px) and (max-width: 767px) {
   .container {
     padding: 0 32px;

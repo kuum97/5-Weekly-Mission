@@ -11,3 +11,8 @@ export const HOUR: number = 60 * MINUTE;
 export const DAY: number = 24 * HOUR;
 export const MONTH: number = 30 * DAY;
 export const YEAR: number = 12 * MONTH;
+
+//Regex
+
+export const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+export const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;

@@ -9,6 +9,7 @@
   padding: 18px 15px;
   border: 1px solid var(--gray-500);
   border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 .inputWrapper:focus {
@@ -33,9 +34,7 @@
 }
 
 .errorMessage {
-  display: inline-block;
+  color: var(--red);
   font-size: 14px;
   font-weight: 400;
-  color: var(--red);
-  margin-top: 5px;
 }
