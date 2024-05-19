@@ -3,6 +3,7 @@ import { FolderData, SampleFolder } from "@/types/folder";
 import { Response, SampleFolderResponse } from "@/types/response";
 import { LinkData } from "@/types/link";
 import { CODEIT_BASE_URL } from "@/constants";
+import { FormValues } from "./common/Auth/Form";
 
 export interface Params {
   [key: string]: number | null;
@@ -93,6 +94,26 @@ export async function postEmailCheck(email: string): Promise<void | string> {
 
   if (!response.ok) {
     throw new Error("잘못된 요청입니다.");
+  }
+
+  return;
+}
+
+export async function postSignup({
+  email,
+  password,
+}: FormValues): Promise<void | string> {
+  const response = await fetch(`${CODEIT_BASE_URL}/sign-up`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    return data.error.message;
   }
 
   return;

@@ -43,7 +43,7 @@ function Signup() {
     <div className={styles.container}>
       <AuthHeader purpose="signup" />
       <main className={styles.main}>
-        <AuthForm purpose="signup" handleSubmit={handleSubmit}>
+        <AuthForm purpose="signup" onSubmit={handleSubmit}>
           <AuthInput
             label="이메일"
             type="text"
