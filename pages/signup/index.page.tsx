@@ -1,10 +1,12 @@
+import { useForm } from "react-hook-form";
+import { postEmailCheck } from "@/api";
+import { emailPattern, passwordPattern } from "@/constants";
 import AuthHeader from "@/common/Auth/Header";
-import SocialAuthBox from "@/components/SocialAuthBox";
-import styles from "@/styles/Auth.module.css";
 import AuthForm, { FormValues } from "@/common/Auth/Form";
 import AuthInput from "@/common/Auth/Input";
-import { useForm } from "react-hook-form";
-import { emailPattern, passwordPattern } from "@/constants";
+import SocialAuthBox from "@/components/SocialAuthBox";
+import styles from "@/styles/Auth.module.css";
+import React from "react";
 
 function Signup() {
   const {
@@ -12,9 +14,30 @@ function Signup() {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm<FormValues>();
+    setError,
+  } = useForm<FormValues>({ mode: "onBlur" });
 
   const password = watch("password");
+
+  const handleEmailCheck = async (e: React.FocusEvent<HTMLInputElement>) => {
+    const email = e.target.value;
+    try {
+      const result = await postEmailCheck(email);
+      console.log("result", result);
+
+      if (typeof result === "string") {
+        setError(
+          "email",
+          { type: "onBlur", message: result },
+          { shouldFocus: true }
+        );
+      }
+
+      return;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -32,6 +55,7 @@ function Signup() {
                   value: emailPattern,
                   message: "올바른 형식의 이메일을 입력해 주세요",
                 },
+                onBlur: (e) => handleEmailCheck(e),
               }),
             }}
             error={errors.email}

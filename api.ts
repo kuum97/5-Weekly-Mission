@@ -76,3 +76,24 @@ export async function getLinksByUserIdAndFolderId({
 
   return data;
 }
+
+export async function postEmailCheck(email: string): Promise<void | string> {
+  const response = await fetch(`${CODEIT_BASE_URL}/check-email`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+  });
+
+  if (response.status === 409) {
+    const data = await response.json();
+    return data.error.message;
+  }
+
+  if (!response.ok) {
+    throw new Error("잘못된 요청입니다.");
+  }
+
+  return;
+}
