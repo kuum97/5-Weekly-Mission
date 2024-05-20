@@ -1,13 +1,13 @@
 import { ReactElement, useState } from "react";
 import Image from "next/image";
-import { LinkData } from "@/lib/api";
-import { displayCreatedTime, formatDateString } from "@/lib/dateUtils";
-import Modal from "@/components/Modal";
-import styles from "@/components/LinkCard.module.css";
-import { FaRegStar } from "react-icons/fa";
+import { LinkData } from "@/types/link";
+import { displayCreatedTime, formatDateString } from "@/utils/date";
+import Modal from "@/common/Modal";
+import LinkDeleteForm from "@/common/Modal/childrens/LinkDeleteForm";
+import LinkAddToFolderForm from "@/common/Modal/childrens/LinkAddToFolderForm";
 import { GoKebabHorizontal } from "react-icons/go";
-import LinkDeleteForm from "../Modal/childrens/LinkDeleteForm";
-import LinkAddToFolderForm from "../Modal/childrens/LinkAddToFolderForm";
+import { FaRegStar } from "react-icons/fa";
+import styles from "../LinkCard.module.css";
 
 interface FolderLinkCardProps {
   link: LinkData;
@@ -36,7 +36,7 @@ function FolderLinkCard({ link }: FolderLinkCardProps) {
   const createdTime = displayCreatedTime(created_at);
   const createdAtFormat = formatDateString(created_at);
 
-  const src = image_source || "/card-default.png";
+  const src = image_source || "/images/card-default.png";
 
   const handleToggleDropDown = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

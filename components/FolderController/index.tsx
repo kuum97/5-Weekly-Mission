@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import useAsync from "@/lib/useAsync";
-import { FolderData, LinkData, getLinksByUserIdAndFolderId } from "@/lib/api";
-import SearchBar from "@/components/SearchBar";
+import useAsync from "@/hooks/useAsync";
+import { getLinksByUserIdAndFolderId } from "@/api";
+import { FolderData } from "@/types/folder";
+import { LinkData } from "@/types/link";
+import SearchBar from "@/common/SearchBar";
 import FoldersList from "@/components/FoldersList";
 import FolderLinkCards from "@/components/FolderLinkCards";
-import styles from "@/components/FolderController/FoldersController.module.css";
+import styles from "./index.module.css";
 
 interface FoldersControllerProps {
   folders: FolderData[];
@@ -20,11 +22,10 @@ function FoldersController({ folders, userId }: FoldersControllerProps) {
     value: links,
     isLoading,
     error,
-  } = useAsync<LinkData[]>(
-    getLinksByUserIdAndFolderId,
+  } = useAsync<LinkData[]>(getLinksByUserIdAndFolderId, {
     userId,
-    selectedFolderId
-  );
+    selectedFolderId,
+  });
 
   const handleClickFolder = (folderId: number | null) => {
     router.push({
@@ -59,7 +60,7 @@ function FoldersController({ folders, userId }: FoldersControllerProps) {
         links && (
           <>
             <FoldersList
-              handleClick={handleClickFolder}
+              onClick={handleClickFolder}
               folders={folders}
               selectedFolderId={selectedFolderId}
             />
