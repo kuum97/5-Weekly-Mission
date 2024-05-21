@@ -1,5 +1,5 @@
-import { HTMLInputTypeAttribute } from "react";
-import { FaEyeSlash } from "react-icons/fa";
+import { HTMLInputTypeAttribute, useRef, useState } from "react";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 import styles from "./index.module.css";
 import {
   FieldError,
@@ -24,6 +24,16 @@ function AuthInput({
   register,
   error,
 }: AuthInputProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleToggleVisibility = () => {
+    if (inputRef.current) {
+      inputRef.current.type = isVisible ? "password" : "text";
+    }
+    setIsVisible(!isVisible);
+  };
+
   return (
     <div className={styles.container}>
       <label className={styles.inputLabel} htmlFor={type}>
@@ -36,13 +46,18 @@ function AuthInput({
           [styles.errorBorder]: error,
         })}
         {...register}
+        ref={inputRef}
       />
       {error && (
         <p className={styles.errorMessage}>{error.message?.toString()}</p>
       )}
       {type === "password" && (
-        <button className={styles.eyeSlash} type="button">
-          <FaEyeSlash />
+        <button
+          className={styles.eyeSlash}
+          type="button"
+          onClick={handleToggleVisibility}
+        >
+          {!isVisible ? <FaEye /> : <FaEyeSlash />}
         </button>
       )}
     </div>
