@@ -97,10 +97,17 @@ export async function postEmailCheck(email: string): Promise<void | string> {
   return;
 }
 
+interface postData {
+  data: {
+    accessToken: string;
+    refreshToken: string;
+  };
+}
+
 export async function postSignup({
   email,
   password,
-}: FormValues): Promise<void | string> {
+}: FormValues): Promise<postData> {
   const response = await fetch(`${CODEIT_BASE_URL}/sign-up`, {
     method: "POST",
     headers: {
@@ -108,19 +115,19 @@ export async function postSignup({
     },
     body: JSON.stringify({ email, password }),
   });
+  const data = await response.json();
 
   if (!response.ok) {
-    const data = await response.json();
     return data.error.message;
   }
 
-  return;
+  return data;
 }
 
 export async function postSignin({
   email,
   password,
-}: FormValues): Promise<void> {
+}: FormValues): Promise<postData> {
   const response = await fetch(`${CODEIT_BASE_URL}/sign-in`, {
     method: "POST",
     headers: {
@@ -128,11 +135,11 @@ export async function postSignin({
     },
     body: JSON.stringify({ email, password }),
   });
+  const data = await response.json();
 
   if (!response.ok) {
-    const data = await response.json();
     return data.error.message;
   }
 
-  return;
+  return data;
 }

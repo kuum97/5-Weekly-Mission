@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute, useRef, useState } from "react";
+import React, { HTMLInputTypeAttribute, forwardRef, useState } from "react";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import styles from "./index.module.css";
 import {
@@ -17,19 +17,15 @@ interface AuthInputProps {
   error?: FieldError | Merge<FieldError, FieldErrorsImpl>;
 }
 
-function AuthInput({
-  label,
-  type,
-  placeholder,
-  register,
-  error,
-}: AuthInputProps) {
+function AuthInput(
+  { label, type, placeholder, register, error }: AuthInputProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) {
   const [isVisible, setIsVisible] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleToggleVisibility = () => {
-    if (inputRef.current) {
-      inputRef.current.type = isVisible ? "password" : "text";
+    if (typeof ref !== "function" && ref?.current) {
+      ref.current.type = isVisible ? "password" : "text";
     }
     setIsVisible(!isVisible);
   };
@@ -46,7 +42,14 @@ function AuthInput({
           [styles.errorBorder]: error,
         })}
         {...register}
-        ref={inputRef}
+        ref={(e) => {
+          register.ref(e);
+          if (typeof ref === "function") {
+            ref(e);
+          } else if (ref) {
+            ref.current = e;
+          }
+        }}
       />
       {error && (
         <p className={styles.errorMessage}>{error.message?.toString()}</p>
@@ -64,4 +67,4 @@ function AuthInput({
   );
 }
 
-export default AuthInput;
+export default forwardRef(AuthInput);

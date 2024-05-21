@@ -7,15 +7,17 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { emailPattern } from "@/constants";
 import { postSignin } from "@/api";
 import { useRouter } from "next/router";
+import { useRef } from "react";
 
 function Signin() {
   const router = useRouter();
+  const passwordRef = useRef<HTMLInputElement | null>(null);
   const {
     register,
     formState: { errors },
     handleSubmit,
     setError,
-  } = useForm<FormValues>();
+  } = useForm<FormValues>({ mode: "onBlur" });
 
   const handleSignin: SubmitHandler<FormValues> = async (data) => {
     const { email, password } = data;
@@ -36,6 +38,7 @@ function Signin() {
         return;
       }
 
+      localStorage.setItem("accessToken", result.data.accessToken);
       router.push("/folder");
     } catch (error) {
       console.error(error);
@@ -55,27 +58,24 @@ function Signin() {
             label="이메일"
             type="text"
             placeholder="이메일을 입력해 주세요"
-            register={{
-              ...register("email", {
-                required: "이메일을 입력해 주세요",
-                pattern: {
-                  value: emailPattern,
-                  message: "올바른 형식의 이메일을 입력해 주세요",
-                },
-              }),
-            }}
+            register={register("email", {
+              required: "이메일을 입력해 주세요",
+              pattern: {
+                value: emailPattern,
+                message: "올바른 형식의 이메일을 입력해 주세요",
+              },
+            })}
             error={errors.email}
           />
           <AuthInput
             label="비밀번호"
             type="password"
             placeholder="비밀번호를 입력해 주세요"
-            register={{
-              ...register("password", {
-                required: "비밀번호를 입력해 주세요",
-              }),
-            }}
+            register={register("password", {
+              required: "비밀번호를 입력해 주세요",
+            })}
             error={errors.password}
+            ref={passwordRef}
           />
         </AuthForm>
         <SocialAuthBox />

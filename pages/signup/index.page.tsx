@@ -27,7 +27,7 @@ function Signup() {
       const result = await postEmailCheck(email);
       console.log("result", result);
 
-      if (typeof result === "string") {
+      if (result) {
         setError(
           "email",
           { type: "onBlur", message: result },
@@ -46,8 +46,9 @@ function Signup() {
     password,
   }) => {
     try {
-      await postSignup({ email, password });
+      const result = await postSignup({ email, password });
 
+      localStorage.setItem("accessToken", result.data.accessToken);
       router.push("/folder");
     } catch (error) {
       console.error(error);
@@ -67,44 +68,38 @@ function Signup() {
             label="이메일"
             type="text"
             placeholder="이메일을 입력해 주세요"
-            register={{
-              ...register("email", {
-                required: "이메일을 입력해 주세요",
-                pattern: {
-                  value: emailPattern,
-                  message: "올바른 형식의 이메일을 입력해 주세요",
-                },
-                onBlur: (e) => handleEmailCheck(e),
-              }),
-            }}
+            register={register("email", {
+              required: "이메일을 입력해 주세요",
+              pattern: {
+                value: emailPattern,
+                message: "올바른 형식의 이메일을 입력해 주세요",
+              },
+              onBlur: (e) => handleEmailCheck(e),
+            })}
             error={errors.email}
           />
           <AuthInput
             label="비밀번호"
             type="password"
             placeholder="영문, 숫자를 조합해 8자 이상 입력해 주세요"
-            register={{
-              ...register("password", {
-                required: "비밀번호를 입력해 주세요",
-                pattern: {
-                  value: passwordPattern,
-                  message: "영문, 숫자를 조합해 8자 이상 입력해 주세요",
-                },
-              }),
-            }}
+            register={register("password", {
+              required: "비밀번호를 입력해 주세요",
+              pattern: {
+                value: passwordPattern,
+                message: "영문, 숫자를 조합해 8자 이상 입력해 주세요",
+              },
+            })}
             error={errors.password}
           />
           <AuthInput
             label="비밀번호 확인"
             type="password"
             placeholder="비밀번호와 일치하는 값을 입력해 주세요"
-            register={{
-              ...register("passwordConfirm", {
-                required: "비밀번호와 일치하는 값을 입력해 주세요",
-                validate: (value) =>
-                  value === password || "비밀번호와 일치하지 않습니다",
-              }),
-            }}
+            register={register("passwordConfirm", {
+              required: "비밀번호와 일치하는 값을 입력해 주세요",
+              validate: (value) =>
+                value === password || "비밀번호와 일치하지 않습니다",
+            })}
             error={errors.passwordConfirm}
           />
         </AuthForm>
