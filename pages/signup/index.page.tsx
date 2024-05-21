@@ -41,9 +41,10 @@ function Signup() {
     }
   };
 
-  const handleSignup: SubmitHandler<FormValues> = async (data) => {
-    const { email, password } = data;
-
+  const handleSignup: SubmitHandler<FormValues> = async ({
+    email,
+    password,
+  }) => {
     try {
       await postSignup({ email, password });
 

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./index.module.css";
 
-type TProps = "signin" | "signup";
+export type TProps = "signin" | "signup";
 interface AuthHeaderProps {
   purpose: TProps;
 }

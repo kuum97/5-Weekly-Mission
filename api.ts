@@ -116,3 +116,23 @@ export async function postSignup({
 
   return;
 }
+
+export async function postSignin({
+  email,
+  password,
+}: FormValues): Promise<void> {
+  const response = await fetch(`${CODEIT_BASE_URL}/sign-in`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    return data.error.message;
+  }
+
+  return;
+}
