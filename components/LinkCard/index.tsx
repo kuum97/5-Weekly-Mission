@@ -9,7 +9,7 @@ import { GoKebabHorizontal } from "react-icons/go";
 import { FaRegStar } from "react-icons/fa";
 import styles from "../LinkCard.module.css";
 
-interface FolderLinkCardProps {
+interface LinkCardProps {
   link: LinkData;
 }
 
@@ -17,7 +17,7 @@ interface ActionTypes {
   [actionType: string]: ReactElement;
 }
 
-function FolderLinkCard({ link }: FolderLinkCardProps) {
+function LinkCard({ link }: LinkCardProps) {
   const [onModal, setOnModal] = useState(false);
   const [modalContent, setModalContent] = useState<ReactElement | null>(null);
 
@@ -91,4 +91,4 @@ function FolderLinkCard({ link }: FolderLinkCardProps) {
   );
 }
 
-export default FolderLinkCard;
+export default LinkCard;

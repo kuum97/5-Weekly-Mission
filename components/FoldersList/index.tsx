@@ -10,7 +10,7 @@ import styles from "./index.module.css";
 
 interface FoldersListProps {
   onClick: (folderId: number | null) => void;
-  folders: FolderData[];
+  folders?: FolderData[];
   selectedFolderId: number | null;
 }
 
@@ -20,7 +20,7 @@ interface ActionTypes {
 
 function FoldersList({ onClick, folders, selectedFolderId }: FoldersListProps) {
   const [modalContent, setModalContent] = useState<ReactElement | null>(null);
-  const currentFolder = folders.find(
+  const currentFolder = folders?.find(
     (folder) => folder.id === selectedFolderId
   );
 
@@ -42,7 +42,7 @@ function FoldersList({ onClick, folders, selectedFolderId }: FoldersListProps) {
           <li>
             <button onClick={() => onClick(null)}>전체</button>
           </li>
-          {folders.map((folder) => (
+          {folders?.map((folder) => (
             <li key={folder.id}>
               <button onClick={() => onClick(folder.id)}>{folder.name}</button>
             </li>

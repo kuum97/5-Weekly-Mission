@@ -62,7 +62,7 @@ export async function getLinksByUserIdAndFolderId({
   userId,
   folderId,
 }: Params): Promise<LinkData[]> {
-  const defaultUrl = `${CODEIT_BASE_URL}/users/${userId}/links;`;
+  const defaultUrl = `${CODEIT_BASE_URL}/users/${userId}/links`;
   const url = folderId ? `${defaultUrl}?folderId=${folderId}` : `${defaultUrl}`;
 
   const response = await fetch(url);

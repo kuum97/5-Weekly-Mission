@@ -1,21 +1,21 @@
 import { LinkData } from "@/types/link";
-import FolderLinkCard from "@/components/FolderLinkCard";
+import LinkCard from "../LinkCard";
 import styles from "../LinkCards.module.css";
 
-interface FolderLinkCardsProps {
-  links: LinkData[];
-  searchedLinks: LinkData[] | null;
+interface LinkCardsProps {
+  links?: LinkData[];
+  searchedLinks?: LinkData[];
 }
 
-function FolderLinkCards({ links, searchedLinks }: FolderLinkCardsProps) {
+function LinkCards({ links, searchedLinks }: LinkCardsProps) {
   return (
     <>
-      {links.length > 0 ? (
+      {links ? (
         <section className={styles.container}>
           <ul className={styles.linkList}>
             {(searchedLinks ? searchedLinks : links).map((link) => (
               <li key={link.id}>
-                <FolderLinkCard link={link} />
+                <LinkCard link={link} />
               </li>
             ))}
           </ul>
@@ -29,4 +29,4 @@ function FolderLinkCards({ links, searchedLinks }: FolderLinkCardsProps) {
   );
 }
 
-export default FolderLinkCards;
+export default LinkCards;
