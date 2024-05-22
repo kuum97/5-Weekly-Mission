@@ -1,13 +1,10 @@
 import Image from "next/image";
 import Avatar from "@/common/Avatar";
 import styles from "./index.module.css";
-import { useInitializeUser } from "@/hooks/useInitializeUser";
-import { useUserState } from "@/hooks/useUserState";
-import { SAMPLE_USER_ID } from "@/constants";
+import { useUser } from "@/hooks/useUser";
 
 function Header() {
-  useInitializeUser({ SAMPLE_USER_ID });
-  const { user } = useUserState();
+  const { data: user } = useUser();
 
   return (
     <header className={styles.container}>
