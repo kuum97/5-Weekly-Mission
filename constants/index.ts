@@ -20,3 +20,8 @@ export const YEAR: number = 12 * MONTH;
 
 export const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 export const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+//Token
+
+export const LOCAL_ACCESSTOKEN: string | false | null =
+  typeof window !== "undefined" && localStorage.getItem("accessToken");

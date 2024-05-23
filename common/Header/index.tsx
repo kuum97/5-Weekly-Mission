@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Avatar from "@/common/Avatar";
 import styles from "./index.module.css";
-import { useUserState } from "@/hooks/useUserState";
+import { useUserState } from "@/hooks/state/useUserState";
 
 function Header() {
   const user = useUserState((state) => state.user);

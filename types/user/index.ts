@@ -13,3 +13,7 @@ export interface UserData {
   email: string;
   auth_id: string;
 }
+
+export interface UserDataProp {
+  user: UserData;
+}

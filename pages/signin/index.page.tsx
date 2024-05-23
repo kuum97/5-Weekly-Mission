@@ -3,14 +3,12 @@ import SocialAuthBox from "@/components/SocialAuthBox";
 import styles from "@/styles/Auth.module.css";
 import AuthForm, { FormValues } from "@/common/Auth/Form";
 import AuthInput from "@/common/Auth/Input";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { emailPattern } from "@/constants";
-import { postSignin } from "@/api";
-import { useRouter } from "next/router";
 import { useRef } from "react";
+import { useSignin } from "@/hooks/auth/useSignin";
 
 function Signin() {
-  const router = useRouter();
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const {
     register,
@@ -18,32 +16,7 @@ function Signin() {
     handleSubmit,
     setError,
   } = useForm<FormValues>({ mode: "onBlur" });
-
-  const handleSignin: SubmitHandler<FormValues> = async (data) => {
-    const { email, password } = data;
-
-    try {
-      const result = await postSignin({ email, password });
-
-      if (typeof result === "string") {
-        const fields: (keyof FormValues)[] = ["email", "password"];
-
-        fields.forEach((field) => {
-          setError(field, {
-            type: "manual",
-            message: "이메일 또는 비밀번호를 확인해 주세요",
-          });
-        });
-
-        return;
-      }
-
-      localStorage.setItem("accessToken", result.data.accessToken);
-      router.push("/folder");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { handleSignin } = useSignin({ setError });
 
   return (
     <div className={styles.container}>

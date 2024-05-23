@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 1060px;
+  width: 100%;
 }
 
 .listContainer {
@@ -19,13 +19,21 @@
   gap: 8px;
 }
 
-.folderButtonList button {
-  flex-shrink: 0;
+.folderButton {
+  display: inline-block;
   background-color: var(--white);
   border-radius: 8px;
   border: 1px solid var(--primary);
   padding: 8px 12px 8px 12px;
   text-align: center;
+  text-decoration: none;
+  color: var(--black);
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.folderButton:hover {
+  color: var(--white);
+  background-color: var(--primary);
 }
 
 .folderAddButton {
@@ -53,7 +61,7 @@
   gap: 3px;
 }
 
-.folderControl button {
+.folderControlButton {
   display: flex;
   align-items: center;
   background-color: transparent;

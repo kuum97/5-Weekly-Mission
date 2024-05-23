@@ -7,22 +7,21 @@ import SocialShareBox from "@/common/Modal/childrens/SocialShareBox";
 import FolderEditForm from "@/common/Modal/childrens/FolderEditForm";
 import FolderDeleteForm from "@/common/Modal/childrens/FolderDeleteForm";
 import styles from "./index.module.css";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface FoldersListProps {
-  onClick: (folderId: number | null) => void;
   folders?: FolderData[];
-  selectedFolderId: number | null;
 }
 
 interface ActionTypes {
   [actionType: string]: ReactElement;
 }
 
-function FoldersList({ onClick, folders, selectedFolderId }: FoldersListProps) {
+function FoldersList({ folders }: FoldersListProps) {
+  const { query } = useRouter();
+  const { folderId } = query;
   const [modalContent, setModalContent] = useState<ReactElement | null>(null);
-  const currentFolder = folders?.find(
-    (folder) => folder.id === selectedFolderId
-  );
 
   const handleClickModal = (actionType: string) => {
     const actionTypes: ActionTypes = {
@@ -40,11 +39,15 @@ function FoldersList({ onClick, folders, selectedFolderId }: FoldersListProps) {
       <div className={styles.listContainer}>
         <ul className={styles.folderButtonList}>
           <li>
-            <button onClick={() => onClick(null)}>전체</button>
+            <Link className={styles.folderButton} href={"/folder"}>
+              전체
+            </Link>
           </li>
-          {folders?.map((folder) => (
-            <li key={folder.id}>
-              <button onClick={() => onClick(folder.id)}>{folder.name}</button>
+          {folders?.map(({ id, name }) => (
+            <li key={id}>
+              <Link className={styles.folderButton} href={`/folder/${id}`}>
+                {name}
+              </Link>
             </li>
           ))}
         </ul>
@@ -57,24 +60,33 @@ function FoldersList({ onClick, folders, selectedFolderId }: FoldersListProps) {
       </div>
       <div className={styles.controlContainer}>
         <div className={styles.selectedFolderName}>
-          {currentFolder ? currentFolder.name : "전체"}
+          {folderId
+            ? folders?.map(({ name, id }) => id === Number(folderId) && name)
+            : "전체"}
         </div>
-        {selectedFolderId && (
-          <div className={styles.folderControl}>
-            <button onClick={() => handleClickModal("share")}>
-              <FaRegShareSquare />
-              공유
-            </button>
-            <button onClick={() => handleClickModal("modify")}>
-              <FaPencilAlt />
-              수정
-            </button>
-            <button onClick={() => handleClickModal("delete")}>
-              <FaRegTrashAlt />
-              삭제
-            </button>
-          </div>
-        )}
+        <div className={styles.folderControl}>
+          <button
+            className={styles.folderControlButton}
+            onClick={() => handleClickModal("share")}
+          >
+            <FaRegShareSquare />
+            공유
+          </button>
+          <button
+            className={styles.folderControlButton}
+            onClick={() => handleClickModal("modify")}
+          >
+            <FaPencilAlt />
+            수정
+          </button>
+          <button
+            className={styles.folderControlButton}
+            onClick={() => handleClickModal("delete")}
+          >
+            <FaRegTrashAlt />
+            삭제
+          </button>
+        </div>
       </div>
       {modalContent && (
         <Modal onClick={() => setModalContent(null)}>{modalContent}</Modal>
