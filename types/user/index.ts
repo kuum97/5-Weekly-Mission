@@ -15,5 +15,5 @@ export interface UserData {
 }
 
 export interface UserDataProp {
-  user: UserData;
+  user: UserData | null;
 }

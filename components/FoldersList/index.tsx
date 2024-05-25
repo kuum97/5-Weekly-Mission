@@ -1,5 +1,4 @@
-import { ReactElement, useState } from "react";
-import { FolderData } from "@/types/folder";
+import { MouseEventHandler, ReactElement, useState } from "react";
 import { FaPencilAlt, FaRegShareSquare, FaRegTrashAlt } from "react-icons/fa";
 import Modal from "@/common/Modal";
 import FolderAddForm from "@/common/Modal/childrens/FolderAddForm";
@@ -7,20 +6,17 @@ import SocialShareBox from "@/common/Modal/childrens/SocialShareBox";
 import FolderEditForm from "@/common/Modal/childrens/FolderEditForm";
 import FolderDeleteForm from "@/common/Modal/childrens/FolderDeleteForm";
 import styles from "./index.module.css";
-import Link from "next/link";
 import { useRouter } from "next/router";
-
-interface FoldersListProps {
-  folders?: FolderData[];
-}
+import { useStoreState } from "@/hooks/state";
 
 interface ActionTypes {
   [actionType: string]: ReactElement;
 }
 
-function FoldersList({ folders }: FoldersListProps) {
-  const { query } = useRouter();
-  const { folderId } = query;
+function FoldersList() {
+  const { folders } = useStoreState();
+  const router = useRouter();
+  const { folderId } = router.query;
   const [modalContent, setModalContent] = useState<ReactElement | null>(null);
 
   const handleClickModal = (actionType: string) => {
@@ -34,20 +30,39 @@ function FoldersList({ folders }: FoldersListProps) {
     setModalContent(actionTypes[actionType]);
   };
 
+  const handleClickFolder: MouseEventHandler<HTMLButtonElement> = (e) => {
+    const folderName = e.currentTarget;
+
+    if (folderName.id) {
+      router.push(`/folder/${folderName.id}`, undefined, { shallow: true });
+    } else {
+      router.push("/folder", undefined, { shallow: true });
+    }
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.listContainer}>
         <ul className={styles.folderButtonList}>
           <li>
-            <Link className={styles.folderButton} href={"/folder"}>
+            <button
+              className={styles.folderButton}
+              type="button"
+              onClick={handleClickFolder}
+            >
               전체
-            </Link>
+            </button>
           </li>
           {folders?.map(({ id, name }) => (
             <li key={id}>
-              <Link className={styles.folderButton} href={`/folder/${id}`}>
+              <button
+                id={id.toString()}
+                className={styles.folderButton}
+                type="button"
+                onClick={handleClickFolder}
+              >
                 {name}
-              </Link>
+              </button>
             </li>
           ))}
         </ul>

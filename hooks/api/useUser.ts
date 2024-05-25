@@ -1,17 +1,19 @@
-import { CODEIT_BASE_URL } from "@/constants";
+import { CODEIT_BASE_URL, IS_CLIENT } from "@/constants";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { useUserState } from "../state/useUserState";
 
-interface UseUserProps {
+interface UserProps {
   localAccessToken: string | null | false;
 }
 
-export function useUser({ localAccessToken }: UseUserProps) {
-  const setUser = useUserState((state) => state.setUser);
+export function useUser({ localAccessToken }: UserProps) {
   const router = useRouter();
 
-  const { data } = useQuery({
+  const {
+    data: user,
+    isLoading: isLoadingUser,
+    isError: isErrorUser,
+  } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
       if (!localAccessToken) return router.push("/signin");
@@ -26,12 +28,8 @@ export function useUser({ localAccessToken }: UseUserProps) {
 
       return data[0];
     },
-    enabled: !!localAccessToken,
+    enabled: !!localAccessToken && IS_CLIENT,
   });
 
-  if (data) {
-    setUser(data);
-  }
-
-  return { data };
+  return { user, isLoadingUser, isErrorUser };
 }

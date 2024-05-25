@@ -6,7 +6,7 @@ import { CODEIT_BASE_URL } from "@/constants";
 import { FormValues } from "./common/Auth/Form";
 
 export interface Params {
-  [key: string]: number;
+  [key: string]: number | undefined;
 }
 
 export async function getUser(): Promise<SampleUser> {

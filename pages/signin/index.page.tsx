@@ -4,7 +4,7 @@ import styles from "@/styles/Auth.module.css";
 import AuthForm, { FormValues } from "@/common/Auth/Form";
 import AuthInput from "@/common/Auth/Input";
 import { useForm } from "react-hook-form";
-import { emailPattern } from "@/constants";
+import { EMAIL_PATTERN } from "@/constants";
 import { useRef } from "react";
 import { useSignin } from "@/hooks/auth/useSignin";
 
@@ -34,7 +34,7 @@ function Signin() {
             register={register("email", {
               required: "이메일을 입력해 주세요",
               pattern: {
-                value: emailPattern,
+                value: EMAIL_PATTERN,
                 message: "올바른 형식의 이메일을 입력해 주세요",
               },
             })}

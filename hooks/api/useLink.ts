@@ -1,14 +1,29 @@
 import { getLinksByUserIdAndFolderId } from "@/api";
+import { IS_CLIENT } from "@/constants";
 import { UserDataProp } from "@/types/user";
 import { useQuery } from "@tanstack/react-query";
 
-export function useLink({ user }: UserDataProp) {
-  return useQuery({
-    queryKey: ["links", user?.id],
+interface LinkProps extends UserDataProp {
+  folderId?: number;
+}
+
+export function useLink({ user, folderId }: LinkProps) {
+  const {
+    data: links,
+    isLoading: isLoadingLinks,
+    isError: isErrorLinks,
+  } = useQuery({
+    queryKey: ["links", user?.id, folderId],
     queryFn: async () => {
-      const data = await getLinksByUserIdAndFolderId({ userId: user.id });
+      if (!user) return;
+      const data = await getLinksByUserIdAndFolderId({
+        userId: user.id,
+        folderId,
+      });
       return data;
     },
-    enabled: !!user,
+    enabled: !!user && IS_CLIENT,
   });
+
+  return { links, isLoadingLinks, isErrorLinks };
 }

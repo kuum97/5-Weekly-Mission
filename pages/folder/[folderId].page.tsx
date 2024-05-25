@@ -1,46 +1,33 @@
-import CardsPageLayout from "@/components/CardsPageLayout";
-import FoldersNavigation from "@/components/FoldersNavigation";
-import LinkAddForm from "@/components/LinkAddForm";
-import LinkCards from "@/components/LinkCards";
-import { CODEIT_BASE_URL, LOCAL_ACCESSTOKEN } from "@/constants";
-import { useFolder } from "@/hooks/api/useFolder";
-import { useUser } from "@/hooks/api/useUser";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
-import SearchBar from "@/common/SearchBar";
+import { useStoreState } from "@/hooks/state";
+import { useLink } from "@/hooks/api/useLink";
+import FolderPageLayout from "@/components/FolderPageLayout";
+import LinkCards from "@/components/LinkCards";
 
 function Page() {
-  const { data: user } = useUser({ localAccessToken: LOCAL_ACCESSTOKEN });
-  const { query } = useRouter();
-  const { folderId } = query;
+  const { user, folders } = useStoreState();
+  const router = useRouter();
+  const { folderId } = router.query;
   const id = Number(folderId);
-  const { data: folders } = useFolder({ user });
-  const { data: links } = useQuery({
-    queryKey: ["folderId", id],
-    queryFn: async () => {
-      if (!user && !folderId) return;
-      const response = await fetch(
-        `${CODEIT_BASE_URL}/users/${user.id}/links?folderId=${folderId}`
-      );
-      const { data } = await response.json();
-      return data;
-    },
-    enabled: !!folderId,
+  const { links } = useLink({
+    user,
+    folderId: id,
   });
 
-  const handleSearchByKeyword = (keyword: string) => {
-    if (!links) return console.log("링크가 존재하지 않습니다!");
-    const searchedLink = links?.filter((link) => link.title?.includes(keyword));
-    if (!searchedLink) return console.log("해당 링크가 존재하지 않습니다!");
-  };
+  useEffect(() => {
+    if (!user) {
+      router.push("/signin");
+    }
+    if (!folders) {
+      router.push("/folder");
+    }
+  }, [router, user, folders]);
 
   return (
-    <CardsPageLayout>
-      <LinkAddForm />
-      <SearchBar onSearch={handleSearchByKeyword} />
-      <FoldersNavigation folders={folders} />
+    <FolderPageLayout>
       <LinkCards links={links} />
-    </CardsPageLayout>
+    </FolderPageLayout>
   );
 }
 

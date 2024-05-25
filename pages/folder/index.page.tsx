@@ -1,47 +1,46 @@
-import SearchBar from "@/common/SearchBar";
-import CardsPageLayout from "@/components/CardsPageLayout";
-import FoldersNavigation from "@/components/FoldersNavigation";
-import LinkAddForm from "@/components/LinkAddForm";
-import LinkCards from "@/components/LinkCards";
-import { LOCAL_ACCESSTOKEN } from "@/constants";
+import { useEffect } from "react";
+import { useStoreState } from "@/hooks/state";
+import { useUser } from "@/hooks/api/useUser";
 import { useFolder } from "@/hooks/api/useFolder";
 import { useLink } from "@/hooks/api/useLink";
-import { useUser } from "@/hooks/api/useUser";
+import { IS_CLIENT, LOCAL_ACCESSTOKEN } from "@/constants";
+import FolderPageLayout from "@/components/FolderPageLayout";
+import LinkCards from "@/components/LinkCards";
 
 function FolderPage() {
-  const { data: user } = useUser({ localAccessToken: LOCAL_ACCESSTOKEN });
-  const {
-    data: folders,
-    isLoading: isLoadingFolders,
-    isError: isErrorFolders,
-  } = useFolder({ user });
-  const {
-    data: links,
-    isLoading: isLoadingLinks,
-    isError: isErrorLinks,
-  } = useLink({ user });
+  const { setUser, setFolders, setIsLoadingWindow, isLoadingWindow } =
+    useStoreState();
+  const { user, isLoadingUser, isErrorUser } = useUser({
+    localAccessToken: LOCAL_ACCESSTOKEN,
+  });
+  const { folders, isLoadingFolders, isErrorFolders } = useFolder({ user });
+  const { links } = useLink({ user });
 
-  if (isLoadingFolders || isLoadingLinks) {
+  useEffect(() => {
+    if (IS_CLIENT) {
+      setIsLoadingWindow(false);
+
+      if (user) {
+        setUser(user);
+      }
+      if (folders) {
+        setFolders(folders);
+      }
+    }
+  }, [user, folders, setUser, setFolders, setIsLoadingWindow]);
+
+  if (isLoadingWindow || isLoadingUser || isLoadingFolders) {
     return <div>Loading...</div>;
   }
 
-  if (isErrorFolders || isErrorLinks) {
+  if (isErrorUser || isErrorFolders) {
     return <div>Error!!</div>;
   }
 
-  const handleSearchByKeyword = (keyword: string) => {
-    if (!links) return console.log("링크가 존재하지 않습니다!");
-    const searchedLink = links?.filter((link) => link.title?.includes(keyword));
-    if (!searchedLink) return console.log("해당 링크가 존재하지 않습니다!");
-  };
-
   return (
-    <CardsPageLayout>
-      <LinkAddForm />
-      <SearchBar onSearch={handleSearchByKeyword} />
-      <FoldersNavigation folders={folders} />
+    <FolderPageLayout>
       <LinkCards links={links} />
-    </CardsPageLayout>
+    </FolderPageLayout>
   );
 }
 

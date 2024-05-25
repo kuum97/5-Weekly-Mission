@@ -1,15 +1,16 @@
-.container {
-  width: 100%;
+.mainContainer {
+  width: 1060px;
+  margin: 0 auto;
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
-  .container {
+  .mainContainer {
     width: 705px;
   }
 }
 
 @media (min-width: 375px) and (max-width: 767px) {
-  .container {
+  .mainContainer {
     width: 325px;
   }
 }

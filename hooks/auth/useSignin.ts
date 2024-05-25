@@ -1,5 +1,6 @@
 import { postSignin } from "@/api";
 import { FormValues } from "@/common/Auth/Form";
+import { LOCAL_ACCESSTOKEN } from "@/constants";
 import { useRouter } from "next/router";
 import { SubmitHandler, UseFormSetError } from "react-hook-form";
 
@@ -12,7 +13,6 @@ export function useSignin({ setError }: UseSigninProp) {
 
   const handleSignin: SubmitHandler<FormValues> = async (data) => {
     const { email, password } = data;
-    const localAccessToken = localStorage.getItem("accessToken");
 
     try {
       const result = await postSignin({ email, password });
@@ -31,7 +31,7 @@ export function useSignin({ setError }: UseSigninProp) {
         return;
       }
 
-      if (localAccessToken === resultAccessToken) {
+      if (LOCAL_ACCESSTOKEN === resultAccessToken) {
         return router.push("/folder");
       }
 

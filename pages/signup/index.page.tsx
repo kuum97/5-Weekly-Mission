@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { postEmailCheck, postSignup } from "@/api";
-import { emailPattern, passwordPattern } from "@/constants";
+import { EMAIL_PATTERN, PW_PATTERN } from "@/constants";
 import AuthHeader from "@/common/Auth/Header";
 import AuthForm, { FormValues } from "@/common/Auth/Form";
 import AuthInput from "@/common/Auth/Input";
@@ -71,7 +71,7 @@ function Signup() {
             register={register("email", {
               required: "이메일을 입력해 주세요",
               pattern: {
-                value: emailPattern,
+                value: EMAIL_PATTERN,
                 message: "올바른 형식의 이메일을 입력해 주세요",
               },
               onBlur: (e) => handleEmailCheck(e),
@@ -85,7 +85,7 @@ function Signup() {
             register={register("password", {
               required: "비밀번호를 입력해 주세요",
               pattern: {
-                value: passwordPattern,
+                value: PW_PATTERN,
                 message: "영문, 숫자를 조합해 8자 이상 입력해 주세요",
               },
             })}
