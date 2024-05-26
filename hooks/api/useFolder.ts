@@ -1,21 +1,29 @@
-import { getFoldersByUserId } from "@/api";
+import { getFolders } from "@/api";
 import { IS_CLIENT } from "@/constants";
-import { UserDataProp } from "@/types/user";
 import { useQuery } from "@tanstack/react-query";
+import { QueryTokenProp } from "./useUser";
+import { useRouter } from "next/router";
 
-export function useFolder({ user }: UserDataProp) {
+export function useFolder({ localAccessToken }: QueryTokenProp) {
+  const router = useRouter();
+
   const {
     data: folders,
     isLoading: isLoadingFolders,
     isError: isErrorFolders,
   } = useQuery({
-    queryKey: ["folders", user?.id],
+    queryKey: ["folders"],
     queryFn: async () => {
-      if (!user) return;
-      const data = await getFoldersByUserId({ userId: user.id });
+      if (!localAccessToken) {
+        router.replace("/signin");
+        return null;
+      }
+      const data = await getFolders({
+        token: localAccessToken,
+      });
       return data;
     },
-    enabled: !!user && IS_CLIENT,
+    enabled: IS_CLIENT,
   });
 
   return { folders, isLoadingFolders, isErrorFolders };

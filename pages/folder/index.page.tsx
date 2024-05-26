@@ -4,8 +4,13 @@ import { useUser } from "@/hooks/api/useUser";
 import { useFolder } from "@/hooks/api/useFolder";
 import { useLink } from "@/hooks/api/useLink";
 import { IS_CLIENT, LOCAL_ACCESSTOKEN } from "@/constants";
-import FolderPageLayout from "@/components/FolderPageLayout";
+import LinkListPageLayout from "@/components/LinkListPageLayout";
 import LinkCards from "@/components/LinkCards";
+import LinkAddForm from "@/components/LinkAddForm";
+import SearchBar from "@/common/SearchBar";
+import FoldersList from "@/components/FoldersList";
+import EmptyLinkCards from "@/components/EmptyLinkCards";
+import styles from "@/styles/LinkListPage.module.css";
 
 function FolderPage() {
   const { setUser, setFolders, setIsLoadingWindow, isLoadingWindow } =
@@ -13,8 +18,12 @@ function FolderPage() {
   const { user, isLoadingUser, isErrorUser } = useUser({
     localAccessToken: LOCAL_ACCESSTOKEN,
   });
-  const { folders, isLoadingFolders, isErrorFolders } = useFolder({ user });
-  const { links } = useLink({ user });
+  const { folders, isLoadingFolders, isErrorFolders } = useFolder({
+    localAccessToken: LOCAL_ACCESSTOKEN,
+  });
+  const { links } = useLink({
+    localAccessToken: LOCAL_ACCESSTOKEN,
+  });
 
   useEffect(() => {
     if (IS_CLIENT) {
@@ -37,10 +46,21 @@ function FolderPage() {
     return <div>Error!!</div>;
   }
 
+  const handleSearchByKeyword = () => {};
+
   return (
-    <FolderPageLayout>
-      <LinkCards links={links} />
-    </FolderPageLayout>
+    <LinkListPageLayout>
+      <LinkAddForm />
+      <section className={styles.mainContainer}>
+        <SearchBar onSearch={handleSearchByKeyword} />
+        <FoldersList />
+        {links && links.length > 0 ? (
+          <LinkCards links={links} />
+        ) : (
+          <EmptyLinkCards />
+        )}
+      </section>
+    </LinkListPageLayout>
   );
 }
 

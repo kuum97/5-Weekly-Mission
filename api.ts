@@ -1,6 +1,20 @@
 import { CODEIT_BASE_URL } from "@/constants";
 import { FormValues } from "./common/Auth/Form";
-import { FolderData, LinkData, Params, Response, UserData } from "./types/api";
+import {
+  FolderData,
+  LinkData,
+  NewFolderData,
+  NewUserData,
+  Params,
+  Response,
+  UserData,
+} from "./types/api";
+
+interface TokenProp {
+  token: string;
+}
+
+// 유저 데이터
 
 export async function getUserById({ userId }: Params): Promise<UserData> {
   const response = await fetch(`${CODEIT_BASE_URL}/users/${userId}`);
@@ -13,6 +27,28 @@ export async function getUserById({ userId }: Params): Promise<UserData> {
 
   return data[0];
 }
+
+export async function getUserByToken({
+  token,
+}: TokenProp): Promise<NewUserData> {
+  const response = await fetch(`${CODEIT_BASE_URL}/users`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("잘못된 요청입니다.");
+  }
+
+  const user: Response<NewUserData> = await response.json();
+  const { data } = user;
+
+  return data[0];
+}
+
+// 폴더 데이터
 
 export async function getFoldersByUserId({
   userId,
@@ -27,6 +63,28 @@ export async function getFoldersByUserId({
 
   return data;
 }
+
+export async function getFolders({
+  token,
+}: TokenProp): Promise<NewFolderData[]> {
+  const response = await fetch(`${CODEIT_BASE_URL}/folders`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("잘못된 요청입니다.");
+  }
+
+  const { data } = await response.json();
+  const { folder } = data;
+
+  return folder;
+}
+
+// 링크 데이터
 
 export async function getLinksByUserIdAndFolderId({
   userId,
@@ -45,6 +103,36 @@ export async function getLinksByUserIdAndFolderId({
 
   return data;
 }
+
+interface GetLinkProps extends TokenProp {
+  folderId?: number;
+}
+
+export async function getLinksByFolderId({
+  folderId,
+  token,
+}: GetLinkProps): Promise<LinkData[]> {
+  const defaultUrl = `${CODEIT_BASE_URL}/links`;
+  const url = folderId ? `${defaultUrl}?folderId=${folderId}` : `${defaultUrl}`;
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("잘못된 요청입니다.");
+  }
+
+  const result = await response.json();
+  const { folder } = result.data;
+
+  return folder;
+}
+
+// POST
 
 export async function postEmailCheck(email: string): Promise<void | string> {
   const response = await fetch(`${CODEIT_BASE_URL}/check-email`, {

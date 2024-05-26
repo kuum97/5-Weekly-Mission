@@ -2,33 +2,60 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useStoreState } from "@/hooks/state";
 import { useLink } from "@/hooks/api/useLink";
-import FolderPageLayout from "@/components/FolderPageLayout";
+import LinkListPageLayout from "@/components/LinkListPageLayout";
 import LinkCards from "@/components/LinkCards";
+import LinkAddForm from "@/components/LinkAddForm";
+import SearchBar from "@/common/SearchBar";
+import FoldersList from "@/components/FoldersList";
+import EmptyLinkCards from "@/components/EmptyLinkCards";
+import styles from "@/styles/LinkListPage.module.css";
+import { LOCAL_ACCESSTOKEN } from "@/constants";
 
-function Page() {
-  const { user, folders } = useStoreState();
+function Folder() {
+  const { user, folders, setLinks } = useStoreState();
   const router = useRouter();
   const { folderId } = router.query;
   const id = Number(folderId);
   const { links } = useLink({
-    user,
     folderId: id,
+    localAccessToken: LOCAL_ACCESSTOKEN,
   });
+
+  const handleSearchByKeyword = () => {};
+
+  const handleClickToSharedPage = () => {
+    router.push(`/shared/${folderId}`);
+  };
 
   useEffect(() => {
     if (!user) {
-      router.push("/signin");
+      router.replace("/signin");
     }
     if (!folders) {
-      router.push("/folder");
+      router.replace("/folder");
     }
-  }, [router, user, folders]);
+    if (links) {
+      setLinks(links);
+    }
+  }, [router, user, folders, links, setLinks]);
 
   return (
-    <FolderPageLayout>
-      <LinkCards links={links} />
-    </FolderPageLayout>
+    <LinkListPageLayout>
+      <LinkAddForm />
+      <section className={styles.mainContainer}>
+        <button onClick={handleClickToSharedPage} type="button">
+          공유 페이지로
+        </button>
+        <SearchBar onSearch={handleSearchByKeyword} />
+        <FoldersList />
+        {links && links.length > 0 ? (
+          <LinkCards links={links} />
+        ) : (
+          <EmptyLinkCards />
+        )}
+      </section>
+    </LinkListPageLayout>
   );
 }
 
-export default Page;
+export default Folder;

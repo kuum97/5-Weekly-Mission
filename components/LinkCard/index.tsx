@@ -1,13 +1,13 @@
 import { ReactElement, useState } from "react";
 import Image from "next/image";
-import { LinkData } from "@/types/link";
 import { displayCreatedTime, formatDateString } from "@/utils/date";
 import Modal from "@/common/Modal";
 import LinkDeleteForm from "@/common/Modal/childrens/LinkDeleteForm";
 import LinkAddToFolderForm from "@/common/Modal/childrens/LinkAddToFolderForm";
 import { GoKebabHorizontal } from "react-icons/go";
 import { FaRegStar } from "react-icons/fa";
-import styles from "../LinkCard.module.css";
+import { LinkData } from "@/types/api";
+import styles from "./index.module.css";
 
 interface LinkCardProps {
   link: LinkData;

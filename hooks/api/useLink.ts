@@ -1,28 +1,34 @@
-import { getLinksByUserIdAndFolderId } from "@/api";
+import { getLinksByFolderId } from "@/api";
 import { IS_CLIENT } from "@/constants";
-import { UserDataProp } from "@/types/user";
 import { useQuery } from "@tanstack/react-query";
+import { QueryTokenProp } from "./useUser";
+import { useRouter } from "next/router";
 
-interface LinkProps extends UserDataProp {
+interface LinkProps extends QueryTokenProp {
   folderId?: number;
 }
 
-export function useLink({ user, folderId }: LinkProps) {
+export function useLink({ folderId, localAccessToken }: LinkProps) {
+  const router = useRouter();
+
   const {
     data: links,
     isLoading: isLoadingLinks,
     isError: isErrorLinks,
   } = useQuery({
-    queryKey: ["links", user?.id, folderId],
+    queryKey: ["links", folderId],
     queryFn: async () => {
-      if (!user) return;
-      const data = await getLinksByUserIdAndFolderId({
-        userId: user.id,
+      if (!localAccessToken) {
+        router.replace("/signin");
+        return null;
+      }
+      const data = await getLinksByFolderId({
         folderId,
+        token: localAccessToken,
       });
       return data;
     },
-    enabled: !!user && IS_CLIENT,
+    enabled: IS_CLIENT,
   });
 
   return { links, isLoadingLinks, isErrorLinks };

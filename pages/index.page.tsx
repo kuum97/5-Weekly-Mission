@@ -28,7 +28,6 @@ export default function Home() {
         로그인
       </button>
       <Link href="/signup">회원가입</Link>
-      <Link href="/shared">공유페이지</Link>
       <Link href="/folder">폴더페이지</Link>
     </div>
   );

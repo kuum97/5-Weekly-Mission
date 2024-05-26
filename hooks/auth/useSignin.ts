@@ -18,6 +18,11 @@ export function useSignin({ setError }: UseSigninProp) {
       const result = await postSignin({ email, password });
       const resultAccessToken = result.data.accessToken;
 
+      if (LOCAL_ACCESSTOKEN === resultAccessToken) {
+        router.replace("/folder");
+        return;
+      }
+
       if (typeof result === "string") {
         const fields: (keyof FormValues)[] = ["email", "password"];
 
@@ -31,12 +36,8 @@ export function useSignin({ setError }: UseSigninProp) {
         return;
       }
 
-      if (LOCAL_ACCESSTOKEN === resultAccessToken) {
-        return router.push("/folder");
-      }
-
       localStorage.setItem("accessToken", resultAccessToken);
-      router.push("/folder");
+      router.replace("/folder");
     } catch (error) {
       console.error(error);
     }

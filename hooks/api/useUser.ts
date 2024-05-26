@@ -1,12 +1,13 @@
-import { CODEIT_BASE_URL, IS_CLIENT } from "@/constants";
+import { getUserByToken } from "@/api";
+import { IS_CLIENT } from "@/constants";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
-interface UserProps {
+export interface QueryTokenProp {
   localAccessToken: string | null | false;
 }
 
-export function useUser({ localAccessToken }: UserProps) {
+export function useUser({ localAccessToken }: QueryTokenProp) {
   const router = useRouter();
 
   const {
@@ -16,19 +17,15 @@ export function useUser({ localAccessToken }: UserProps) {
   } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      if (!localAccessToken) return router.push("/signin");
-      const response = await fetch(`${CODEIT_BASE_URL}/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localAccessToken,
-        },
-      });
-      const { data } = await response.json();
+      if (!localAccessToken) {
+        router.replace("/signin");
+        return null;
+      }
+      const data = await getUserByToken({ token: localAccessToken });
 
-      return data[0];
+      return data;
     },
-    enabled: !!localAccessToken && IS_CLIENT,
+    enabled: IS_CLIENT,
   });
 
   return { user, isLoadingUser, isErrorUser };
