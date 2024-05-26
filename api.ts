@@ -35,7 +35,7 @@ export async function getUserByToken({
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token,
+      Authorization: `Bearer ${token}`,
     },
   });
   if (!response.ok) {
@@ -71,7 +71,7 @@ export async function getFolders({
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token,
+      Authorization: `Bearer ${token}`,
     },
   });
   if (!response.ok) {
@@ -119,7 +119,7 @@ export async function getLinksByFolderId({
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token,
+      Authorization: `Bearer ${token}`,
     },
   });
   if (!response.ok) {
