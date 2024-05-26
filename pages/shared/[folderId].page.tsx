@@ -1,13 +1,12 @@
-import SearchBar from "@/common/SearchBar";
-import EmptyLinkCards from "@/components/EmptyLinkCards";
-import LinkCards from "@/components/LinkCards";
+import { useRouter } from "next/router";
+import { useLink } from "@/hooks/api/useLink";
+import { LOCAL_ACCESSTOKEN } from "@/constants";
 import LinkListPageLayout from "@/components/LinkListPageLayout";
 import UserProfileAndTitle from "@/components/UserProfileAndTitle";
-import { LOCAL_ACCESSTOKEN } from "@/constants";
-import { useLink } from "@/hooks/api/useLink";
-import { useStoreState } from "@/hooks/state";
+import SearchBar from "@/common/SearchBar";
+import LinkCards from "@/components/LinkCards";
+import EmptyLinkCards from "@/components/EmptyLinkCards";
 import styles from "@/styles/LinkListPage.module.css";
-import { useRouter } from "next/router";
 
 function SharedFolder() {
   const { query } = useRouter();
@@ -18,13 +17,11 @@ function SharedFolder() {
     localAccessToken: LOCAL_ACCESSTOKEN,
   });
 
-  const handleSearchByKeyword = () => {};
-
   return (
     <LinkListPageLayout>
       <UserProfileAndTitle />
       <section className={styles.mainContainer}>
-        <SearchBar onSearch={handleSearchByKeyword} />
+        <SearchBar />
         {links && links.length > 0 ? (
           <LinkCards links={links} />
         ) : (

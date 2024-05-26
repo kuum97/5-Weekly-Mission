@@ -46,13 +46,11 @@ function FolderPage() {
     return <div>Error!!</div>;
   }
 
-  const handleSearchByKeyword = () => {};
-
   return (
     <LinkListPageLayout>
       <LinkAddForm />
       <section className={styles.mainContainer}>
-        <SearchBar onSearch={handleSearchByKeyword} />
+        <SearchBar />
         <FoldersList />
         {links && links.length > 0 ? (
           <LinkCards links={links} />

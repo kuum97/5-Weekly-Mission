@@ -7,9 +7,11 @@ interface StoreStateProps {
   folders: NewFolderData[] | FolderData[] | null;
   setFolders: (folders: NewFolderData[] | FolderData[]) => void;
   links?: LinkData[];
-  setLinks: (links: LinkData[]) => void;
+  setLinks: (links?: LinkData[]) => void;
   isLoadingWindow: boolean;
   setIsLoadingWindow: (isLoadingWindow: boolean) => void;
+  searchQuery?: string;
+  setSearchQuery: (searchQuery?: string) => void;
 }
 
 export const useStoreState = create<StoreStateProps>((set) => ({
@@ -18,7 +20,9 @@ export const useStoreState = create<StoreStateProps>((set) => ({
   folders: null,
   setFolders: (folders: NewFolderData[] | FolderData[]) => set({ folders }),
   links: [],
-  setLinks: (links: LinkData[]) => set({ links }),
+  setLinks: (links?: LinkData[]) => set({ links }),
   isLoadingWindow: true,
   setIsLoadingWindow: (isLoadingWindow: boolean) => set({ isLoadingWindow }),
+  searchQuery: "",
+  setSearchQuery: (searchQuery?: string) => set({ searchQuery }),
 }));
