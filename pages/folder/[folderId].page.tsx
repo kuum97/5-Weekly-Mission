@@ -28,9 +28,11 @@ function Folder() {
   useEffect(() => {
     if (!user) {
       router.replace("/signin");
+      return;
     }
     if (!folders) {
       router.replace("/folder");
+      return;
     }
     if (links) {
       setLinks(links);
