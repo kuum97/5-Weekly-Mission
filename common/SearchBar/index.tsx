@@ -1,37 +1,40 @@
-import { ChangeEventHandler, FormEventHandler, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useStoreState } from "@/hooks/state";
 import { FaSearch } from "react-icons/fa";
 import styles from "./index.module.css";
 
-interface SearchBarProps {
-  onSearch: (keyword: string) => void;
+interface SearchValue {
+  searchInput: string;
 }
 
-function SearchBar({ onSearch }: SearchBarProps) {
-  const [inputValue, setInputValue] = useState<string>("");
+function SearchBar() {
+  const { register, handleSubmit } = useForm<SearchValue>();
+  const { setSearchQuery, searchQuery } = useStoreState();
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-
-    onSearch(inputValue);
+  const onSubmit = (data: SearchValue) => {
+    setSearchQuery(data.searchInput);
   };
 
   return (
-    <form className={styles.wrapper} onSubmit={handleSubmit}>
-      <button className={styles.button} type="submit">
-        <FaSearch />
-      </button>
-      <input
-        className={styles.input}
-        name="searchBar"
-        type="text"
-        placeholder="링크를 검색해 보세요."
-        onChange={handleChange}
-      />
-    </form>
+    <>
+      <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
+        <button className={styles.button} type="submit">
+          <FaSearch />
+        </button>
+        <input
+          className={styles.input}
+          {...register("searchInput")}
+          type="text"
+          placeholder="링크를 검색해 보세요."
+        />
+      </form>
+      {searchQuery && (
+        <p className={styles.queryMessage}>
+          <span className={styles.query}>{searchQuery}</span>으로 검색한
+          결과입니다.
+        </p>
+      )}
+    </>
   );
 }
 

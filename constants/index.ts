@@ -18,5 +18,15 @@ export const YEAR: number = 12 * MONTH;
 
 //Regex
 
-export const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-export const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+export const PW_PATTERN = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+export const EMAIL_PATTERN =
+  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+//Token
+
+export const LOCAL_ACCESSTOKEN: string | false | null =
+  typeof window !== "undefined" && localStorage.getItem("accessToken");
+
+//Hook
+
+export const IS_CLIENT = typeof window !== "undefined";

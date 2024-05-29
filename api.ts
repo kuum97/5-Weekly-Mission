@@ -1,36 +1,20 @@
-import { SampleUser, UserData } from "@/types/user";
-import { FolderData, SampleFolder } from "@/types/folder";
-import { Response, SampleFolderResponse } from "@/types/response";
-import { LinkData } from "@/types/link";
 import { CODEIT_BASE_URL } from "@/constants";
 import { FormValues } from "./common/Auth/Form";
+import {
+  FolderData,
+  LinkData,
+  NewFolderData,
+  NewUserData,
+  Params,
+  Response,
+  UserData,
+} from "./types/api";
 
-export interface Params {
-  [key: string]: number | null;
+interface TokenProp {
+  token: string;
 }
 
-export async function getUser(): Promise<SampleUser> {
-  const response = await fetch(`${CODEIT_BASE_URL}/sample/user`);
-  if (!response.ok) {
-    throw new Error("잘못된 요청입니다.");
-  }
-
-  const user: SampleUser = await response.json();
-
-  return user;
-}
-
-export async function getFolder(): Promise<SampleFolder> {
-  const response = await fetch(`${CODEIT_BASE_URL}/sample/folder`);
-  if (!response.ok) {
-    throw new Error("잘못된 요청입니다.");
-  }
-
-  const data: SampleFolderResponse = await response.json();
-  const { folder } = data;
-
-  return folder;
-}
+// 유저 데이터
 
 export async function getUserById({ userId }: Params): Promise<UserData> {
   const response = await fetch(`${CODEIT_BASE_URL}/users/${userId}`);
@@ -43,6 +27,28 @@ export async function getUserById({ userId }: Params): Promise<UserData> {
 
   return data[0];
 }
+
+export async function getUserByToken({
+  token,
+}: TokenProp): Promise<NewUserData> {
+  const response = await fetch(`${CODEIT_BASE_URL}/users`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("잘못된 요청입니다.");
+  }
+
+  const user: Response<NewUserData> = await response.json();
+  const { data } = user;
+
+  return data[0];
+}
+
+// 폴더 데이터
 
 export async function getFoldersByUserId({
   userId,
@@ -58,14 +64,34 @@ export async function getFoldersByUserId({
   return data;
 }
 
+export async function getFolders({
+  token,
+}: TokenProp): Promise<NewFolderData[]> {
+  const response = await fetch(`${CODEIT_BASE_URL}/folders`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("잘못된 요청입니다.");
+  }
+
+  const { data } = await response.json();
+  const { folder } = data;
+
+  return folder;
+}
+
+// 링크 데이터
+
 export async function getLinksByUserIdAndFolderId({
   userId,
   folderId,
 }: Params): Promise<LinkData[]> {
-  let url = `${CODEIT_BASE_URL}/users/${userId}/links`;
-  if (folderId) {
-    url += `?folderId=${folderId}`;
-  }
+  const defaultUrl = `${CODEIT_BASE_URL}/users/${userId}/links`;
+  const url = folderId ? `${defaultUrl}?folderId=${folderId}` : `${defaultUrl}`;
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -77,6 +103,36 @@ export async function getLinksByUserIdAndFolderId({
 
   return data;
 }
+
+interface GetLinkProps extends TokenProp {
+  folderId?: number;
+}
+
+export async function getLinksByFolderId({
+  folderId,
+  token,
+}: GetLinkProps): Promise<LinkData[]> {
+  const defaultUrl = `${CODEIT_BASE_URL}/links`;
+  const url = folderId ? `${defaultUrl}?folderId=${folderId}` : `${defaultUrl}`;
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("잘못된 요청입니다.");
+  }
+
+  const result = await response.json();
+  const { folder } = result.data;
+
+  return folder;
+}
+
+// POST
 
 export async function postEmailCheck(email: string): Promise<void | string> {
   const response = await fetch(`${CODEIT_BASE_URL}/check-email`, {
@@ -99,10 +155,17 @@ export async function postEmailCheck(email: string): Promise<void | string> {
   return;
 }
 
+interface postData {
+  data: {
+    accessToken: string;
+    refreshToken: string;
+  };
+}
+
 export async function postSignup({
   email,
   password,
-}: FormValues): Promise<void | string> {
+}: FormValues): Promise<postData> {
   const response = await fetch(`${CODEIT_BASE_URL}/sign-up`, {
     method: "POST",
     headers: {
@@ -110,11 +173,31 @@ export async function postSignup({
     },
     body: JSON.stringify({ email, password }),
   });
+  const data = await response.json();
 
   if (!response.ok) {
-    const data = await response.json();
     return data.error.message;
   }
 
-  return;
+  return data;
+}
+
+export async function postSignin({
+  email,
+  password,
+}: FormValues): Promise<postData> {
+  const response = await fetch(`${CODEIT_BASE_URL}/sign-in`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    return data.error.message;
+  }
+
+  return data;
 }

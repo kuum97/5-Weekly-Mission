@@ -1,5 +1,4 @@
-import { ReactElement, useState } from "react";
-import { FolderData } from "@/types/folder";
+import { MouseEventHandler, ReactElement, useState } from "react";
 import { FaPencilAlt, FaRegShareSquare, FaRegTrashAlt } from "react-icons/fa";
 import Modal from "@/common/Modal";
 import FolderAddForm from "@/common/Modal/childrens/FolderAddForm";
@@ -7,22 +6,18 @@ import SocialShareBox from "@/common/Modal/childrens/SocialShareBox";
 import FolderEditForm from "@/common/Modal/childrens/FolderEditForm";
 import FolderDeleteForm from "@/common/Modal/childrens/FolderDeleteForm";
 import styles from "./index.module.css";
-
-interface FoldersListProps {
-  onClick: (folderId: number | null) => void;
-  folders: FolderData[];
-  selectedFolderId: number | null;
-}
+import { useRouter } from "next/router";
+import { useStoreState } from "@/hooks/state";
 
 interface ActionTypes {
   [actionType: string]: ReactElement;
 }
 
-function FoldersList({ onClick, folders, selectedFolderId }: FoldersListProps) {
+function FoldersList() {
+  const { folders } = useStoreState();
+  const router = useRouter();
+  const { folderId } = router.query;
   const [modalContent, setModalContent] = useState<ReactElement | null>(null);
-  const currentFolder = folders.find(
-    (folder) => folder.id === selectedFolderId
-  );
 
   const handleClickModal = (actionType: string) => {
     const actionTypes: ActionTypes = {
@@ -35,16 +30,39 @@ function FoldersList({ onClick, folders, selectedFolderId }: FoldersListProps) {
     setModalContent(actionTypes[actionType]);
   };
 
+  const handleClickFolder: MouseEventHandler<HTMLButtonElement> = (e) => {
+    const folderName = e.currentTarget;
+
+    if (folderName.id) {
+      router.push(`/folder/${folderName.id}`, undefined, { shallow: true });
+    } else {
+      router.push("/folder", undefined, { shallow: true });
+    }
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.listContainer}>
         <ul className={styles.folderButtonList}>
           <li>
-            <button onClick={() => onClick(null)}>전체</button>
+            <button
+              className={styles.folderButton}
+              type="button"
+              onClick={handleClickFolder}
+            >
+              전체
+            </button>
           </li>
-          {folders.map((folder) => (
-            <li key={folder.id}>
-              <button onClick={() => onClick(folder.id)}>{folder.name}</button>
+          {folders?.map(({ id, name }) => (
+            <li key={id}>
+              <button
+                id={id.toString()}
+                className={styles.folderButton}
+                type="button"
+                onClick={handleClickFolder}
+              >
+                {name}
+              </button>
             </li>
           ))}
         </ul>
@@ -57,24 +75,33 @@ function FoldersList({ onClick, folders, selectedFolderId }: FoldersListProps) {
       </div>
       <div className={styles.controlContainer}>
         <div className={styles.selectedFolderName}>
-          {currentFolder ? currentFolder.name : "전체"}
+          {folderId
+            ? folders?.map(({ name, id }) => id === Number(folderId) && name)
+            : "전체"}
         </div>
-        {selectedFolderId && (
-          <div className={styles.folderControl}>
-            <button onClick={() => handleClickModal("share")}>
-              <FaRegShareSquare />
-              공유
-            </button>
-            <button onClick={() => handleClickModal("modify")}>
-              <FaPencilAlt />
-              수정
-            </button>
-            <button onClick={() => handleClickModal("delete")}>
-              <FaRegTrashAlt />
-              삭제
-            </button>
-          </div>
-        )}
+        <div className={styles.folderControl}>
+          <button
+            className={styles.folderControlButton}
+            onClick={() => handleClickModal("share")}
+          >
+            <FaRegShareSquare />
+            공유
+          </button>
+          <button
+            className={styles.folderControlButton}
+            onClick={() => handleClickModal("modify")}
+          >
+            <FaPencilAlt />
+            수정
+          </button>
+          <button
+            className={styles.folderControlButton}
+            onClick={() => handleClickModal("delete")}
+          >
+            <FaRegTrashAlt />
+            삭제
+          </button>
+        </div>
       </div>
       {modalContent && (
         <Modal onClick={() => setModalContent(null)}>{modalContent}</Modal>

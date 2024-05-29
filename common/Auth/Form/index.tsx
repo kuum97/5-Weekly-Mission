@@ -1,18 +1,19 @@
-import { SubmitHandler, UseFormHandleSubmit, useForm } from "react-hook-form";
+import { SubmitHandler, UseFormHandleSubmit } from "react-hook-form";
 import styles from "./index.module.css";
 import { ReactNode } from "react";
+import { TProps } from "../Header";
 
 export interface FormValues {
   email: string;
-  password: number;
-  passwordConfirm?: number;
+  password: string;
+  passwordConfirm?: string;
 }
 
 export interface AuthFormProps {
   children?: ReactNode;
   onSubmit: SubmitHandler<FormValues>;
   handleSubmit: UseFormHandleSubmit<FormValues, undefined>;
-  purpose: string;
+  purpose: TProps;
 }
 
 function AuthForm({

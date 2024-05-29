@@ -1,5 +1,5 @@
-import { HTMLInputTypeAttribute } from "react";
-import { FaEyeSlash } from "react-icons/fa";
+import React, { HTMLInputTypeAttribute, forwardRef, useState } from "react";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 import styles from "./index.module.css";
 import {
   FieldError,
@@ -17,13 +17,19 @@ interface AuthInputProps {
   error?: FieldError | Merge<FieldError, FieldErrorsImpl>;
 }
 
-function AuthInput({
-  label,
-  type,
-  placeholder,
-  register,
-  error,
-}: AuthInputProps) {
+function AuthInput(
+  { label, type, placeholder, register, error }: AuthInputProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleToggleVisibility = () => {
+    if (typeof ref !== "function" && ref?.current) {
+      ref.current.type = isVisible ? "password" : "text";
+    }
+    setIsVisible(!isVisible);
+  };
+
   return (
     <div className={styles.container}>
       <label className={styles.inputLabel} htmlFor={type}>
@@ -36,17 +42,29 @@ function AuthInput({
           [styles.errorBorder]: error,
         })}
         {...register}
+        ref={(e) => {
+          register.ref(e);
+          if (typeof ref === "function") {
+            ref(e);
+          } else if (ref) {
+            ref.current = e;
+          }
+        }}
       />
       {error && (
         <p className={styles.errorMessage}>{error.message?.toString()}</p>
       )}
       {type === "password" && (
-        <button className={styles.eyeSlash} type="button">
-          <FaEyeSlash />
+        <button
+          className={styles.eyeSlash}
+          type="button"
+          onClick={handleToggleVisibility}
+        >
+          {!isVisible ? <FaEye /> : <FaEyeSlash />}
         </button>
       )}
     </div>
   );
 }
 
-export default AuthInput;
+export default forwardRef(AuthInput);

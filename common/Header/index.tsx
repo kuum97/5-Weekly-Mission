@@ -1,17 +1,15 @@
 import Image from "next/image";
 import Avatar from "@/common/Avatar";
 import styles from "./index.module.css";
-import { useInitializeUser } from "@/hooks/useInitializeUser";
-import { useUserState } from "@/hooks/useUserState";
-import { SAMPLE_USER_ID } from "@/constants";
+import { useStoreState } from "@/hooks/state";
+import Link from "next/link";
 
 function Header() {
-  useInitializeUser({ SAMPLE_USER_ID });
-  const { user } = useUserState();
+  const { user } = useStoreState();
 
   return (
     <header className={styles.container}>
-      <div className={styles.logo}>
+      <Link href={"/"} className={styles.logo}>
         <Image
           fill
           src="/images/Linkbrary.png"
@@ -20,15 +18,15 @@ function Header() {
           sizes="(max-width: 767px) 100px, 133px"
           priority
         />
+      </Link>
+      <div className={styles.profileContainer}>
+        {user && (
+          <>
+            <Avatar size="small" src={user.image_source} />
+            <span>{user.email}</span>
+          </>
+        )}
       </div>
-      {user ? (
-        <div className={styles.profileContainer}>
-          <Avatar size="small" src={user.image_source} />
-          <span>{user.email}</span>
-        </div>
-      ) : (
-        <button className={styles.loginBtn}>로그인</button>
-      )}
     </header>
   );
 }

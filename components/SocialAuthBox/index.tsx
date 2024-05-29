@@ -10,7 +10,7 @@ function SocialAuthBox() {
       <span>소셜 로그인</span>
       <ul className={styles.socialLoginBtns}>
         {SOCIALLINKS.map(({ src, href }, i: number) => (
-          <li key={i}>
+          <li key={src}>
             <SocialButton>
               <Link href={href}>
                 <Image width={42} height={42} src={src} alt="logo" />
