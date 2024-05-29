@@ -1,12 +1,13 @@
-import { LOCAL_ACCESSTOKEN } from "@/constants";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Home() {
   const router = useRouter();
+  const localAccessToken =
+    typeof window !== "undefined" && localStorage.getItem("accessToken");
 
   const handleAutoSignin = () => {
-    if (LOCAL_ACCESSTOKEN) {
+    if (localAccessToken) {
       return router.push("/folder");
     }
 
