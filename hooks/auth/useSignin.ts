@@ -1,13 +1,9 @@
 import { postSignin } from "@/api";
-import { FormValues } from "@/common/Auth/Form";
+import { AuthHookProp, FormValues } from "@/types/form";
 import { useRouter } from "next/router";
-import { SubmitHandler, UseFormSetError } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
 
-interface UseSigninProp {
-  setError: UseFormSetError<FormValues>;
-}
-
-export function useSignin({ setError }: UseSigninProp) {
+export function useSignin({ setError }: AuthHookProp) {
   const router = useRouter();
   const localAccessToken = localStorage.getItem("accessToken");
 

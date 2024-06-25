@@ -1,16 +1,15 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import { postEmailCheck, postSignup } from "@/api";
+import { useForm } from "react-hook-form";
 import { EMAIL_PATTERN, PW_PATTERN } from "@/constants";
 import AuthHeader from "@/common/Auth/Header";
-import AuthForm, { FormValues } from "@/common/Auth/Form";
+import AuthForm from "@/common/Auth/Form";
 import AuthInput from "@/common/Auth/Input";
 import SocialAuthBox from "@/components/SocialAuthBox";
 import styles from "@/styles/Auth.module.css";
 import React from "react";
-import { useRouter } from "next/router";
+import useSignup from "@/hooks/auth/useSignup";
+import { FormValues } from "@/types/form";
 
 function Signup() {
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -18,42 +17,8 @@ function Signup() {
     watch,
     setError,
   } = useForm<FormValues>({ mode: "onBlur" });
-
   const password = watch("password");
-
-  const handleEmailCheck = async (e: React.FocusEvent<HTMLInputElement>) => {
-    const email = e.target.value;
-    try {
-      const result = await postEmailCheck(email);
-      console.log("result", result);
-
-      if (result) {
-        setError(
-          "email",
-          { type: "onBlur", message: result },
-          { shouldFocus: true }
-        );
-      }
-
-      return;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleSignup: SubmitHandler<FormValues> = async ({
-    email,
-    password,
-  }) => {
-    try {
-      const result = await postSignup({ email, password });
-
-      localStorage.setItem("accessToken", result.data.accessToken);
-      router.push("/folder");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { handleEmailCheck, handleSignup } = useSignup({ setError });
 
   return (
     <div className={styles.container}>
@@ -65,6 +30,7 @@ function Signup() {
           onSubmit={handleSignup}
         >
           <AuthInput
+            id="email"
             label="이메일"
             type="text"
             placeholder="이메일을 입력해 주세요"
@@ -79,6 +45,7 @@ function Signup() {
             error={errors.email}
           />
           <AuthInput
+            id="password"
             label="비밀번호"
             type="password"
             placeholder="영문, 숫자를 조합해 8자 이상 입력해 주세요"
@@ -92,6 +59,7 @@ function Signup() {
             error={errors.password}
           />
           <AuthInput
+            id="password-confirm"
             label="비밀번호 확인"
             type="password"
             placeholder="비밀번호와 일치하는 값을 입력해 주세요"
