@@ -1,22 +1,21 @@
-import { useForm } from "react-hook-form";
+import classNames from "classnames";
 import useSignup from "@/hooks/auth/useSignup";
 import { useStoreState } from "@/hooks/state";
-import classNames from "classnames";
-import { FormValues } from "@/types/form";
 import { EMAIL_PATTERN, PW_PATTERN } from "@/constants";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styles from "../Form.module.css";
 
 function SignupForm() {
   const {
+    handleEmailCheck,
+    handleSignup,
     register,
     handleSubmit,
     formState: { errors },
     watch,
-    setError,
-  } = useForm<FormValues>({ mode: "onBlur" });
+    emailCheckMutation,
+  } = useSignup();
   const password = watch("password");
-  const { handleEmailCheck, handleSignup } = useSignup({ setError });
   const { currentType, toggleType } = useStoreState();
 
   return (

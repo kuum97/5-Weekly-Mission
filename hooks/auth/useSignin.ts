@@ -1,17 +1,14 @@
 import { postSignin } from "@/api";
+import { FormValues } from "@/types/form";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-
-interface AuthProps {
-  email: string;
-  password: string;
-}
+import { SubmitHandler } from "react-hook-form";
 
 function useSignin() {
   const router = useRouter();
   const mutation = useMutation({ mutationFn: postSignin });
 
-  const handleSignin = ({ email, password }: AuthProps) => {
+  const handleSignin: SubmitHandler<FormValues> = ({ email, password }) => {
     try {
       mutation.mutate({ email, password });
       console.log("로그인 성공!");

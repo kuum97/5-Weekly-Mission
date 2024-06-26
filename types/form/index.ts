@@ -1,14 +1,6 @@
 import { TProps } from "@/components/Auth/Header";
 import { ReactNode } from "react";
-import {
-  SubmitHandler,
-  UseFormHandleSubmit,
-  UseFormSetError,
-} from "react-hook-form";
-
-export interface AuthHookProp {
-  setError: UseFormSetError<FormValues>;
-}
+import { SubmitHandler, UseFormHandleSubmit } from "react-hook-form";
 
 export interface FormValues {
   email: string;

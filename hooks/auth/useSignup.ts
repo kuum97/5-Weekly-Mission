@@ -1,46 +1,58 @@
 import { postEmailCheck, postSignup } from "@/api";
-import { AuthHookProp, FormValues } from "@/types/form";
+import { FormValues } from "@/types/form";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { SubmitHandler } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-function useSignup({ setError }: AuthHookProp) {
+function useSignup() {
   const router = useRouter();
-
-  const handleEmailCheck = async (e: React.FocusEvent<HTMLInputElement>) => {
-    const email = e.target.value;
-    try {
-      if (email.length === 0) return;
-
-      const result = await postEmailCheck(email);
-
-      if (typeof result === "string") {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    setError,
+  } = useForm<FormValues>({ mode: "onBlur" });
+  const emailCheckMutation = useMutation({
+    mutationFn: postEmailCheck,
+    onSuccess: (data) => {
+      if (typeof data === "string") {
         setError(
           "email",
-          { type: "value", message: result },
+          {
+            type: "validate",
+            message: data,
+          },
           { shouldFocus: true }
         );
       }
+    },
+  });
+  const signupMutation = useMutation({ mutationFn: postSignup });
 
-      return;
-    } catch (error) {
-      console.error(error);
-    }
+  const handleEmailCheck = (e: React.FocusEvent<HTMLInputElement>) => {
+    const email = e.target.value;
+
+    if (email.length === 0) return;
+
+    emailCheckMutation.mutate(email);
   };
 
-  const handleSignup: SubmitHandler<FormValues> = async ({
-    email,
-    password,
-  }) => {
-    try {
-      await postSignup({ email, password });
+  const handleSignup: SubmitHandler<FormValues> = ({ email, password }) => {
+    signupMutation.mutate({ email, password });
 
-      router.replace("/signin");
-    } catch (error) {
-      console.error(error);
-    }
+    router.replace("/signin");
   };
 
-  return { handleEmailCheck, handleSignup };
+  return {
+    handleEmailCheck,
+    handleSignup,
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    emailCheckMutation,
+  };
 }
 
 export default useSignup;
