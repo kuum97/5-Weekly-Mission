@@ -12,12 +12,15 @@ function SigninForm() {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<FormValues>({ mode: "onBlur" });
   const { currentType, toggleType } = useStoreState();
+  const { handleSignin } = useSignin();
 
   return (
-    <form className={styles.formContainer}>
+    <form
+      className={styles.formContainer}
+      onSubmit={handleSubmit(handleSignin)}
+    >
       <div className={styles.inputContainer}>
         <label className={styles.inputLabel} htmlFor="email">
           이메일

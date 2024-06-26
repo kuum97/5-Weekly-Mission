@@ -1,4 +1,4 @@
-import { TProps } from "@/common/Auth/Header";
+import { TProps } from "@/components/Auth/Header";
 import { ReactNode } from "react";
 import {
   SubmitHandler,

@@ -1,17 +1,26 @@
 import { postSignin } from "@/api";
-import { AuthHookProp, FormValues } from "@/types/form";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { SubmitHandler } from "react-hook-form";
 
-function useSignin({ setError }: AuthHookProp) {
+interface AuthProps {
+  email: string;
+  password: string;
+}
+
+function useSignin() {
   const router = useRouter();
-  const localAccessToken = localStorage.getItem("accessToken");
+  const mutation = useMutation({ mutationFn: postSignin });
 
-  const handleSignin: SubmitHandler<FormValues> = async (data) => {
-    const { email, password } = data;
+  const handleSignin = ({ email, password }: AuthProps) => {
+    try {
+      mutation.mutate({ email, password });
+      console.log("로그인 성공!");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  return;
+  return { handleSignin };
 }
 
 export default useSignin;
