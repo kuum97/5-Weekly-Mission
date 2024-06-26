@@ -175,10 +175,9 @@ export async function postSignup({
     },
     body: JSON.stringify({ email, password }),
   });
-  const result = await response.json();
 
   if (!response.ok) {
-    return result.message;
+    throw new Error("잘못된 요청입니다.");
   }
 }
 
@@ -186,18 +185,21 @@ export async function postSignin({
   email,
   password,
 }: FormValues): Promise<postData> {
-  const response = await fetch(`${CODEIT_BASE_URL}/sign-in`, {
+  const response = await fetch(`${CODEIT_BASE_URL}/auth/sign-in`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
   });
-  const data = await response.json();
 
   if (!response.ok) {
-    return data.error.message;
+    throw new Error("잘못된 요청입니다.");
   }
 
-  return data;
+  const result = await response.json();
+
+  return result;
 }
+
+// 탠스택 쿼리와 미들웨어 api 라우트 구현
