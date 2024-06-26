@@ -9,12 +9,8 @@ function useSignin() {
   const mutation = useMutation({ mutationFn: postSignin });
 
   const handleSignin: SubmitHandler<FormValues> = ({ email, password }) => {
-    try {
-      mutation.mutate({ email, password });
-      console.log("로그인 성공!");
-    } catch (error) {
-      console.error(error);
-    }
+    mutation.mutate({ email, password });
+    router.replace("/");
   };
 
   return { handleSignin };
